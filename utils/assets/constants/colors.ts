@@ -1,5 +1,3 @@
-export const Colors = {};
-
 /* 
 
     name it later
@@ -12,3 +10,15 @@ export const Colors = {};
 
 
 */
+
+import { createTheme } from "@mui/material";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#26335c",
+    },
+  },
+});
+
+export default theme;
