@@ -24,7 +24,7 @@ export default function Login() {
           isValid,
           dirty,
         }) => (
-          <div className="w-full flex flex-col md:w-3/4">
+          <div className="w-full flex flex-col md:w-3/4 justify-center">
             <h1 className="text-5xl text-center mt-5 mb-5 font-bold">Login</h1>
 
             <Input

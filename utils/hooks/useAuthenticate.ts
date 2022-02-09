@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API } from "@utils/assets/constants/routes";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const ROUTES = {
   login: `${API}/user/login`,
@@ -17,12 +18,14 @@ interface StateProps {
     statusCode: number;
     message: string;
   };
+  response?: {};
 }
 
 export default function useAuthenticate(type: "login" | "register") {
   const url = ROUTES[type];
 
   const [state, setState] = useState<StateProps>({});
+  const router = useRouter();
 
   async function onSubmit({ email, password }: DataProps) {
     return axios
@@ -31,25 +34,40 @@ export default function useAuthenticate(type: "login" | "register") {
   }
 
   async function onRegister(props: DataProps) {
-    onSubmit(props).then(({ status }) => {
-      if (status === 201) {
-      }
-    });
+    onSubmit(props)
+      .then(({ data }) => {
+        if (data.StatusCode === 201) {
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        if (typeof err?.response?.data !== "undefined") {
+          setState({ error: err?.response?.data });
+        } else {
+          setState({ error: { statusCode: 400, message: err } });
+        }
+      });
   }
 
   async function onLogin(props: DataProps) {
     onSubmit(props)
-      .then(({ status }) => {
-        if (status === 200) {
+      .then(({ data }) => {
+        if (data.statusCode === 200) {
+          router.push("/");
         }
       })
       .catch((err) => {
-        console.log(err.response.data);
+        if (typeof err?.response?.data !== "undefined") {
+          setState({ error: err?.response?.data });
+        } else {
+          setState({ error: { statusCode: 400, message: err } });
+        }
       });
   }
 
   return {
     onRegister,
     onLogin,
+    state,
   };
 }

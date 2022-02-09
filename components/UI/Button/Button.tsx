@@ -9,6 +9,7 @@ const buttonVariants = {
   warning: "bg-amber-700 hover:bg-amber-600 active:bg-amber-500",
   error: "bg-red-700 hover:bg-red-800",
   ok: "bg-green-600 hover:bg-green-700",
+  text: "",
 };
 
 interface ButtonProps
