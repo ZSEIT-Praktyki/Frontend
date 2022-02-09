@@ -8,7 +8,7 @@ import {
 
 export default function Navbar() {
   return (
-    <header className="w-full fixed bottom-0 left-0 flex flex-row bg-white justify-between border-t-2 border-black">
+    <header className="w-full fixed bottom-0 left-0 flex flex-row bg-white justify-between border-t-2 border-black sm:hidden">
       <button className="flex flex-col p-2 items-center text-sm w-1/5">
         <AiOutlineHome color="black" size={25} />
         Home

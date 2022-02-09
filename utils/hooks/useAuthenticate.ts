@@ -19,12 +19,16 @@ interface StateProps {
     message: string;
   };
   response?: {};
+
+  loading: boolean;
 }
 
 export default function useAuthenticate(type: "login" | "register") {
   const url = ROUTES[type];
 
-  const [state, setState] = useState<StateProps>({});
+  const [state, setState] = useState<StateProps>({
+    loading: false,
+  });
   const router = useRouter();
 
   async function onSubmit({ email, password }: DataProps) {
@@ -42,9 +46,9 @@ export default function useAuthenticate(type: "login" | "register") {
       })
       .catch((err) => {
         if (typeof err?.response?.data !== "undefined") {
-          setState({ error: err?.response?.data });
+          setState((p) => ({ ...p, error: err?.response?.data }));
         } else {
-          setState({ error: { statusCode: 400, message: err } });
+          setState((p) => ({ ...p, error: { statusCode: 400, message: err } }));
         }
       });
   }
@@ -58,9 +62,9 @@ export default function useAuthenticate(type: "login" | "register") {
       })
       .catch((err) => {
         if (typeof err?.response?.data !== "undefined") {
-          setState({ error: err?.response?.data });
+          setState((p) => ({ ...p, error: err?.response?.data }));
         } else {
-          setState({ error: { statusCode: 400, message: err } });
+          setState((p) => ({ ...p, error: { statusCode: 400, message: err } }));
         }
       });
   }
