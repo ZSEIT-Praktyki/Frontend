@@ -2,8 +2,22 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const user = createSlice({
   name: "user",
-  initialState: {},
-  reducers: {},
+  initialState: {
+    email: "",
+    user_id: -1,
+    isLoggedIn: false,
+
+    details: {
+      phone: "",
+      name: "",
+      surname: "",
+    },
+  },
+  reducers: {
+    setLoggedIn(state) {
+      state.isLoggedIn = true;
+    },
+  },
 });
 
 export const userReducers = user.reducer;
