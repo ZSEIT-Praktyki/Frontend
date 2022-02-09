@@ -6,27 +6,27 @@ import {
   AiOutlineShoppingCart,
 } from "react-icons/ai";
 
-export default function Navbar() {
+export default function BottomTab() {
   return (
-    <header className="w-full fixed bottom-0 left-0 flex flex-row bg-white justify-between border-t-2 border-black sm:hidden">
+    <header className="w-full fixed bottom-0 left-0 flex flex-row bg-gray-900 justify-between border-t-2 border-gray-800 sm:hidden text-gray-400">
       <button className="flex flex-col p-2 items-center text-sm w-1/5">
-        <AiOutlineHome color="black" size={25} />
+        <AiOutlineHome color="white" size={25} />
         Home
       </button>
       <button className="flex flex-col p-2 items-center text-sm w-1/5">
-        <AiOutlineGroup color="black" size={25} />
+        <AiOutlineGroup color="white" size={25} />
         Categories
       </button>
       <button className="flex flex-col p-2 items-center text-sm w-1/5">
-        <AiOutlineShoppingCart color="black" size={25} />
+        <AiOutlineShoppingCart color="white" size={25} />
         Cart
       </button>
       <button className="flex flex-col p-2 items-center text-sm w-1/5">
-        <AiOutlineHeart color="black" size={25} />
+        <AiOutlineHeart color="white" size={25} />
         List
       </button>
       <button className="flex flex-col p-2 items-center text-sm w-1/5">
-        <AiOutlineUser color="black" size={25} />
+        <AiOutlineUser color="white" size={25} />
         Account
       </button>
     </header>

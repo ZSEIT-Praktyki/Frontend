@@ -8,7 +8,7 @@ const buttonVariants = {
   outlined: "border-teal-500 text-black hover:bg-teal-500 hover:text-white",
   warning: "bg-amber-700 hover:bg-amber-600 active:bg-amber-500",
   error: "bg-red-700 hover:bg-red-800",
-  ok: "bg-green-600 hover:bg-green-700",
+  ok: "bg-green-600 hover:bg-green-700 border-green-600",
   text: "text-gray-900 hover:bg-gray-200",
 };
 

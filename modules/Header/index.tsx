@@ -7,37 +7,36 @@ import {
 
 export default function Header() {
   return (
-    <header className="w-full p-2 flex flex-row bg-white justify-between items-center ">
-      <p className="p-2 font-bold text-purple-800 text-2xl">LOGO</p>
+    <header className="w-full p-2 flex flex-row bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-10">
+      <p className="p-2 font-bold text-purple-800 text-2xl hidden sm:flex w-1/6">
+        LOGO
+      </p>
 
-      <div className="w-1/2 flex justify-center">
+      <div className="w-full sm:w-4/6 justify-center flex m-0">
         <Input
-          classes="w-3/4 hidden sm:flex border-white bg-gray-200 mr-0"
+          classes="w-4/5 flex border-gray-800 bg-gray-800 m-0"
           placeholder="Search anything, we may have it"
         />
-        <Button variants="text" classes="border-white bg-gray-200">
+        <Button
+          variants="text"
+          classes="border-gray-800 bg-gray-800 hover:bg-gray-900 m-0 ml-2"
+        >
           <AiOutlineSearch />
         </Button>
       </div>
 
-      <section className="hidden flex-row sm:flex">
+      <section className="hidden flex-row sm:flex w-1/6">
         <Button
           variants="text"
-          classes="text-gray-900 font-medium flex flex-row"
+          classes="font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2"
         >
-          <AiOutlineUser color="black" size={20} style={{ marginRight: 5 }} />
-          Account
+          <AiOutlineUser color="white" size={20} />
         </Button>
         <Button
           variants="text"
-          classes="text-gray-900 font-medium flex flex-row"
+          classes="font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2"
         >
-          <AiOutlineShoppingCart
-            color="black"
-            size={20}
-            style={{ marginRight: 5 }}
-          />
-          Cart
+          <AiOutlineShoppingCart color="white" size={20} />
         </Button>
       </section>
     </header>
