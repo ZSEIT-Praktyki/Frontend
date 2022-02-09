@@ -1,5 +1,3 @@
-export const Colors = {};
-
 /* 
 
     name it later
