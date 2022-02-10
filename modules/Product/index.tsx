@@ -1,26 +1,27 @@
 import { Button } from "@components/index";
 import Image from "next/image";
 
+import { AiOutlineHeart } from "react-icons/ai";
+
 export default function Product() {
   return (
-    <section className="bg-black  rounded-xl max-w-xs m-2">
-      <div className="p-2">
-        <Image
-          src={require("../../utils/assets/images/placeholder.png")}
-          layout="responsive"
-          alt="image"
-        />
-      </div>
-      <h2 className="font-bold text-white p-2 text-3xl">Title</h2>
-      <p className="text-white p-2">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos molestiae
-        consequuntur itaque vitae doloremque reprehenderit dolore optio quisquam
-        aliquid recusandae blanditiis neque nostrum non veniam, quo quibusdam
-        molestias iste odio.
-      </p>
-      <div className="flex flex-row justify-between">
-        <Button variants="ok">Buy</Button>
-        <Button>Cart</Button>
+    <section className="bg-gray-800 text-white">
+      <Image
+        src={require("../../utils/assets/images/placeholder.png")}
+        layout="responsive"
+        alt="image"
+      />
+
+      <h2 className="font-bold text-white p-2 text-xl">Title</h2>
+
+      <p className="p-2 font-medium">Olsztyn at 9:40</p>
+
+      <div className="flex flex-row justify-between m-2">
+        <p className="text-white font-medium text-xl">$1000</p>
+
+        <button>
+          <AiOutlineHeart color="white" size={25} />
+        </button>
       </div>
     </section>
   );

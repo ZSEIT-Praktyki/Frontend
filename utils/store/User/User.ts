@@ -6,6 +6,7 @@ const user = createSlice({
     email: "",
     user_id: -1,
     isLoggedIn: false,
+    token: "",
 
     details: {
       phone: "",
@@ -14,8 +15,19 @@ const user = createSlice({
     },
   },
   reducers: {
-    setLoggedIn(state) {
+    setLoggedIn(state, { payload }) {
       state.isLoggedIn = true;
+      state.token = payload.token;
+    },
+    setDetails(state, { payload }) {
+      state.email = payload.email;
+      state.user_id = payload.id;
+      state.details.phone = payload.phone;
+      state.details.name = payload.name;
+      state.details.surname = payload.surname;
+    },
+    setLoggedOut(state) {
+      state.isLoggedIn = false;
     },
   },
 });

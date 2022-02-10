@@ -2,6 +2,8 @@ import axios from "axios";
 import { API } from "@utils/assets/constants/routes";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { userActions } from "@utils/store/User/User";
 
 const ROUTES = {
   login: `${API}/user/login`,
@@ -30,6 +32,7 @@ export default function useAuthenticate(type: "login" | "register") {
     loading: false,
   });
   const router = useRouter();
+  const dispatch = useDispatch();
 
   async function onSubmit({ email, password }: DataProps) {
     return axios
@@ -41,7 +44,8 @@ export default function useAuthenticate(type: "login" | "register") {
     onSubmit(props)
       .then(({ data }) => {
         if (data.StatusCode === 201) {
-          console.log(data);
+          dispatch(userActions.setLoggedIn(data.token));
+          router.push("/");
         }
       })
       .catch((err) => {
@@ -57,6 +61,7 @@ export default function useAuthenticate(type: "login" | "register") {
     onSubmit(props)
       .then(({ data }) => {
         if (data.statusCode === 200) {
+          dispatch(userActions.setLoggedIn(data.token));
           router.push("/");
         }
       })
