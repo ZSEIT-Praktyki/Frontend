@@ -44,7 +44,7 @@ export default function useAuthenticate(type: "login" | "register") {
     onSubmit(props)
       .then(({ data }) => {
         if (data.StatusCode === 201) {
-          dispatch(userActions.setLoggedIn(data.token));
+          dispatch(userActions.setLoggedIn());
           router.push("/");
         }
       })
@@ -61,7 +61,7 @@ export default function useAuthenticate(type: "login" | "register") {
     onSubmit(props)
       .then(({ data }) => {
         if (data.statusCode === 200) {
-          dispatch(userActions.setLoggedIn(data.token));
+          dispatch(userActions.setLoggedIn());
           router.push("/");
         }
       })
