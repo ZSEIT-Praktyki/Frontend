@@ -10,7 +10,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <main className="w-full h-full flex justify-center flex-col bg-gray-900">
       <Header></Header>
-      {children}
+      <section>{children}</section>
       <Footer></Footer>
     </main>
   );
