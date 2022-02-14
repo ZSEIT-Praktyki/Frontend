@@ -30,14 +30,14 @@ export default function Login() {
           isValid,
           dirty,
         }) => (
-          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 h-2/4 bg-white rounded">
+          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 h-2/4 bg-white ">
             <h1 className="text-5xl text-center mt-5 mb-10 font-bold p-2">
               Log in
             </h1>
 
             <label
               htmlFor="name"
-              className={`ml-2 font-medium ${errors.email && "text-red-600"}`}
+              className={`ml-2 font-medium ${errors.email && "text-rose-600"}`}
             >
               {errors.email || "Email"}
             </label>
@@ -47,13 +47,14 @@ export default function Login() {
               placeholder="Email"
               onChange={handleChange("email")}
               onBlur={handleBlur("email")}
-              classes={`mt-0 mb-0 ${errors.email && "border-red-600"}`}
+              classes={`mt-0 mb-0 `}
+              error={!!errors.email}
             />
             <p className="ml-2 text-xs">Must be a valid email</p>
             <label
               htmlFor="name"
               className={`ml-2 font-medium mt-4 ${
-                errors.password && "text-red-600"
+                !!errors.password && "text-rose-600"
               }`}
             >
               {errors.password || "Password"}
@@ -66,20 +67,21 @@ export default function Login() {
               onChange={handleChange("password")}
               onBlur={handleBlur("password")}
               type="password"
-              classes={`mt-0 mb-0 ${errors.password && "border-red-600"}`}
+              classes={`mt-0 mb-0`}
+              error={!!errors.password}
             />
-            
+
             <p className="ml-2 text-xs">
-            Password must be at least 6 characters long
+              Password must be at least 6 characters long
             </p>
             <Button
               disabled={!(isValid && dirty)}
               //@ts-ignore
               onClick={handleSubmit}
               type="submit"
-              classes="mt-6"
+              classes="mt-6 hover:ring hover:ring-3 hover:ring-purple-800 ring-offset-2 active:scale-[0.95]"
             >
-              Login
+              LOGIN
             </Button>
             <div className="text-center text-sm text-purple-800 font-medium mt-2">
               <Link href="/auth/register">Sign up</Link>

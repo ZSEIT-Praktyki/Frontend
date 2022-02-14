@@ -47,7 +47,8 @@ export default function Login() {
               placeholder="Email"
               onChange={handleChange("email")}
               onBlur={handleBlur("email")}
-              classes={`mt-0 mb-0 ${errors.email && "border-red-600"}`}
+              error={!!errors.email}
+              classes={`mt-0 mb-0`}
             />
             <p className="ml-2 text-xs">Must be a valid email</p>
             <label
@@ -66,7 +67,8 @@ export default function Login() {
               onChange={handleChange("password")}
               onBlur={handleBlur("password")}
               type="password"
-              classes={`mt-0 mb-0 ${errors.password && "border-red-600"}`}
+              error={!!errors.password}
+              classes={`mt-0 mb-0`}
             />
 
             <p className="ml-2 text-xs">
