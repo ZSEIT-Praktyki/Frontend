@@ -1,30 +1,18 @@
-import { NextPageContext } from "next";
+import { Button } from "@components/index";
+import { API } from "@utils/assets/constants/routes";
+import useAddWatchlist from "@utils/hooks/useAddWatchlist";
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 const url =
   "https://i.kym-cdn.com/entries/icons/mobile/000/025/382/Screen_Shot_2018-02-06_at_3.37.14_PM.jpg";
 
-export async function getServerSideProps({ query }: NextPageContext) {
-  const res = await fetch(`http://localhost:3001/listings/${query.id}`);
-  const data = await res.json();
+function Listing({ data }: { data: ListingProps }) {
+  const { status, Append } = useAddWatchlist();
+  const router = useRouter();
 
-  if (data.statusCode === 404 || data.statusCode === 400) {
-    return {
-      props: {
-        data: {},
-        error: "Post not found",
-      },
-    };
-  }
+  console.log(status);
 
-  return {
-    props: {
-      data,
-    },
-  };
-}
-
-export default function Listing({ data }: any) {
   return (
     <main className="w-full flex flex-col items-center">
       <Head>
@@ -33,7 +21,9 @@ export default function Listing({ data }: any) {
       <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
         <article className="p-2 mt-5">
           <img className="w-full rounded" src={url} alt="" />
-          <div className="pt-2 flex overflow-scroll sm:overflow-hidden h-16 sm:h-24 mb-2">
+          <div className="pt-2 flex overflow-scroll sm:overflow-hidden h-24 mb-2">
+            <img className="pr-2 rounded last:pr-0" src={url} alt="" />
+            <img className="pr-2 rounded last:pr-0" src={url} alt="" />
             <img className="pr-2 rounded last:pr-0" src={url} alt="" />
             <img className="pr-2 rounded last:pr-0" src={url} alt="" />
             <img className="pr-2 rounded last:pr-0" src={url} alt="" />
@@ -46,25 +36,59 @@ export default function Listing({ data }: any) {
           </h1>
 
           <h2 className="text-gray-300 mt-2 text-xl font-bold">
-            Price: ${data.price / 100}
+            Price: &euro;{data.price / 100}
           </h2>
-          <div className="mt-4 flex flex-row overflow-hidden">
-            <span className="p-2 rounded border border-white text-white mr-2">
-              Electronic
-            </span>
-            <span className="p-2 rounded border border-white text-white mr-2">
-              Electronic
-            </span>
-            <span className="p-2 rounded border border-white text-white mr-2">
-              Electronic
-            </span>
-            <span className="p-2 rounded border border-white text-white mr-2">
-              Electronic
-            </span>
+          <div className="mt-4 flex flex-row overflow-hidden text-gray-300 border-gray-300">
+            <span className="p-2 rounded border mr-2">Electronic</span>
+            <span className="p-2 rounded border mr-2">Electronic</span>
+            <span className="p-2 rounded border mr-2">Electronic</span>
+            <span className="p-2 rounded border mr-2">Electronic</span>
           </div>
-          <p className="mt-4 text-white p-2">{data.description}</p>
+          <div className="flex flex-row">
+            <Button
+              classes="m-0 mt-4 mr-2"
+              onClick={() => Append(data.listing_id)}
+            >
+              Add to watchlist
+            </Button>
+            <Button
+              classes="m-0 mt-4"
+              onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
+            >
+              Purchase now
+            </Button>
+          </div>
+          <p className="mt-4 text-white">{data.description}</p>
         </article>
       </section>
     </main>
   );
 }
+
+export async function getStaticPaths() {
+  const res = await fetch(`${API}/listings/ids`);
+  const data = await res.json();
+
+  const paths = data.map((listing: any) => ({
+    params: {
+      id: listing.listing_id.toString(),
+    },
+  }));
+
+  return {
+    paths: paths,
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }: any) {
+  const res = await fetch(`${API}/listings/${params.id.toString()}`);
+  const data = await res.json();
+
+  return {
+    props: { data },
+    revalidate: 60,
+  };
+}
+
+export default Listing;

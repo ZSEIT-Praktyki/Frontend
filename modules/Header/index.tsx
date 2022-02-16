@@ -1,4 +1,5 @@
 import { Button, Input } from "@components/index";
+import { useSelector } from "@utils/store/store";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -22,6 +23,8 @@ export default function Header() {
     });
   }
 
+  const { isLoggedIn } = useSelector((state) => state.user);
+
   return (
     <header className="w-full p-2 flex flex-row bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-10">
       <p className="p-2 font-bold text-purple-800 text-2xl hidden sm:flex w-1/6">
@@ -40,26 +43,30 @@ export default function Header() {
           classes="border-gray-800 bg-gray-800 hover:bg-gray-900 m-0 ml-2"
           onClick={onSearch}
         >
-          <AiOutlineSearch />
+          <AiOutlineSearch color="white" />
         </Button>
       </div>
 
-      <section className="hidden flex-row sm:flex w-1/6">
-        <Button
-          variants="text"
-          classes="font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2"
-          onClick={() => router.push("/user/account")}
-        >
-          <AiOutlineUser color="white" size={20} />
-        </Button>
-        <Button
-          variants="text"
-          classes="font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2"
-          onClick={() => router.push("/watchlist")}
-        >
-          <AiOutlineShoppingCart color="white" size={20} />
-        </Button>
-      </section>
+      {isLoggedIn ? (
+        <section className="hidden flex-row sm:flex w-1/6">
+          <Button
+            variants="text"
+            classes="font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2"
+            onClick={() => router.push("/user/account")}
+          >
+            <AiOutlineUser color="white" size={20} />
+          </Button>
+          <Button
+            variants="text"
+            classes="font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2"
+            onClick={() => router.push("/watchlist")}
+          >
+            <AiOutlineShoppingCart color="white" size={20} />
+          </Button>
+        </section>
+      ) : (
+        <></>
+      )}
     </header>
   );
 }
