@@ -6,7 +6,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function Login() {
-  const { onRegister } = useAuthenticate("login");
+  const { onRegister } = useAuthenticate("register");
   return (
     <main className="w-full flex justify-center h-screen flex-col items-center">
       <Head>

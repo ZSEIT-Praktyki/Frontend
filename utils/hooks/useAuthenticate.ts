@@ -36,7 +36,13 @@ export default function useAuthenticate(type: "login" | "register") {
 
   async function onSubmit({ email, password }: DataProps) {
     return axios
-      .post(url, { email, password })
+      .post(
+        url,
+        { email, password },
+        {
+          withCredentials: true,
+        }
+      )
       .then(({ data, status }) => ({ data, status }));
   }
 
@@ -61,6 +67,8 @@ export default function useAuthenticate(type: "login" | "register") {
     onSubmit(props)
       .then(({ data }) => {
         if (data.statusCode === 200) {
+          console.log(data);
+
           dispatch(userActions.setLoggedIn());
           router.push("/");
         }

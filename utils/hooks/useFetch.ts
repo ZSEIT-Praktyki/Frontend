@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { API } from "@utils/assets/constants/routes";
+import { axiosbase } from "@utils/helpers/axiosbase";
 
 interface StateProps<T> {
   data: T;
@@ -28,7 +29,7 @@ export default function useFetch<T>(
     (async () => {
       setState((p) => ({ ...p, loading: true }));
       try {
-        const { data } = await axios.get(API + path, {
+        const { data } = await axiosbase.get(API + path, {
           headers: {
             token: "",
           },
