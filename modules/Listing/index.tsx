@@ -1,4 +1,5 @@
-import AddWatchlist from "@modules/AddWatchlist";
+import { Button } from "@components/index";
+import useAddWatchlist from "@utils/hooks/useAddWatchlist";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -9,8 +10,14 @@ export default function Listing({
   listing_id,
 }: ListingProps) {
   const router = useRouter();
+
+  const { Append, status } = useAddWatchlist();
+
   return (
-    <section className="bg-gray-800 text-white flex flex-col justify-between rounded">
+    <section className="bg-gray-800 text-white flex flex-col justify-between rounded mb-2 relative">
+      {/* <span className="absolute -top-3 right-0 text-xs bg-green-600 z-10 p-1 rounded">
+        In Watchlist
+      </span> */}
       <div>
         <Image
           onClick={() => router.push("/listing/" + listing_id)}
@@ -22,16 +29,21 @@ export default function Listing({
         />
       </div>
 
-      <h2 className="font-bold p-2 text-xl">{title}</h2>
+      <h2 className="font-medium p-2 text-xl">{title}</h2>
+      <div className="flex flex-row text-gray-400 p-2 font-medium justify-between text-md">
+        <p> Olsztyn at {new Date(added_date).toLocaleDateString()}</p>
+        <p>&euro;{price / 100}</p>
+      </div>
 
-      <p className="p-2 font-medium">
-        {new Date(added_date).toLocaleDateString()}
-      </p>
-
-      <div className="flex flex-row justify-between m-2">
-        <p className=" font-medium text-xl">&euro;{price / 100}</p>
-
-        <AddWatchlist listing_id={listing_id} />
+      <div className="p-2">
+        <Button
+          variants={status === "OK" ? "ok" : "fire"}
+          classes="!border-0 !w-full py-3 !m-0"
+          disabled={status === "OK" || status === "Failed"}
+          onClick={() => Append(listing_id)}
+        >
+          {status === "OK" ? "Added" : "Follow"}
+        </Button>
       </div>
     </section>
   );
