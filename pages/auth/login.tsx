@@ -81,7 +81,7 @@ export default function Login() {
               disabled={!(isValid && dirty)}
               onClick={() => handleSubmit()}
               type="submit"
-              classes="border-0"
+              classes="!border-0"
             >
               LOGIN
             </Button>

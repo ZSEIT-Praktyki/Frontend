@@ -62,8 +62,6 @@ export default function Home({ data }: { data: ListingProps[] }) {
         ))}
       </div>
 
-      <BottomTab></BottomTab>
-
       <FloatingButton />
     </main>
   );

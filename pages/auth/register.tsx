@@ -80,7 +80,8 @@ export default function Login() {
               disabled={!(isValid && dirty)}
               onClick={() => handleSubmit()}
               type="submit"
-              classes="mt-6 active:scale-[0.95]"
+              variants="fire"
+              classes="active:scale-[0.95] !border-0"
             >
               Register
             </Button>

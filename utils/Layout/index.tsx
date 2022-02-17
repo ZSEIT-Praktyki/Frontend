@@ -1,3 +1,4 @@
+import BottomTab from "@modules/BottomTab";
 import Footer from "@modules/Footer";
 import Header from "@modules/Header";
 import useCheckCookie from "@utils/hooks/useCheckCookie";
@@ -13,6 +14,8 @@ export default function Layout({ children }: LayoutProps) {
     <main className="w-full h-full bg-gray-900 min-h-screen">
       <Header></Header>
       <section>{children}</section>
+
+      <BottomTab></BottomTab>
       <Footer></Footer>
     </main>
   );

@@ -40,7 +40,7 @@ export default function Header() {
         />
         <Button
           variants="text"
-          classes="border-gray-800 bg-gray-800 hover:bg-gray-900 m-0 ml-2"
+          classes="border-gray-800 bg-gray-800 hover:bg-gray-900 m-2"
           onClick={onSearch}
         >
           <AiOutlineSearch color="white" />
