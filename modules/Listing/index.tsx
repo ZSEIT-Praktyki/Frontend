@@ -1,4 +1,4 @@
-import AddWatchlist from "@modules/AddWatchlist";
+import { Button } from "@components/index";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -7,10 +7,11 @@ export default function Listing({
   price,
   added_date,
   listing_id,
+  condition,
 }: ListingProps) {
   const router = useRouter();
   return (
-    <section className="bg-gray-800 text-white flex flex-col justify-between rounded">
+    <section className="bg-gray-800 text-white flex flex-col justify-between rounded mb-5">
       <div>
         <Image
           onClick={() => router.push("/listing/" + listing_id)}
@@ -22,16 +23,18 @@ export default function Listing({
         />
       </div>
 
-      <h2 className="font-bold p-2 text-xl">{title}</h2>
-
-      <p className="p-2 font-medium">
-        {new Date(added_date).toLocaleDateString()}
-      </p>
-
-      <div className="flex flex-row justify-between m-2">
-        <p className=" font-medium text-xl">&euro;{price / 100}</p>
-
-        <AddWatchlist listing_id={listing_id} />
+      <h2 className="font-medium p-2 text-xl">{title}</h2>
+      <div className="flex flex-row text-gray-400 p-2 font-medium justify-between text-md">
+        <p> {new Date(added_date).toLocaleDateString()}</p>
+        <p>&euro;{price / 100}</p>
+      </div>
+      <div className="p-2 text-gray-400">
+        <p>Olsztyn</p>
+      </div>
+      <div className="p-2">
+        <Button variants="fire" classes="border-0 !w-full py-3 !m-0">
+          Follow
+        </Button>
       </div>
     </section>
   );

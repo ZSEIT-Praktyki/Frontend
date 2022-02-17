@@ -17,6 +17,7 @@ const user = createSlice({
   reducers: {
     setLoggedIn(state) {
       state.isLoggedIn = true;
+      localStorage.setItem("user", JSON.stringify({ isLoggedIn: true }));
     },
     setDetails(state, { payload }) {
       state.email = payload.email;
@@ -27,6 +28,7 @@ const user = createSlice({
     },
     setLoggedOut(state) {
       state.isLoggedIn = false;
+      localStorage.removeItem("user");
     },
   },
 });

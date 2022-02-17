@@ -8,9 +8,9 @@ import Link from "next/link";
 export default function Login() {
   const { onRegister } = useAuthenticate("register");
   return (
-    <main className="w-full flex justify-center h-screen flex-col items-center">
+    <main className="w-full h-screen flex justify-center items-center">
       <Head>
-        <title>Register</title>
+        <title>Log in</title>
       </Head>
       <Formik
         initialValues={{
@@ -30,16 +30,18 @@ export default function Login() {
           isValid,
           dirty,
         }) => (
-          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 h-2/4 bg-white rounded">
-            <h1 className="text-5xl text-center mt-5 mb-10 font-bold p-2">
+          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 h-2/4 bg-gray-800 ">
+            <h1 className="text-5xl text-center mt-5 mb-10 font-bold p-2 text-gray-50">
               Register
             </h1>
 
             <label
               htmlFor="name"
-              className={`ml-2 font-medium ${errors.email && "text-red-600"}`}
+              className={`ml-2 font-medium text-gray-300 ${
+                !!errors.email && "!text-rose-600"
+              }`}
             >
-              {errors.email || "Email"}
+              {errors.email ?? "Email"}
             </label>
             <Input
               value={values.email}
@@ -47,17 +49,17 @@ export default function Login() {
               placeholder="Email"
               onChange={handleChange("email")}
               onBlur={handleBlur("email")}
+              classes={`mt-0 mb-0 bg-gray-900 text-white`}
               error={!!errors.email}
-              classes={`mt-0 mb-0`}
             />
-            <p className="ml-2 text-xs">Must be a valid email</p>
+            <p className="ml-2 text-xs text-gray-300">Must be a valid email</p>
             <label
               htmlFor="name"
-              className={`ml-2 font-medium mt-4 ${
-                errors.password && "text-red-600"
+              className={`ml-2 font-medium mt-4 text-gray-300 ${
+                !!errors.password && "!text-rose-600"
               }`}
             >
-              {errors.password || "Password"}
+              {errors.password ?? "Password"}
             </label>
 
             <Input
@@ -67,24 +69,23 @@ export default function Login() {
               onChange={handleChange("password")}
               onBlur={handleBlur("password")}
               type="password"
+              classes={`mt-0 mb-0 bg-gray-900 text-white`}
               error={!!errors.password}
-              classes={`mt-0 mb-0`}
             />
 
-            <p className="ml-2 text-xs">
+            <p className="ml-2 text-xs text-gray-300">
               Password must be at least 6 characters long
             </p>
             <Button
               disabled={!(isValid && dirty)}
-              //@ts-ignore
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
               type="submit"
-              classes="mt-6"
+              classes="mt-6 active:scale-[0.95]"
             >
-              Login
+              Register
             </Button>
             <div className="text-center text-sm text-purple-800 font-medium mt-2">
-              <Link href="/auth/register">Sign up</Link>
+              <Link href="/auth/login">log in</Link>
             </div>
           </div>
         )}

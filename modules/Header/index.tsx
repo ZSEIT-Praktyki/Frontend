@@ -35,7 +35,7 @@ export default function Header() {
         <Input
           value={query}
           onChange={({ target }) => setQuery(target.value)}
-          classes="w-4/5 flex border-gray-800 bg-gray-800 m-0"
+          classes="bg-gray-800 w-3/4"
           placeholder="Search anything, we may have it"
         />
         <Button
@@ -47,7 +47,7 @@ export default function Header() {
         </Button>
       </div>
 
-      {isLoggedIn ? (
+      {isLoggedIn && (
         <section className="hidden flex-row sm:flex w-1/6">
           <Button
             variants="text"
@@ -64,8 +64,6 @@ export default function Header() {
             <AiOutlineShoppingCart color="white" size={20} />
           </Button>
         </section>
-      ) : (
-        <></>
       )}
     </header>
   );
