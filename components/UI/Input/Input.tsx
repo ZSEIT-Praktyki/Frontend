@@ -7,15 +7,35 @@ interface InputProps
   > {
   classes?: string;
   error?: boolean;
+  label?: string;
+  name?: string;
 }
 
-export default function Input({ classes, error, ...rest }: InputProps) {
+export default function Input({
+  classes,
+  error,
+  label,
+  name,
+  ...rest
+}: InputProps) {
   return (
-    <input
-      className={`border-2  border-zinc-600 w-auto m-2 p-2 rounded outline-0 transition hover:border-purple-600 focus:border-purple-800 focus:text-purple-800 ${
-        error && "border-rose-600"
-      } ${classes}`}
-      {...rest}
-    />
+    <div className="flex flex-col w-full">
+      {label !== undefined && (
+        <label
+          htmlFor={name ?? ""}
+          className={`pl-2 text-gray-300 font-medium ${
+            error && "text-rose-600"
+          }`}
+        >
+          {label}
+        </label>
+      )}
+      <input
+        className={`border-2  border-zinc-600 w-auto m-2 p-2 rounded outline-0 transition hover:border-purple-600 focus:border-purple-800 focus:text-purple-800 ${
+          error && "border-rose-600"
+        } ${classes}`}
+        {...rest}
+      />
+    </div>
   );
 }
