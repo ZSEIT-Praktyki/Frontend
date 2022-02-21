@@ -35,7 +35,7 @@ export default function Header() {
         <Input
           value={query}
           onChange={({ target }) => setQuery(target.value)}
-          classes="bg-gray-800 w-3/4"
+          classes="bg-gray-800 "
           placeholder="Search anything, we may have it"
         />
         <Button
