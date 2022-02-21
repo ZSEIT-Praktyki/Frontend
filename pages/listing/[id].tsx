@@ -4,6 +4,7 @@ import { API } from "@utils/assets/constants/routes";
 import useAddWatchlist from "@utils/hooks/useAddWatchlist";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import {AiOutlineShoppingCart, AiOutlineHeart} from 'react-icons/ai'
 
 function Listing({ data }: { data: ListingProps }) {
   const { status, Append } = useAddWatchlist();
@@ -16,36 +17,40 @@ function Listing({ data }: { data: ListingProps }) {
       </Head>
       <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
         <Slider images={data.images}></Slider>
-        <article className="p-2">
-          <h1 className="text-2xl sm:text-4xl text-white font-bold">
-            {data.title}
-          </h1>
+        <article className="p-10 flex w-full justify-between items-center bg-gray-800 rounded-lg">
+          <section className="mr-5">
+            <h1 className="text-2xl sm:text-4xl text-white font-bold">
+              {data.title}
+            </h1>
 
-          <h2 className="text-gray-300 mt-2 text-xl font-bold">
-            Price: &euro;{data.price / 100}
-          </h2>
-          <div className="mt-4 flex flex-row overflow-hidden text-gray-300 border-gray-300">
-            <span className="p-2 rounded border mr-2">Electronic</span>
-            <span className="p-2 rounded border mr-2">Electronic</span>
-            <span className="p-2 rounded border mr-2">Electronic</span>
-            <span className="p-2 rounded border mr-2">Electronic</span>
-          </div>
-          <div className="flex flex-row">
-            <Button
-              classes="m-0 mt-4 mr-2"
-              onClick={() => Append(data.listing_id)}
-            >
-              Add to watchlist
-            </Button>
+            <h2 className="text-gray-300 mt-2 text-xl font-bold">
+              Price: &euro;{data.price / 100}
+            </h2>
+            <div className="mt-2 flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
+              <span className="p-2 rounded border mr-2 mt-2">Category: Electronics &gt; Computers</span>
+              <span className="p-2 rounded border mr-2 mt-2">Condition: New</span>
+              {/* <span className="p-2 rounded border mr-2">Electronic</span>
+              <span className="p-2 rounded border mr-2">Electronic</span> */}
+            </div>
+          </section>
+          <div className="flex flex-col">
             <Button
               classes="m-0 mt-4"
               onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
             >
-              Purchase now
+              <AiOutlineShoppingCart className="text-xl mr-1"/> Purchase now
+            </Button>
+            <Button
+              classes="m-0 mt-2"
+              variants="outlinedPrimary"
+              onClick={() => Append(data.listing_id)}
+            >
+              <AiOutlineHeart className="text-xl mr-1" />Add to watchlist
             </Button>
           </div>
-          <p className="mt-4 text-white">{data.description}</p>
+          
         </article>
+        <p className="mt-4 text-white">{data.description}</p>
       </section>
     </main>
   );
