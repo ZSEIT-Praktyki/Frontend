@@ -1,16 +1,14 @@
-import useFetch from '@utils/hooks/useFetch'
-import Head from 'next/head'
-import Listing from '@modules/Listing'
-import { useRouter } from 'next/router'
-import { NextPageContext } from 'next'
-import { API } from '@utils/assets/constants/routes'
+
+import Head from "next/head";
+import Listing from "@modules/Listing";
+import { NextPageContext } from "next";
+import { API } from "@utils/assets/constants/routes";
+
 
 export async function getServerSideProps(ctx: NextPageContext) {
   const res = await fetch(`${API}/listings/search?query=${ctx.query.q}`)
   const data = await res.json()
-
-  console.log(data)
-
+  
   return {
     props: {
       query: { q: ctx.query.q },
