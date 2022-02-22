@@ -16,7 +16,7 @@ export async function getStaticProps() {
   };
 }
 
-export default function Home({ data }: { data: ListingProps[] }) {
+export default function Home({ data }: { data: ListingMinified[] }) {
   const router = useRouter();
   return (
     <main className="w-full min-h-screen flex flex-col items-center">

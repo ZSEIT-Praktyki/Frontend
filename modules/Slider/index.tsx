@@ -52,19 +52,21 @@ export default function Slider({ images }: SliderProps) {
         <BsFillArrowRightCircleFill color="white" />
       </button>
 
-      <div className="pt-2 flex overflow-scroll cursor-pointer sm:overflow-hidden h-24 mb-2">
-        {images.map(({ filename, photo_id }) => (
-          <img
-            style={{
-              transform: `translateX(${100 * thumbnail.index}px)`,
-            }}
-            onClick={() => setThumbnail((p) => ({ ...p, filename }))}
-            key={photo_id}
-            className="pr-2 rounded last:pr-0"
-            src={`${API}/listings/images/${filename}`}
-          />
-        ))}
-      </div>
+      {images.length !== 0 && (
+        <div className="pt-2 flex overflow-scroll cursor-pointer sm:overflow-hidden h-24 mb-2">
+          {images.map(({ filename, photo_id }) => (
+            <img
+              style={{
+                transform: `translateX(${100 * thumbnail.index}px)`,
+              }}
+              onClick={() => setThumbnail((p) => ({ ...p, filename }))}
+              key={photo_id}
+              className="pr-2 rounded last:pr-0"
+              src={`${API}/listings/images/${filename}`}
+            />
+          ))}
+        </div>
+      )}
     </article>
   );
 }

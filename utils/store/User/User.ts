@@ -12,6 +12,7 @@ const user = createSlice({
       phone: "",
       name: "",
       surname: "",
+      address: "",
     },
   },
   reducers: {
