@@ -34,3 +34,10 @@ interface ListingProps {
   subcategory_id: {};
   description?: string;
 }
+
+interface ListingMinified {
+  listing_id: number;
+  images: string | null;
+  title: string;
+  price: number;
+}
