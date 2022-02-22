@@ -31,7 +31,7 @@ export default function Remind() {
           dirty,
         }) => (
           <div className='w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-2/4 bg-gray-800 '>
-            <p className='text-4xl text-center mt-5 mb-10 font-bold p-2 text-purple-800 visit-gray-50'>
+            <p className='text-4xl text-center mt-5 mb-10 font-bold p-2 text-purple-800 '>
               Remind password
             </p>
 
