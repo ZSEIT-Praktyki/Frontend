@@ -9,6 +9,8 @@ interface InputProps
   error?: boolean;
   label?: string;
   name?: string;
+  errorText?: string;
+  containerStyle?: string;
 }
 
 export default function Input({
@@ -16,10 +18,12 @@ export default function Input({
   error,
   label,
   name,
+  errorText,
+  containerStyle,
   ...rest
 }: InputProps) {
   return (
-    <div className="flex flex-col w-full">
+    <div className={"flex flex-col w-full " + containerStyle ?? ""}>
       {label !== undefined && (
         <label
           htmlFor={name ?? ""}
@@ -36,6 +40,7 @@ export default function Input({
         } ${classes}`}
         {...rest}
       />
+      {errorText && error && <p className="pl-2 text-rose-600">{errorText}</p>}
     </div>
   );
 }

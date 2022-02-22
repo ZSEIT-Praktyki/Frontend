@@ -16,8 +16,8 @@ function Listing({ data }: { data: ListingProps }) {
         <title>{data.title}</title>
       </Head>
       <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
-        <Slider images={data.images}></Slider>
-        <article className="p-10 flex w-full justify-between items-center bg-gray-800 rounded-lg">
+        <Slider images={data.images} />
+        <article className="p-10 flex w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
           <section className="mr-5">
             {/* Auction title */}
             <h1 className="text-2xl sm:text-4xl text-white font-bold">
@@ -44,13 +44,13 @@ function Listing({ data }: { data: ListingProps }) {
             </h2>
             {/* Purchase button */}
             <Button
-              classes="m-0 mt-4"
+              classes="m-0 mt-4 !justify-start"
               onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
             >
               <AiOutlineShoppingCart className="text-xl mr-1" /> Purchase now
             </Button>
             {/* watchlist button */}
-            {}
+
             <Button
               classes="m-0 mt-2"
               variants="outlinedPrimary"
