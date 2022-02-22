@@ -5,12 +5,12 @@ import useAuthenticate from '@utils/hooks/useAuthenticate'
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Login() {
-  const { onRegister } = useAuthenticate('register')
+export default function Remind() {
+  const { onLogin } = useAuthenticate('login')
   return (
     <main className='w-full h-screen flex justify-center items-center'>
       <Head>
-        <title>Log in</title>
+        <title>Send me a password</title>
       </Head>
       <Formik
         initialValues={{
@@ -18,7 +18,7 @@ export default function Login() {
           password: '',
         }}
         validationSchema={loginSchema}
-        onSubmit={onRegister}
+        onSubmit={onLogin}
         validateOnBlur
       >
         {({
@@ -30,10 +30,10 @@ export default function Login() {
           isValid,
           dirty,
         }) => (
-          <div className='w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 h-2/4 bg-gray-800 '>
-            <h1 className='text-5xl text-center mt-5 mb-10 font-bold p-2 text-purple-800'>
-              Register
-            </h1>
+          <div className='w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-2/4 bg-gray-800 '>
+            <p className='text-4xl text-center mt-5 mb-10 font-bold p-2 text-purple-800 visit-gray-50'>
+              Remind password
+            </p>
 
             <label
               htmlFor='name'
@@ -52,38 +52,18 @@ export default function Login() {
               classes={`mt-0 mb-0 bg-gray-900 text-white`}
               error={!!errors.email}
             />
-            <p className='ml-2 text-xs text-gray-300'>Must be a valid email</p>
-            <label
-              htmlFor='name'
-              className={`ml-2 font-medium mt-4 text-gray-300 ${
-                !!errors.password && '!text-rose-600'
-              }`}
-            >
-              {errors.password ?? 'Password'}
-            </label>
-
-            <Input
-              value={values.password}
-              name='password'
-              placeholder='Password'
-              onChange={handleChange('password')}
-              onBlur={handleBlur('password')}
-              type='password'
-              classes={`mt-0 mb-0 bg-gray-900 text-white`}
-              error={!!errors.password}
-            />
-
-            <p className='ml-2 mb-4 text-xs text-gray-300'>
-              Password must be at least 6 characters long
+            <p className=' mb-4 ml-2 text-xs text-gray-300'>
+              Must be a valid email
             </p>
+
             <Button
+              variants='fire'
               disabled={!(isValid && dirty)}
               onClick={() => handleSubmit()}
               type='submit'
-              variants='fire'
-              classes='active:scale-[0.95] !border-0'
+              classes='!border-0'
             >
-              Register
+              Send me my e-mail
             </Button>
             <div className='text-center text-l text-purple-800 font-medium mt-2'>
               <Link href='/auth/login'>log in</Link>
