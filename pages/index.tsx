@@ -1,5 +1,4 @@
 import FloatingButton from "@components/FloatingButton";
-import BottomTab from "@modules/BottomTab";
 import Listing from "@modules/Listing";
 import { API } from "@utils/assets/constants/routes";
 import Head from "next/head";
