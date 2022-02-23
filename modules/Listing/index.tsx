@@ -37,7 +37,7 @@ export default function Listing({
           Olsztyn at <br />
           {new Date(added_date).toLocaleDateString()}
         </p>
-        <p>&euro;{price / 100}</p>
+        <p>&euro;{Number.parseFloat(`${price / 100}`).toFixed(2)}</p>
       </div>
 
       <div className="p-2">
