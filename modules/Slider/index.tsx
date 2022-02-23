@@ -55,7 +55,7 @@ export default function Slider({ images }: SliderProps) {
                 }}
                 onClick={() => setThumbnail((p) => ({ ...p, filename }))}
                 key={photo_id}
-                className="mr-2 rounded last:mr-0 max-h-36 hover:border-2 hover:border-purple-600"
+                className="mr-2 rounded last:mr-0 max-h-36 transition border-2 border-zinc-600 hover:border-purple-600"
                 src={`${API}/listings/images/${filename}`}
               />
             ))}

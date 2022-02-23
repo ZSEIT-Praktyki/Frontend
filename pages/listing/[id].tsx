@@ -103,8 +103,16 @@ function Listing({ data }: { data: ListingProps }) {
             <p className="mt-4 text-white">{data.description}</p>
           </article>
           {/* Seller info */}
-          <section className="bg-gray-800 p-10 mt-4 rounded-lg text-xl sm:text-3xl text-white font-bold">
-            Seller: {data.seller_id.owners_name}
+          <section className="bg-gray-800 p-10 mt-4 rounded-lg flex items-baseline justify-between">
+            <span className="text-xl sm:text-3xl text-white font-bold">
+              Seller: {data.seller_id.owners_name}
+            </span>
+            <a
+              href=""
+              className="text-lg sm:text-lg transition text-gray-300 hover:text-gray-200 font-bold"
+            >
+              See seller's other items
+            </a>
           </section>
         </section>
       </main>
