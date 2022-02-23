@@ -49,7 +49,7 @@ export default function useAuthenticate(type: "login" | "register") {
   async function onRegister(props: DataProps) {
     onSubmit(props)
       .then(({ data }) => {
-        if (data.StatusCode === 201) {
+        if (data.StatusCode === 201 || data.statusCode === 200) {
           dispatch(userActions.setLoggedIn());
           router.push("/");
         }
