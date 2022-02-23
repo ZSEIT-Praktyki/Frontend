@@ -18,6 +18,8 @@ export default function useUserCredentials() {
           });
 
           store.dispatch(userActions.setDetails(data));
+
+          console.log(data);
         } catch (error) {
           console.warn(error);
         }
