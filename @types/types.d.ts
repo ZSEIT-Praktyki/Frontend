@@ -5,9 +5,12 @@ interface ListingImagesProps {
 }
 
 interface ListingSellerProps {
-  creation_date: Date;
-  email: string;
   id: number;
+  email: string;
+  creation_date: Date;
+  owners_name: string;
+  owners_surname: string;
+  owners_phone: string;
 }
 
 interface CategoryProps {
@@ -16,7 +19,7 @@ interface CategoryProps {
   description: string;
 }
 
-interface SubcategoryProps {
+interface  SubcategoryProps{
   subcategory_id: number;
   description: string;
   name: string;
@@ -31,6 +34,6 @@ interface ListingProps {
   condition: number;
   added_date: Date;
   title: string;
-  subcategory_id: {};
+  subcategory_id: SubcategoryProps;
   description?: string;
 }
