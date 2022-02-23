@@ -6,12 +6,10 @@ import { useRouter } from "next/router";
 export default function Listing({
   title,
   price,
-  added_date,
   listing_id,
   images,
-}: ListingProps) {
+}: ListingMinified) {
   const router = useRouter();
-
   const { Append, status } = useAddWatchlist();
 
   return (
@@ -23,8 +21,8 @@ export default function Listing({
         <img
           onClick={() => router.push("/listing/" + listing_id)}
           src={
-            images[0]?.filename
-              ? `${API}/listings/images/${images[0].filename}`
+            images
+              ? `${API}/listings/images/${images.filename}`
               : "https://previews.123rf.com/images/kaymosk/kaymosk1804/kaymosk180400005/99776312-fehler-404-seite-nicht-gefunden-fehler-mit-glitch-effekt-auf-dem-bildschirm-vektor-illustration-f%C3%BCr-.jpg"
           }
           alt="image"
@@ -34,14 +32,14 @@ export default function Listing({
 
       <h2 className="font-medium p-2 text-xl">{title}</h2>
       <div className="flex flex-row text-gray-400 p-2 font-medium justify-between text-md">
-        <p> Olsztyn at {new Date(added_date).toLocaleDateString()}</p>
-        <p>&euro; {Number.parseFloat(`${price / 100}`).toFixed(2)}</p>
+        <p> Olsztyn at {new Date("").toLocaleDateString()}</p>
+        <p>&euro;{price / 100}</p>
       </div>
 
       <div className="p-2">
         <Button
           variants={status === "OK" ? "ok" : "fire"}
-          classes="!border-0 !w-full py-3 !m-0"
+          classes="border-0 w-full py-3 m-0 text-center"
           disabled={status === "OK" || status === "Failed"}
           onClick={() => Append(listing_id)}
         >

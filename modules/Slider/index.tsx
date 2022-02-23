@@ -28,9 +28,9 @@ export default function Slider({ images }: SliderProps) {
   }
 
   return (
-    <article className="mt-5">
+    <article className="p-2 mt-5 relative">
       <img
-        className="w-full rounded-lg bg-gray-800 max-h-96 object-contain"
+        className="w-full rounded max-h-96"
         src={
           images[0]?.filename
             ? `${API}/listings/images/${thumbnail.filename}`
@@ -39,14 +39,21 @@ export default function Slider({ images }: SliderProps) {
         alt=""
       />
 
-      <section className="flex justify-between bg-gray-800 p-10 mt-5 mb-5 w-full rounded-lg">
-        <button
-          onClick={onPrev}
-          className="bg-purple-900 p-2 rounded-full z-10"
-        >
-          <BsFillArrowLeftCircleFill color="white" />
-        </button>
-        <div className="flex overflow-scroll sm:overflow-hidden">
+      <button
+        onClick={onPrev}
+        className="absolute bottom-10 -left-2 bg-purple-900 p-2 rounded-full z-10 hidden sm:block"
+      >
+        <BsFillArrowLeftCircleFill color="white" />
+      </button>
+      <button
+        onClick={onNext}
+        className="absolute bottom-10 -right-2 bg-purple-900 p-2 rounded-full z-10 hidden sm:block"
+      >
+        <BsFillArrowRightCircleFill color="white" />
+      </button>
+
+      {images.length !== 0 && (
+        <div className="pt-2 flex overflow-scroll cursor-pointer sm:overflow-hidden h-24 mb-2">
           {images.map(({ filename, photo_id }) => (
             <img
               style={{
@@ -59,13 +66,8 @@ export default function Slider({ images }: SliderProps) {
             />
           ))}
         </div>
-        <button
-          onClick={onNext}
-          className="bg-purple-900 p-2 rounded-full z-10 hidden sm:block"
-        >
-          <BsFillArrowRightCircleFill color="white" />
-        </button>
-      </section>
+      )}
     </article>
   );
 }
+

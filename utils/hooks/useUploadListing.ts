@@ -1,4 +1,5 @@
 import { axiosbase } from "@utils/helpers/axiosbase";
+import { useRouter } from "next/router";
 
 interface ListingProps {
   title: string;
@@ -7,9 +8,12 @@ interface ListingProps {
   subcategory_id: number;
   price: number;
   condition: string;
+  files: File[];
 }
 
 export default function useUploadListing() {
+  const router = useRouter();
+
   async function onSubmit(listing: ListingProps) {
     try {
       const { data } = await axiosbase.post("/listings/managment", {
@@ -17,7 +21,10 @@ export default function useUploadListing() {
         price: +listing.price * 100,
         subcategory_id: +listing.subcategory_id,
       });
-      console.log(data);
+
+      await onUploadImages(listing.files, data.listing_id);
+
+      router.push("/listing/" + data.listing_id);
     } catch (error: any) {
       console.warn(error.response.data);
     }
@@ -36,7 +43,7 @@ export default function useUploadListing() {
         form
       );
 
-      console.log(data);
+      return data;
     } catch (error: any) {
       console.warn(error.response.data);
     }
