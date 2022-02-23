@@ -19,7 +19,7 @@ interface CategoryProps {
   description: string;
 }
 
-interface  SubcategoryProps{
+interface SubcategoryProps {
   subcategory_id: number;
   description: string;
   name: string;
@@ -40,6 +40,7 @@ interface ListingProps {
 
 interface ListingMinified {
   listing_id: number;
+  added_date: Date;
   images: null | {
     filename: string;
     order: number;

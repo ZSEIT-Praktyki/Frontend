@@ -101,7 +101,7 @@ export default function CheckoutForm({ onSubmit, stripe }: CheckoutFormProps) {
                 disabled={!(stripe && isValid && dirty) || isSubmitting}
                 onClick={() => handleSubmit()}
                 variants="fire"
-                classes="border-0 py-3 mt-5"
+                classes="border-0 !py-3 mt-6"
                 type="submit"
               >
                 Submit Payment
