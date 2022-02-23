@@ -7,7 +7,7 @@ export default function Listing({
   title,
   price,
   listing_id,
-  image,
+  images,
 }: ListingMinified) {
   const router = useRouter();
 
@@ -22,8 +22,8 @@ export default function Listing({
         <img
           onClick={() => router.push("/listing/" + listing_id)}
           src={
-            image
-              ? `${API}/listings/images/${image}`
+            images
+              ? `${API}/listings/images/${images.filename}`
               : "https://previews.123rf.com/images/kaymosk/kaymosk1804/kaymosk180400005/99776312-fehler-404-seite-nicht-gefunden-fehler-mit-glitch-effekt-auf-dem-bildschirm-vektor-illustration-f%C3%BCr-.jpg"
           }
           alt="image"

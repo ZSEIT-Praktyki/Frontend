@@ -37,7 +37,11 @@ interface ListingProps {
 
 interface ListingMinified {
   listing_id: number;
-  images: string | null;
+  images: null | {
+    filename: string;
+    order: number;
+    photo_id: number;
+  };
   title: string;
   price: number;
 }
