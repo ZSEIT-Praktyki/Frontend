@@ -17,18 +17,18 @@ function Listing({ data }: { data: ListingProps }) {
 
   return (
     <>
-    <main className="w-full flex flex-col items-center">
-      <Head>
-        <title>{data.title}</title>
-      </Head>
-      <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
-        <Slider images={data.images} />
-        <article className="p-10 flex w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
-          <section className="mr-5">
-            {/* Auction title */}
-            <h1 className="text-2xl sm:text-4xl text-white font-bold">
-              {data.title}
-            </h1>
+      <main className="w-full flex flex-col items-center">
+        <Head>
+          <title>{data.title}</title>
+        </Head>
+        <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
+          <Slider images={data.images} />
+          <article className="p-10 flex w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
+            <section className="mr-5">
+              {/* Auction title */}
+              <h1 className="text-2xl sm:text-4xl text-white font-bold">
+                {data.title}
+              </h1>
 
               {/* Tags */}
               <div className="mt-2 flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
@@ -48,12 +48,15 @@ function Listing({ data }: { data: ListingProps }) {
                     {data.condition ? "New" : "Used"}
                   </span>
                 </span>
+                <span className="p-2 rounded border mr-2 mt-2">
+                  Quantity: <span className="font-bold">{data.quantity}</span>
+                </span>
               </div>
             </section>
 
             {/* Price and buttons */}
             <section className="flex flex-col">
-              <h2 className="text-white mt-2 text-4xl font-bold">
+              <h2 className="text-white mt-2 text-2xl sm:text-4xl font-bold">
                 &euro;
                 {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
               </h2>
@@ -102,11 +105,9 @@ function Listing({ data }: { data: ListingProps }) {
           {/* Seller info */}
           <section className="bg-gray-800 p-10 mt-4 rounded-lg text-xl sm:text-3xl text-white font-bold">
             Seller: {data.seller_id.owners_name}
-
           </section>
         </section>
       </main>
-      <Footer />
     </>
   );
 }

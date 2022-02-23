@@ -28,9 +28,10 @@ export default function Slider({ images }: SliderProps) {
   }
 
   return (
-    <article className="p-2 mt-5 relative">
+    <article className="mt-5">
       <img
-        className="w-full rounded max-h-96"
+        className="w-full rounded-lg bg-gray-800 object-contain"
+        style={{ maxHeight: "36rem" }}
         src={
           images[0]?.filename
             ? `${API}/listings/images/${thumbnail.filename}`
@@ -38,36 +39,35 @@ export default function Slider({ images }: SliderProps) {
         }
         alt=""
       />
-
-      <button
-        onClick={onPrev}
-        className="absolute bottom-10 -left-2 bg-purple-900 p-2 rounded-full z-10 hidden sm:block"
-      >
-        <BsFillArrowLeftCircleFill color="white" />
-      </button>
-      <button
-        onClick={onNext}
-        className="absolute bottom-10 -right-2 bg-purple-900 p-2 rounded-full z-10 hidden sm:block"
-      >
-        <BsFillArrowRightCircleFill color="white" />
-      </button>
-
-      {images.length !== 0 && (
-        <div className="pt-2 flex overflow-scroll cursor-pointer sm:overflow-hidden h-24 mb-2">
-          {images.map(({ filename, photo_id }) => (
-            <img
-              style={{
-                transform: `translateX(${100 * thumbnail.index}px)`,
-              }}
-              onClick={() => setThumbnail((p) => ({ ...p, filename }))}
-              key={photo_id}
-              className="pr-2 rounded last:pr-0"
-              src={`${API}/listings/images/${filename}`}
-            />
-          ))}
-        </div>
+      {images.length > 0 && (
+        <section className="flex justify-between items-center bg-gray-800 pl-10 pr-10 pt-3 pb-3 mt-5 w-full rounded-lg">
+          <button
+            onClick={onPrev}
+            className="bg-purple-900 p-2 mr-10 rounded-full z-10 h-8"
+          >
+            <BsFillArrowLeftCircleFill color="white" />
+          </button>
+          <div className="flex overflow-hidden sm:overflow-hidden items-center justify-center w-full">
+            {images.map(({ filename, photo_id }) => (
+              <img
+                style={{
+                  transform: `translateX(${100 * thumbnail.index}px)`,
+                }}
+                onClick={() => setThumbnail((p) => ({ ...p, filename }))}
+                key={photo_id}
+                className="mr-2 rounded last:mr-0 max-h-36 hover:border-2 hover:border-purple-600"
+                src={`${API}/listings/images/${filename}`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={onNext}
+            className="bg-purple-900 p-2 ml-10 rounded-full z-10 h-8"
+          >
+            <BsFillArrowRightCircleFill color="white" />
+          </button>
+        </section>
       )}
     </article>
   );
 }
-

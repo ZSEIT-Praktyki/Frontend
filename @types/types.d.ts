@@ -30,6 +30,7 @@ interface ListingProps {
   images: ListingImagesProps[];
   listing_id: number;
   price: number;
+  quantity: number;
   seller_id: ListingSellerProps;
   condition: number;
   added_date: Date;
