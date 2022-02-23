@@ -1,16 +1,22 @@
 import { Button } from "@components/index";
+import Footer from "@modules/Footer";
 import Slider from "@modules/Slider";
 import { API } from "@utils/assets/constants/routes";
 import useAddWatchlist from "@utils/hooks/useAddWatchlist";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { AiOutlineShoppingCart, AiOutlineHeart } from "react-icons/ai";
+import {
+  AiOutlineShoppingCart,
+  AiOutlineHeart,
+  AiFillHeart,
+} from "react-icons/ai";
 
 function Listing({ data }: { data: ListingProps }) {
   const { status, Append } = useAddWatchlist();
   const router = useRouter();
 
   return (
+    <>
     <main className="w-full flex flex-col items-center">
       <Head>
         <title>{data.title}</title>
@@ -24,54 +30,84 @@ function Listing({ data }: { data: ListingProps }) {
               {data.title}
             </h1>
 
-            {/* Tags */}
-            <div className="mt-2 flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
-              {/* Tag */}
-              <span className="p-2 rounded border mr-2 mt-2">
-                Category:{" "}
-                <span className="font-bold">Electronics &gt; Computers</span>
-              </span>
-              <span className="p-2 rounded border mr-2 mt-2">
-                Condition: <span className="font-bold">New</span>
-              </span>
-            </div>
-          </section>
+              {/* Tags */}
+              <div className="mt-2 flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
+                {/* Tag */}
+                <span className="p-2 rounded border mr-2 mt-2">
+                  Category:{" "}
+                  <span className="font-bold">
+                    {data.subcategory_id.category_id.category_name}
+                    {" > "}
+                    {data.subcategory_id.name}
+                  </span>
+                </span>
+                <span className="p-2 rounded border mr-2 mt-2">
+                  Condition:{" "}
+                  <span className="font-bold">
+                    {/* Possibly it should be all around, but someone who did backend fucked up enums */}
+                    {data.condition ? "New" : "Used"}
+                  </span>
+                </span>
+              </div>
+            </section>
 
-          {/* Price and buttons */}
-          <section className="flex flex-col">
-            <h2 className="text-white mt-2 text-4xl font-bold">
-              &euro;{data.price / 100}
-            </h2>
-            {/* Purchase button */}
-            <Button
-              classes="m-0 mt-4 !justify-start"
-              onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
-            >
-              <AiOutlineShoppingCart className="text-xl mr-1" /> Purchase now
-            </Button>
-            {/* watchlist button */}
+            {/* Price and buttons */}
+            <section className="flex flex-col">
+              <h2 className="text-white mt-2 text-4xl font-bold">
+                &euro;
+                {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
+              </h2>
+              {/* Purchase button */}
+              <Button
+                classes="m-0 mt-4"
+                onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
+              >
+                <AiOutlineShoppingCart className="text-xl mr-1" />{" "}
+                <span>Purchase now</span>
+              </Button>
+              {/* watchlist button */}
+              <Button
+                classes="m-0 mt-2"
+                variants="outlinedPrimary"
+                onClick={() => Append(data.listing_id)}
+              >
+                {
+                  /*When listing is on whitelist, change contents of a button*/
+                  true ? (
+                    <>
+                      <AiOutlineHeart className="text-xl mr-1" />
+                      <span>Add to watchlist</span>
+                    </>
+                  ) : (
+                    <>
+                      <AiFillHeart className="text-xl mr-1" />
+                      <span>
+                        Remove from
+                        <br />
+                        watchlist
+                      </span>
+                    </>
+                  )
+                }
+              </Button>
+            </section>
+          </article>
+          {/* Description */}
+          <article className="bg-gray-800 p-10 mt-4 rounded-lg">
+            <header className="text-xl sm:text-3xl text-white font-bold">
+              Description
+            </header>
+            <p className="mt-4 text-white">{data.description}</p>
+          </article>
+          {/* Seller info */}
+          <section className="bg-gray-800 p-10 mt-4 rounded-lg text-xl sm:text-3xl text-white font-bold">
+            Seller: {data.seller_id.owners_name}
 
-            <Button
-              classes="m-0 mt-2"
-              variants="outlinedPrimary"
-              onClick={() => Append(data.listing_id)}
-            >
-              <AiOutlineHeart className="text-xl mr-1" />
-              Add to watchlist
-            </Button>
           </section>
-        </article>
-        {/* Description */}
-        <article className="bg-gray-800 p-10 mt-4 rounded-lg">
-          <header className="text-xl sm:text-3xl text-white font-bold">
-            Description
-          </header>
-          <p className="mt-4 text-white">{data.description}</p>
-        </article>
-        {/* Seller info */}
-        <article className="bg-gray-800 flex p-10 mt-4 rounded-lg"></article>
-      </section>
-    </main>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }
 

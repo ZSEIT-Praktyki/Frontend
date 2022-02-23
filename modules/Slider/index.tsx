@@ -70,3 +70,4 @@ export default function Slider({ images }: SliderProps) {
     </article>
   );
 }
+
