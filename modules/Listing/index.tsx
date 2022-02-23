@@ -10,7 +10,6 @@ export default function Listing({
   images,
 }: ListingMinified) {
   const router = useRouter();
-
   const { Append, status } = useAddWatchlist();
 
   return (
