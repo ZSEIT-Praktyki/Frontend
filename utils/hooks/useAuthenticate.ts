@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { userActions } from "@utils/store/User/User";
+import { axiosbase } from "@utils/helpers/axiosbase";
 
 const ROUTES = {
   login: `${API}/user/login`,
@@ -82,9 +83,16 @@ export default function useAuthenticate(type: "login" | "register") {
       });
   }
 
+  async function signOut() {
+    try {
+      await axiosbase.post("/user/signout");
+    } catch (error) {}
+  }
+
   return {
     onRegister,
     onLogin,
     state,
+    signOut,
   };
 }
