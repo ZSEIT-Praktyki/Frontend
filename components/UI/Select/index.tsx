@@ -22,6 +22,7 @@ export default function Select({
   error = false,
   label,
   options = [],
+  classes,
   ...rest
 }: SelectProps) {
   return (
@@ -32,11 +33,11 @@ export default function Select({
       <select
         className={`bg-gray-900 border-2 border-zinc-600 p-2 m-2 text-white rounded mt-0 ${
           error && "border-rose-600"
-        }`}
+        } ${classes}`}
         {...rest}
       >
         {options.map(({ text, value }) => (
-          <option key={value} value={value}>
+          <option key={value} value={value} className="p-2">
             {text}
           </option>
         ))}

@@ -20,6 +20,7 @@ export default function useUploadListing() {
         ...listing,
         price: +listing.price * 100,
         subcategory_id: +listing.subcategory_id,
+        quantity: +listing.quantity,
       });
 
       await onUploadImages(listing.files, data.listing_id);

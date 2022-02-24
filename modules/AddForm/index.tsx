@@ -3,7 +3,9 @@ import addSchema from "@utils/helpers/addSchema";
 import { Input, Button } from "@components/index";
 import Label from "@components/UI/Label";
 import Select from "@components/UI/Select";
-import { useState, ChangeEvent } from "react";
+import { useState } from "react";
+import Condition from "./components/Condition";
+import FileDrop from "@components/FileDrop";
 
 interface AddFormProps {
   onSubmit: (arg: any) => Promise<void>;
@@ -11,10 +13,6 @@ interface AddFormProps {
 
 export default function AddForm({ onSubmit }: AddFormProps) {
   const [files, setFiles] = useState<File[]>([]);
-
-  function onFiles(event: ChangeEvent<HTMLInputElement>) {
-    setFiles((p) => [...p, event.target.files![0]]);
-  }
 
   return (
     <Formik
@@ -28,7 +26,6 @@ export default function AddForm({ onSubmit }: AddFormProps) {
         subcategory_id: 1,
         price: 0,
         condition: "",
-        files: [],
       }}
     >
       {({
@@ -39,99 +36,118 @@ export default function AddForm({ onSubmit }: AddFormProps) {
         errors,
         isValid,
         dirty,
+        touched,
       }) => {
+        console.log(errors);
         return (
-          <section className="w-full sm:w-3/5 md:w-2/4 lg:w-2/4 xl:w-2/5 flex flex-col text-white mt-5">
-            <h1 className="text-white text-4xl text-center font-bold mb-5">
-              Add listing
-            </h1>
+          <article className="max-w-6xl flex flex-col items-center md:items-start lg:flex-row mt-5 mb-5">
+            <section className="bg-gray-800 w-full sm:w-3/4 lg:w-full flex-1 mr-5 flex flex-col rounded-md p-4">
+              <section className="w-full h-80 bg-gray-900 rounded-md mb-5">
+                <FileDrop files={files} setState={setFiles} />
+              </section>
 
-            <Input
-              name="title"
-              label="Title"
-              classes="bg-gray-900 mt-0"
-              placeholder="Title"
-              error={!!errors.title}
-              type={"text"}
-              value={values.title}
-              onChange={handleChange("title")}
-              onBlur={handleBlur("title")}
-            />
-            <Label text="Description" error={!!errors.description} />
-            <textarea
-              value={values.description}
-              onChange={handleChange("description")}
-              onBlur={handleBlur("description")}
-              name="description"
-              className={`bg-gray-900 border-2 border-zinc-600 m-2 mt-0 rounded p-2 text-white focus:border-purple-600 ${
-                !!errors.description && "border-rose-600"
-              }`}
-              placeholder="Description"
-              rows={10}
-            />
+              <Input
+                containerStyle="mb-4"
+                label={
+                  !!errors.title && touched.title
+                    ? errors.title
+                    : "Name of the product*"
+                }
+                placeholder="Type what are you selling"
+                onChange={handleChange("title")}
+                value={values.title}
+                error={!!errors.title && touched.title}
+                onBlur={handleBlur("title")}
+              />
+              <Label
+                error={!!errors.description && touched.description}
+                text={
+                  !!errors.description && touched.description
+                    ? errors.description
+                    : "Product's description*"
+                }
+              />
+              <textarea
+                value={values.description}
+                onChange={handleChange("description")}
+                onBlur={handleBlur("description")}
+                placeholder="Say someting more to the customers about the product "
+                rows={10}
+                className={`bg-gray-900 text-white mb-4 resize-none m-2 mt-0 p-2 rounded  border-2 ${
+                  !!errors.description && touched.description
+                    ? "border-rose-600"
+                    : "border-zinc-600"
+                }`}
+              />
 
-            <Input
-              label="Quantity"
-              value={values.quantity}
-              onChange={handleChange("quantity")}
-              onBlur={handleBlur("quantity")}
-              name="quantity"
-              error={!!errors.quantity}
-              classes="bg-gray-900 mt-0"
-              placeholder="Quantity"
-              type={"number"}
-            />
+              <Select
+                onChange={handleChange("subcategory_id")}
+                value={values.subcategory_id}
+                onBlur={handleBlur("subcategory_id")}
+                label="Category*"
+                error={!!errors.subcategory_id && touched.subcategory_id}
+                options={[{ value: "Home", text: "Home" }]}
+              />
 
-            <Input
-              label="Price"
-              value={values.price}
-              onChange={handleChange("price")}
-              onBlur={handleBlur("price")}
-              name="price"
-              error={!!errors.price}
-              classes="bg-gray-900 mt-0"
-              placeholder="Price"
-              type={"number"}
-            />
+              <Condition
+                onChange={handleChange("condition")}
+                value={values.condition}
+              />
 
-            <Select
-              label="Condition"
-              value={values.condition}
-              onChange={handleChange("condition")}
-              onBlur={handleBlur("condition")}
-              name="condition"
-              error={!!errors.condition}
-              options={[
-                { text: "Used", value: "USED" },
-                { text: "New", value: "NEW" },
-              ]}
-            />
+              <Input
+                label={
+                  !!errors.price && touched.price
+                    ? errors.price
+                    : "Product's price"
+                }
+                placeholder="0,00"
+                value={values.price}
+                onChange={handleChange("price")}
+                onBlur={handleBlur("price")}
+                error={!!errors.price && touched.price}
+              />
+              <div className="flex items-center ">
+                <input type="checkbox" className="ml-2 " />
+                <p className="text-white ml-2 font-medium">Negotiable</p>
+              </div>
 
-            <Select
-              error={!!errors.subcategory_id}
-              label="Category"
-              name="category"
-              value={values.subcategory_id}
-              onChange={handleChange("subcategory_id")}
-              onBlur={handleBlur("subcategory_id")}
-              options={[
-                { text: "Any", value: "1" },
-                { text: "Any 2", value: "2" },
-              ]}
-            />
+              <Input
+                containerStyle="mt-4"
+                label={
+                  !!errors.quantity && touched.quantity
+                    ? errors.quantity
+                    : "Quantity*"
+                }
+                placeholder="How much products you have"
+                value={values.quantity}
+                onChange={handleChange("quantity")}
+                onBlur={handleBlur("quantity")}
+                error={!!errors.quantity && touched.quantity}
+              />
 
-            <Input type={"file"} onChange={onFiles} />
-
-            <Button
-              disabled={!(isValid && dirty)}
-              variants="fire"
-              type="submit"
-              classes="border-0 py-5 mt-5"
-              onClick={() => handleSubmit()}
-            >
-              Submit
-            </Button>
-          </section>
+              <Input label="Location*" containerStyle="mt-4" />
+            </section>
+            <section className="bg-gray-800 flex-1 flex items-center flex-col justify-around rounded-md h-96   pb-5">
+              <h1 className="text-white text-4xl font-bold text-center p-2">
+                Add
+              </h1>
+              <p className="text-white p-2 w-3/4">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+                rem eos aliquam necessitatibus! Sit, cumque consectetur. Sunt
+                blanditiis molestiae dolores ullam officia accusamus culpa
+                officiis commodi voluptas consequatur, quisquam similique.
+              </p>
+              <Button
+                onClick={() => handleSubmit()}
+                disabled={!(isValid && dirty)}
+                variants="fire"
+                type="submit"
+                classes="w-full !m-0 w-4/5 py-3 rounded-2xl font-medium"
+              >
+                ADD AS BUY NOW
+              </Button>
+            </section>
+          </article>
         );
       }}
     </Formik>
