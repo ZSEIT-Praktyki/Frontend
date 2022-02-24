@@ -1,76 +1,95 @@
-import { Button, Input } from '@components/index'
-import { useSelector } from '@utils/store/store'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState } from 'react'
+import SearchForm from "@modules/SearchForm";
+import { useSelector } from "@utils/store/store";
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   AiOutlineUser,
-  AiOutlineShoppingCart,
-  AiOutlineSearch,
-} from 'react-icons/ai'
+  AiOutlineHeart,
+  AiOutlinePlusCircle,
+} from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { MdKeyboardArrowDown } from "react-icons/md";
+import useAuthenticate from "@utils/hooks/useAuthenticate";
 
 export default function Header() {
-  const router = useRouter()
+  const { isLoggedIn } = useSelector((state) => state.user);
+  const router = useRouter();
 
-  const [query, setQuery] = useState('')
+  const [show, setShow] = useState(false);
 
-  function onSearch(e: any) {
-    e.preventDefault()
-    router.push('/search', {
-      pathname: '/search',
-      query: {
-        q: query,
-      },
-    })
-  }
-
-  const { isLoggedIn } = useSelector((state) => state.user)
+  const { signOut } = useAuthenticate("login");
 
   return (
-    <header className='w-full p-2 flex flex-row bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-10'>
-      <p className='p-2 font-bold !text-rose-600 text-2xl hidden sm:flex w-1/6'>
-        <Link href={'/'}>LOGO</Link>
-      </p>
+    <header className="w-full p-2 flex flex-col bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-10">
+      <section className="flex w-full justify-between p-2 items-center">
+        <p className="p-2 font-bold !text-rose-600 text-2xl flex flex-1 items-center">
+          <button className="hidden sm:flex">
+            <GiHamburgerMenu size={30} color="white" className="mr-2" />
+          </button>
+          <Link href={"/"}>LOGO</Link>
+        </p>
 
-      <form
-        className='w-full sm:w-4/6 justify-center flex m-0'
-        onSubmit={onSearch}
-      >
-        <Input
-          value={query}
-          onChange={({ target }) => setQuery(target.value)}
-          classes='bg-gray-800 mr-0 text-white'
-          placeholder='Search anything, we may have it'
-        />
-        <Button
-          variants='text'
-          classes='border-gray-800 bg-gray-800 hover:bg-gray-900 m-2'
-          type='submit'
-        >
-          <AiOutlineSearch color='white' />
-        </Button>
-      </form>
+        <section className="hidden sm:flex w-full justify-center">
+          <button className="flex sm:hidden">
+            <GiHamburgerMenu size={30} color="white" />
+          </button>
+          <SearchForm />
+        </section>
 
-      <section className='hidden flex-row sm:flex w-1/6'>
-        {isLoggedIn && (
-          <>
-            <Button
-              variants='text'
-              classes='font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2'
-              onClick={() => router.push('/user/account')}
-            >
-              <AiOutlineUser color='white' size={20} />
-            </Button>
-            <Button
-              variants='text'
-              classes='font-medium flex flex-row border-gray-800 bg-gray-800 hover:bg-gray-900 px-2'
-              onClick={() => router.push('/watchlist')}
-            >
-              <AiOutlineShoppingCart color='white' size={20} />
-            </Button>
-          </>
-        )}
+        <section className="flex">
+          <button
+            className="p-2 flex justify-center"
+            onClick={() => router.push("/add")}
+          >
+            <AiOutlinePlusCircle color="white" size={25} />
+          </button>
+
+          <button
+            className="p-2 flex justify-center"
+            onClick={() => router.push("/watchlist")}
+          >
+            <AiOutlineHeart color="white" size={25} />
+          </button>
+
+          <button className="flex p-2" onClick={() => setShow(!show)}>
+            <AiOutlineUser color="white" size={25} />
+            <MdKeyboardArrowDown
+              color="white"
+              size={20}
+              className={`mt-1 ${show ? "rotate-180" : "rotate-0"}`}
+            />
+          </button>
+
+          {show && (
+            <article className="bg-gray-800 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52">
+              {isLoggedIn && (
+                <>
+                  <button
+                    className="transition-colors p-2 hover:bg-gray-700 rounded font-medium"
+                    onClick={() => router.push("/user/account")}
+                  >
+                    My account
+                  </button>
+                  <button
+                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                    onClick={signOut}
+                  >
+                    Sign out
+                  </button>
+                </>
+              )}
+            </article>
+          )}
+        </section>
+      </section>
+      <section className="flex sm:hidden w-full">
+        <button>
+          <GiHamburgerMenu size={30} color="white" />
+        </button>
+        <SearchForm />
       </section>
     </header>
-  )
+  );
 }
+

@@ -5,6 +5,7 @@ import { API } from "@utils/assets/constants/routes";
 import { useSelector } from "@utils/store/store";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import Categories from "@modules/Categories";
 
 export async function getStaticProps() {
   const res = await fetch(`${API}/listings`);
@@ -24,7 +25,7 @@ export default function Home({ data }: { data: ListingMinified[] }) {
   const { isLoggedIn } = useSelector((state) => state.user);
 
   return (
-    <main className="w-full min-h-screen flex flex-col items-center">
+    <main className="w-full min-h-screen flex flex-col items-center mb-5">
       <Head>
         <title>Home</title>
       </Head>
@@ -76,11 +77,14 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         </article>
       </section>
 
-      <div className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3 ">
-        {data.map((listing) => (
-          <Listing key={listing.listing_id} {...listing} />
-        ))}
-      </div>
+      <section className="flex flex-col justify-center md:flex-row">
+        <Categories />
+        <div className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3 ">
+          {data.map((listing) => (
+            <Listing key={listing.listing_id} {...listing} />
+          ))}
+        </div>
+      </section>
 
       <FloatingButton />
     </main>
