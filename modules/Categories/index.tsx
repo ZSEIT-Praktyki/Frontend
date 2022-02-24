@@ -1,22 +1,25 @@
-const categories = {
-  Electronic: 'Electronic',
-  Food: 'Food',
-  Computers: 'Computers',
+import { AiOutlineShop, AiOutlineRight } from "react-icons/ai";
+
+function Category() {
+  return (
+    <button className=" flex items-center justify-between p-2 mb-2 rounded-md text-white">
+      <AiOutlineShop size={30} />
+      <span className="font-normal text-xl hover:text-emerald-500">Home</span>
+      <AiOutlineRight size={20} />
+    </button>
+  );
 }
 
 export default function Categories() {
   return (
-    <article className='w-full p-2 m-4 flex justify-center'>
-      {Object.entries(categories).map(([name]) => {
-        return (
-          <span
-            key={name}
-            className='mr-2 p-2 px-4 text-white bg-gray-800 rounded-md'
-          >
-            {name}
-          </span>
-        )
-      })}
-    </article>
-  )
+    <aside className="flex w-96 flex-col p-2 bg-gray-800 m-2 rounded-md mb-4">
+      <Category />
+      <Category />
+      <Category />
+      <Category />
+      <Category />
+      <Category />
+      <Category />
+    </aside>
+  );
 }
