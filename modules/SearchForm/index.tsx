@@ -14,6 +14,7 @@ export default function SearchForm() {
       pathname: "/search",
       query: {
         q: query,
+        page: 1,
       },
     });
   }
