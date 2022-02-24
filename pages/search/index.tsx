@@ -1,42 +1,43 @@
-import Head from 'next/head'
-import Listing from '@modules/Listing'
-import { NextPageContext } from 'next'
-import { API } from '@utils/assets/constants/routes'
+import Head from "next/head";
+import { useRouter } from "next/router";
+import useFetch from "@utils/hooks/useFetch";
+import { useState } from "react";
+import SearchLayout from "@modules/SearchLayout";
 
-export async function getServerSideProps(ctx: NextPageContext) {
-  const res = await fetch(`${API}/listings/search?query=${ctx.query.q}`)
-  const data = await res.json()
-
-  return {
-    props: {
-      query: { q: ctx.query.q },
-      data: data ?? [],
-    },
-  }
+export interface SearchProps {
+  hasMore: boolean;
+  results: ListingMinified[];
+  amount: number;
 }
 
-export default function Search({
-  query,
-  data,
-}: {
-  query: any
-  data: ListingProps[]
-}) {
+const init = {
+  hasMore: false,
+  results: [],
+};
+
+export default function Search() {
+  const router = useRouter();
+  const [page, setPage] = useState(1);
+
+  const { data } = useFetch<SearchProps>(
+    `/listings/search?query=${router.query.q ?? ""}&page=${page}`,
+    [page],
+    init
+  );
+
   return (
-    <main className='p-2 flex flex-col items-center'>
+    <main className="p-2 flex flex-col items-center">
       <Head>
         <title>Search</title>
       </Head>
 
-      <h1 className='text-white text-center  text-5xl md:text-7xl font-bold mb-5'>
-        Matching text: {query.q}
-      </h1>
-
-      <div className='p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3'>
-        {data.map((listing) => (
-          <Listing key={listing.listing_id} {...listing} />
-        ))}
+      <div className="flex w-full max-w-7xl">
+        <h1 className="text-white my-10 text-5xl font-bold text-left">
+          Looking for "{router.query.q}".
+        </h1>
       </div>
+
+      <SearchLayout data={data} setPage={setPage} page={page} />
     </main>
-  )
+  );
 }
