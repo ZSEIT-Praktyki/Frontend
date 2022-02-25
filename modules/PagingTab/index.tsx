@@ -1,6 +1,4 @@
 interface PagingTabProps {
-  setPage: (page: number) => void;
-  page: number;
   hasMore: boolean;
   amount: number;
 }
@@ -8,27 +6,13 @@ interface PagingTabProps {
 import { AiOutlineBars } from "react-icons/ai";
 import { RiLayoutGridLine } from "react-icons/ri";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
-import { ChangeEvent, useEffect } from "react";
-import { useRouter } from "next/router";
+import { ChangeEvent, useContext, useEffect } from "react";
 import { useState } from "react";
+import { SearchContext } from "pages/search";
 
-export default function PagingTab({
-  page,
-  setPage,
-  hasMore,
-  amount,
-}: PagingTabProps) {
-  const router = useRouter();
+export default function PagingTab({ hasMore, amount }: PagingTabProps) {
+  const { page, setPage } = useContext(SearchContext);
   const [input, setInput] = useState<number>(1);
-
-  useEffect(() => {
-    router.push("/search", {
-      query: {
-        q: router.query.q,
-        page: page === 0 ? 1 : page,
-      },
-    });
-  }, [page]);
 
   useEffect(() => {
     setInput(page);
