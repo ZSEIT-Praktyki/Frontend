@@ -27,7 +27,7 @@ export default function SearchForm() {
       <Input
         value={query}
         onChange={({ target }) => setQuery(target.value)}
-        classes="bg-gray-800 mr-0 py-3 text-white border-0"
+        classes="bg-gray-800 mr-0 py-3 !text-white border-0"
         placeholder="Search anything, we may have it"
       />
       <Button

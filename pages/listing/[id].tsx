@@ -37,8 +37,7 @@ function Listing({ data }: { data: ListingProps }) {
                   Category:{" "}
                   <span className="font-bold">
                     {data.subcategory_id.category_id.category_name}
-                    {" > "}
-                    {data.subcategory_id.name}
+                    {"  "} &gt; {data.subcategory_id.name}
                   </span>
                 </span>
                 <span className="p-2 rounded border mr-2 mt-2">
@@ -65,7 +64,7 @@ function Listing({ data }: { data: ListingProps }) {
                 classes="m-0 mt-4"
                 onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
               >
-                <AiOutlineShoppingCart className="text-xl mr-1" />{" "}
+                <AiOutlineShoppingCart className="text-xl mr-1" />
                 <span>Purchase now</span>
               </Button>
               {/* watchlist button */}
@@ -111,7 +110,7 @@ function Listing({ data }: { data: ListingProps }) {
               href=""
               className="text-lg sm:text-lg transition text-gray-300 hover:text-gray-200 font-bold"
             >
-              See seller's other items
+              See seller&apos;s other items
             </a>
           </section>
         </section>

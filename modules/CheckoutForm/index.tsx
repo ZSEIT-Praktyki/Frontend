@@ -5,14 +5,11 @@ import { useSelector } from "@utils/store/store";
 import { P24BankElement } from "@stripe/react-stripe-js";
 import { Stripe } from "@stripe/stripe-js";
 import Label from "@components/UI/Label";
+import useCheckout from "@utils/hooks/useCheckout";
 
-interface CheckoutFormProps {
-  onSubmit: (arg: any) => Promise<void>;
-  stripe: Stripe | null;
-}
-
-export default function CheckoutForm({ onSubmit, stripe }: CheckoutFormProps) {
+export default function CheckoutForm() {
   const { details } = useSelector((state) => state.user);
+  const { onSubmit, stripe } = useCheckout();
 
   return (
     <div className="p-2 rounded flex flex-col w-full xl:w-2/4 text-white">

@@ -30,9 +30,16 @@ export default function PagingTab({
     });
   }, [page]);
 
+  useEffect(() => {
+    setInput(page);
+  }, [page]);
+
   function onSubmit(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    setPage(input <= 0 ? 1 : input);
+
+    if (input > 0 && input <= amount) {
+      setPage(input);
+    }
   }
 
   function onNext() {
@@ -43,11 +50,15 @@ export default function PagingTab({
     setPage(page - 1);
   }
 
+  function onChange(e: ChangeEvent<HTMLInputElement>) {
+    setInput(+e.target.value);
+  }
+
   // TODO: Prevent inserting invalid values
 
   return (
-    <nav className="bg-gray-800 mt-2 mb-5 items-center flex justify-between p-2 rounded">
-      <section className="flex-1">
+    <nav className="bg-gray-800 mt-2 mb-5 items-center flex flex-col sm:flex-row  justify-between p-2 rounded">
+      <section className="hidden sm:flex flex-1">
         <button className="p-2">
           <AiOutlineBars color="white" size={25} />
         </button>
@@ -55,7 +66,7 @@ export default function PagingTab({
           <RiLayoutGridLine color="white" size={25} />
         </button>
       </section>
-      <section className="flex flex-1 items-center justify-center">
+      <section className="flex flex-1 items-center justify-center mb-2 sm:mb-0">
         <p className="text-white font-medium text-md mr-5">Sort by:</p>
         <select className="bg-gray-900 p-2 text-white rounded px-3">
           <option value="LATEST">Latest</option>
@@ -71,7 +82,7 @@ export default function PagingTab({
         <form onSubmit={onSubmit}>
           <input
             value={input}
-            onChange={({ target }) => setInput(+target.value)}
+            onChange={onChange}
             type="text"
             className="bg-gray-900 p-2 rounded w-12 text-white text-center"
           />

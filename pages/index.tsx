@@ -6,16 +6,20 @@ import { useSelector } from "@utils/store/store";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Categories from "@modules/Categories";
+import Image from "next/image";
 
 export async function getStaticProps() {
-  const res = await fetch(`${API}/listings`);
-  const data = await res.json();
+  let data = [];
+  try {
+    const res = await fetch(`${API}/listings`);
+    data = await res.json();
+  } catch (error) {}
 
   return {
     props: {
-      data,
+      data: data ?? [],
     },
-    revalidate: 60,
+    revalidate: 120,
   };
 }
 
@@ -72,8 +76,13 @@ export default function Home({ data }: { data: ListingMinified[] }) {
             )}
           </div>
         </article>
-        <article className="w-full min-h-full md:w-1/2 p-2 flex items-center justify-center">
-          <img src="/Online_shopping_SVG.svg" className="w-4/5" />
+        <article className="w-full min-h-full h-96 sm:h-screen md:w-1/2 p-2  flex items-center justify-center relative">
+          <Image
+            src="/Online_shopping_SVG.svg"
+            className="w-4/5"
+            alt=""
+            layout="fill"
+          />
         </article>
       </section>
 

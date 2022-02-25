@@ -11,6 +11,7 @@ import {
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import useAuthenticate from "@utils/hooks/useAuthenticate";
+import Head from "next/head";
 
 export default function Header() {
   const { isLoggedIn } = useSelector((state) => state.user);
@@ -21,14 +22,19 @@ export default function Header() {
   const { signOut } = useAuthenticate("login");
 
   return (
-    <header className="w-full p-2 flex flex-col bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-10">
-      <section className="flex w-full justify-between p-2 items-center">
-        <p className="p-2 font-bold !text-rose-600 text-2xl flex flex-1 items-center">
+    <header className="w-full p-2 flex flex-col bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-20">
+      <Head>
+        <title>Home</title>
+      </Head>
+      <main className="flex w-full justify-between p-2 items-center">
+        <section className="p-2 font-bold !text-white text-2xl flex flex-1 items-center">
           <button className="hidden sm:flex">
             <GiHamburgerMenu size={30} color="white" className="mr-2" />
           </button>
-          <Link href={"/"}>LOGO</Link>
-        </p>
+          <div className="relative w-50 h-50">
+            <Link href={"/"}>LOGO</Link>
+          </div>
+        </section>
 
         <section className="hidden sm:flex w-full justify-center">
           <button className="flex sm:hidden">
@@ -82,7 +88,7 @@ export default function Header() {
             </article>
           )}
         </section>
-      </section>
+      </main>
       <section className="flex sm:hidden w-full">
         <button>
           <GiHamburgerMenu size={30} color="white" />
@@ -92,4 +98,3 @@ export default function Header() {
     </header>
   );
 }
-

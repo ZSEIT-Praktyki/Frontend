@@ -38,7 +38,6 @@ export default function AddForm({ onSubmit }: AddFormProps) {
         dirty,
         touched,
       }) => {
-        console.log(errors);
         return (
           <article className="max-w-6xl flex flex-col items-center md:items-start lg:flex-row mt-5 mb-5">
             <section className="bg-gray-800 w-full sm:w-3/4 lg:w-full flex-1 mr-5 flex flex-col rounded-md p-4">
@@ -142,7 +141,7 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 disabled={!(isValid && dirty)}
                 variants="fire"
                 type="submit"
-                classes="w-full !m-0 w-4/5 py-3 rounded-2xl font-medium"
+                classes="w-full !m-0 w-4/5 py-4 rounded-2xl font-medium"
               >
                 ADD AS BUY NOW
               </Button>
