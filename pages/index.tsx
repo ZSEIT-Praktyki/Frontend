@@ -77,7 +77,7 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         </article>
       </section>
 
-      <section className="flex flex-col justify-center md:flex-row">
+      <section className="flex flex-col justify-center md:flex-row h-auto">
         <Categories />
         <div className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3 ">
           {data.map((listing) => (
