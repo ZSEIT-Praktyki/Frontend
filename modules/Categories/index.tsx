@@ -3,15 +3,21 @@ import * as ai from "react-icons/ai";
 import { RiArtboardLine, RiFirstAidKitLine, RiBaiduLine } from "react-icons/ri";
 import { GiAmpleDress } from "react-icons/gi";
 import { MdOutlineChildFriendly } from "react-icons/md";
+import React from "react";
 
 interface CategoryProps {
   icon: ReactNode;
   text: string;
+  categoriesExtended: boolean;
 }
 
 function Category(props: CategoryProps) {
   return (
-    <button className=" flex items-center justify-between p-2 mb-2 rounded-md text-white transition hover:text-purple-500">
+    <button
+      className={`${
+        props.categoriesExtended ? "flex" : "hidden"
+      } md:flex items-center justify-between py-2 mt-2 rounded-md text-white transition hover:text-purple-500`}
+    >
       {props.icon}
       <span className="font-normal text-xl">{props.text}</span>
       <ai.AiOutlineRight size={20} />
@@ -20,6 +26,8 @@ function Category(props: CategoryProps) {
 }
 
 export default function Categories() {
+  const [categoriesExtended, setCategoriesExtended] = React.useState(false);
+
   const categories = [
     { icon: <ai.AiOutlineLaptop size={30} />, text: "Electronics" },
     { icon: <GiAmpleDress size={30} />, text: "Fashion" },
@@ -37,10 +45,20 @@ export default function Categories() {
   ];
 
   return (
-    <aside className="flex flex-col p-2 bg-gray-800 m-2 rounded-md mb-4">
-      <h1 className="text-2xl text-white">Categories:</h1>
+    <aside className="flex flex-col p-4 bg-gray-800 m-2 rounded-md mb-4">
+      <p className="flex justify-between items-center">
+        <h1 className="text-2xl text-white">Categories:</h1>
+        <ai.AiOutlineBars
+          className="text-white text-2xl md:hidden cursor-pointer transition hover:text-purple-500"
+          onClick={() => setCategoriesExtended((prevState) => !prevState)}
+        />
+      </p>
       {categories.map((category) => (
-        <Category icon={category.icon} text={category.text} />
+        <Category
+          icon={category.icon}
+          text={category.text}
+          categoriesExtended={categoriesExtended}
+        />
       ))}
     </aside>
   );
