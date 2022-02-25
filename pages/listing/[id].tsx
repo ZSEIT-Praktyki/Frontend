@@ -3,6 +3,7 @@ import Footer from "@modules/Footer";
 import Slider from "@modules/Slider";
 import { API } from "@utils/assets/constants/routes";
 import useAddWatchlist from "@utils/hooks/useAddWatchlist";
+import useFetch from "@utils/hooks/useFetch";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
@@ -12,8 +13,14 @@ import {
 } from "react-icons/ai";
 
 function Listing({ data }: { data: ListingProps }) {
-  const { status, Append } = useAddWatchlist();
+  const { Append, Remove } = useAddWatchlist();
   const router = useRouter();
+
+  const { data: status } = useFetch<{ isIn: boolean }>(
+    `/watchlist/check?listing_id=${data.listing_id}`,
+    [],
+    { isIn: false }
+  );
 
   return (
     <>
@@ -71,26 +78,27 @@ function Listing({ data }: { data: ListingProps }) {
               <Button
                 classes="m-0 mt-2"
                 variants="outlinedPrimary"
-                onClick={() => Append(data.listing_id)}
-              >
-                {
-                  /*When listing is on whitelist, change contents of a button*/
-                  true ? (
-                    <>
-                      <AiOutlineHeart className="text-xl mr-1" />
-                      <span>Add to watchlist</span>
-                    </>
-                  ) : (
-                    <>
-                      <AiFillHeart className="text-xl mr-1" />
-                      <span>
-                        Remove from
-                        <br />
-                        watchlist
-                      </span>
-                    </>
-                  )
+                onClick={() =>
+                  status.isIn
+                    ? Remove(data.listing_id)
+                    : Append(data.listing_id)
                 }
+              >
+                {!status.isIn ? (
+                  <>
+                    <AiOutlineHeart className="text-xl mr-1" />
+                    <span>Add to watchlist</span>
+                  </>
+                ) : (
+                  <>
+                    <AiFillHeart className="text-xl mr-1" />
+                    <span>
+                      Remove from
+                      <br />
+                      watchlist
+                    </span>
+                  </>
+                )}
               </Button>
             </section>
           </article>
