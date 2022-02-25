@@ -33,8 +33,8 @@ export default function Search() {
 
   const { data } = useFetch<SearchProps>(
     `/listings/search?query=${router.query.q ?? ""}&page=${page}&min=${
-      params.min
-    }&max=${params.max}`,
+      params.min * 100
+    }&max=${params.max * 100}`,
     [page, params],
     init
   );
