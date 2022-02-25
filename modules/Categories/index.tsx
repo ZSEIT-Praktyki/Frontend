@@ -45,16 +45,17 @@ export default function Categories() {
   ];
 
   return (
-    <aside className="flex flex-col p-4 bg-gray-800 m-2 rounded-md mb-4">
-      <p className="flex justify-between items-center">
-        <h1 className="text-2xl text-white">Categories:</h1>
+    <aside className="flex flex-col p-4 bg-gray-800  rounded-md mb-4">
+      <section className="flex justify-between items-center">
+        <h1 className="text-3xl text-white font-bold mb-2">Categories:</h1>
         <ai.AiOutlineBars
           className="text-white text-2xl md:hidden cursor-pointer transition hover:text-purple-500"
           onClick={() => setCategoriesExtended((prevState) => !prevState)}
         />
-      </p>
+      </section>
       {categories.map((category) => (
         <Category
+          key={category.text}
           icon={category.icon}
           text={category.text}
           categoriesExtended={categoriesExtended}
