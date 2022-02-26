@@ -42,11 +42,11 @@ interface ListingProps {
 interface ListingMinified {
   listing_id: number;
   added_date: Date;
-  images: null | {
-    filename: string;
-    order: number;
-    photo_id: number;
-  };
+  images: ListingImagesProps | null;
   title: string;
   price: number;
+}
+
+interface WatchListProps extends ListingMinified {
+  watchlist_id: number;
 }

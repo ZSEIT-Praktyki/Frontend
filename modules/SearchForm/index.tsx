@@ -10,11 +10,14 @@ export default function SearchForm() {
 
   function onSearch(e: any) {
     e.preventDefault();
-    router.push("/search", {
+    router.push(`/search?q=${query}&min=0&max=99999&page=1`, {
       pathname: "/search",
+
       query: {
         q: query,
         page: 1,
+        min: 0,
+        max: 99999,
       },
     });
   }
