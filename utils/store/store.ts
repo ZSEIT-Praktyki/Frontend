@@ -4,14 +4,19 @@ import { useSelector as useReduxSelector, useDispatch } from "react-redux";
 import { TypedUseSelectorHook } from "react-redux";
 import { watchlistApi } from "@utils/services/watchlistService";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { accountApi } from "@utils/services/accountService";
 
 const store = configureStore({
   reducer: {
     user: userReducers,
     [watchlistApi.reducerPath]: watchlistApi.reducer,
+    [accountApi.reducerPath]: accountApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(watchlistApi.middleware),
+    getDefaultMiddleware().concat(
+      watchlistApi.middleware,
+      accountApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);
