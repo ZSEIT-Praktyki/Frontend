@@ -1,9 +1,11 @@
 import { Button } from "@components/index";
-import Footer from "@modules/Footer";
 import Slider from "@modules/Slider";
 import { API } from "@utils/assets/constants/routes";
-import useAddWatchlist from "@utils/hooks/useAddWatchlist";
-import useFetch from "@utils/hooks/useFetch";
+import {
+  useAddWatchlistMutation,
+  useCheckWatchlistQuery,
+  useRemoveWatchlistMutation,
+} from "@utils/services/watchlistService";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
@@ -13,14 +15,10 @@ import {
 } from "react-icons/ai";
 
 function Listing({ data }: { data: ListingProps }) {
-  const { Append, Remove } = useAddWatchlist();
   const router = useRouter();
-
-  const { data: status } = useFetch<{ isIn: boolean }>(
-    `/watchlist/check?listing_id=${data.listing_id}`,
-    [],
-    { isIn: false }
-  );
+  const { data: status } = useCheckWatchlistQuery(data.listing_id);
+  const [Append] = useAddWatchlistMutation();
+  const [Remove] = useRemoveWatchlistMutation();
 
   return (
     <>
@@ -79,12 +77,12 @@ function Listing({ data }: { data: ListingProps }) {
                 classes="m-0 mt-2"
                 variants="outlinedPrimary"
                 onClick={() =>
-                  status.isIn
+                  status?.isIn
                     ? Remove(data.listing_id)
                     : Append(data.listing_id)
                 }
               >
-                {!status.isIn ? (
+                {!status?.isIn ? (
                   <>
                     <AiOutlineHeart className="text-xl mr-1" />
                     <span>Add to watchlist</span>

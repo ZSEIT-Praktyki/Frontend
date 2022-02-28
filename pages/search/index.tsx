@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import useFetch from "@utils/hooks/useFetch";
 import { createContext, useEffect, useState } from "react";
 import SearchLayout from "@modules/SearchLayout";
-import { URLSearchParams } from "url";
 
 export interface SearchProps {
   hasMore: boolean;
@@ -40,15 +39,10 @@ export default function Search() {
   );
 
   useEffect(() => {
-    router.push("search", {
-      query: {
-        min: params.min,
-        max: params.max,
-        page: page,
-        q: router.query.q,
-      },
-    });
-  }, [params, page]);
+    if (router.isReady) {
+      console.log(router.query);
+    }
+  }, [router]);
 
   return (
     <SearchContext.Provider

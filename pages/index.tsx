@@ -82,6 +82,7 @@ export default function Home({ data }: { data: ListingMinified[] }) {
             className="w-4/5"
             alt=""
             layout="fill"
+            priority
           />
         </article>
       </section>

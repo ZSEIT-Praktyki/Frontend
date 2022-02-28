@@ -1,6 +1,6 @@
 import { Button } from "@components/index";
 import { API } from "@utils/assets/constants/routes";
-import useAddWatchlist from "@utils/hooks/useAddWatchlist";
+import { useAddWatchlistMutation } from "@utils/services/watchlistService";
 import { useRouter } from "next/router";
 
 export default function Listing({
@@ -11,7 +11,7 @@ export default function Listing({
   added_date,
 }: ListingMinified) {
   const router = useRouter();
-  const { Append, status } = useAddWatchlist();
+  const [Append, status] = useAddWatchlistMutation();
 
   return (
     <section className="bg-gray-800 text-white flex flex-col justify-between rounded mb-2 relative">
@@ -42,12 +42,12 @@ export default function Listing({
 
       <div className="p-2">
         <Button
-          variants={status === "OK" ? "ok" : "fire"}
+          variants={status.isSuccess ? "ok" : "fire"}
           classes=" w-full !py-3 !m-0 text-center"
-          disabled={status === "OK" || status === "Failed"}
+          disabled={status.isSuccess || status.isError}
           onClick={() => Append(listing_id)}
         >
-          {status === "OK" ? "Added" : "Follow"}
+          {status.isSuccess ? "Added" : "Follow"}
         </Button>
       </div>
     </section>

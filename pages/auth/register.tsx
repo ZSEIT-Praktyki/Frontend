@@ -34,7 +34,7 @@ export default function Login() {
           dirty,
           touched,
         }) => (
-          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 h-2/4 bg-gray-800 ">
+          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 m-3 bg-gray-800 ">
             <h1 className="text-5xl text-center mt-5 mb-8 font-bold p-2 text-purple-800">
               Register
             </h1>
@@ -86,7 +86,7 @@ export default function Login() {
               placeholder="Phone"
               onChange={handleChange("phone")}
               onBlur={handleBlur("phone")}
-              type="text"
+              type="tel"
               classes={`mt-0 mb-0 bg-gray-900 text-white`}
               error={!!errors.phone && touched.phone}
             />
@@ -138,7 +138,7 @@ export default function Login() {
               onClick={() => handleSubmit()}
               type="submit"
               variants="fire"
-              classes="active:scale-[0.95] !border-0"
+              classes="active:scale-[0.95] !py-3 !border-0"
             >
               Register
             </Button>
