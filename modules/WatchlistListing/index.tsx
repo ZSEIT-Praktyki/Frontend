@@ -22,7 +22,7 @@ export default function WatchlistListing({
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
-        className="h-full rounded-md"
+        className="h-full rounded-md w-64 object-cover"
       />
       <section className="pl-2 flex flex-col justify-between">
         <h2 className="text-white font-medium text-2xl">{title}</h2>
@@ -35,7 +35,7 @@ export default function WatchlistListing({
         <section className="flex">
           <Button
             variants="error"
-            classes="m-0 !border-0"
+            classes="m-0 !border-0 mr-2"
             onClick={() => Remove(listing_id)}
           >
             <FiTrash2 color="white" />

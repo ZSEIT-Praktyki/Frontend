@@ -53,7 +53,7 @@ export default function Header() {
 
           <button
             className="p-2 flex justify-center"
-            onClick={() => router.push("/watchlist")}
+            onClick={() => router.push("/user/watchlist")}
           >
             <AiOutlineHeart color="white" size={25} />
           </button>
