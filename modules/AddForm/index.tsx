@@ -40,7 +40,7 @@ export default function AddForm({ onSubmit }: AddFormProps) {
       }) => {
         return (
           <article className="max-w-6xl flex flex-col items-center md:items-start lg:flex-row mt-5 mb-5">
-            <section className="bg-gray-800 w-full sm:w-3/4 lg:w-full flex-1 mr-5 flex flex-col rounded-md p-4">
+            <section className="bg-gray-800 w-full sm:w-3/4 lg:w-full flex-1 m-2 flex flex-col rounded-md p-4">
               <section className="w-full h-80 bg-gray-900 rounded-md mb-5">
                 <FileDrop files={files} setState={setFiles} />
               </section>
@@ -105,10 +105,6 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 onBlur={handleBlur("price")}
                 error={!!errors.price && touched.price}
               />
-              <div className="flex items-center ">
-                <input type="checkbox" className="ml-2 " />
-                <p className="text-white ml-2 font-medium">Negotiable</p>
-              </div>
 
               <Input
                 containerStyle="mt-4"
@@ -126,11 +122,11 @@ export default function AddForm({ onSubmit }: AddFormProps) {
 
               <Input label="Location*" containerStyle="mt-4" />
             </section>
-            <section className="bg-gray-800 flex-1 flex items-center flex-col justify-around rounded-md h-96   pb-5">
+            <section className="bg-gray-800 flex-1 flex items-center flex-col justify-around rounded-md h-96 m-2 p-2">
               <h1 className="text-white text-4xl font-bold text-center p-2">
                 Add
               </h1>
-              <p className="text-white p-2 w-3/4">
+              <p className="text-white p-3 w-full sm:w-3/4 text-center">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
                 rem eos aliquam necessitatibus! Sit, cumque consectetur. Sunt
                 blanditiis molestiae dolores ullam officia accusamus culpa

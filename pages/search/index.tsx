@@ -29,20 +29,15 @@ export default function Search() {
     min: 0,
     max: 9999 * 100,
   });
+  // const [category, setCategory] = useState<number>(0);
 
   const { data } = useFetch<SearchProps>(
     `/listings/search?query=${router.query.q ?? ""}&page=${page}&min=${
       params.min * 100
-    }&max=${params.max * 100}`,
+    }&max=${params.max}`,
     [page, params],
     init
   );
-
-  useEffect(() => {
-    if (router.isReady) {
-      console.log(router.query);
-    }
-  }, [router]);
 
   return (
     <SearchContext.Provider
