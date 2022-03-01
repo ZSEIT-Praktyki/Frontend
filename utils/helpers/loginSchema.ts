@@ -35,5 +35,8 @@ export const registerSchema = yup.object().shape({
     .string()
     .min(1, "Please enter valid email")
     .required("Surname is required"),
-  phone: yup.number().required("Phone is required"),
+  phone: yup
+    .string()
+    .max(12, () => "Phone number should be max 12")
+    .required("Phone is required"),
 });

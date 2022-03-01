@@ -83,16 +83,19 @@ export default function Login() {
             <Input
               value={values.phone}
               name="phone"
-              placeholder="Phone"
+              placeholder="Like +48213742069"
               onChange={handleChange("phone")}
               onBlur={handleBlur("phone")}
               type="tel"
               classes={`mt-0 mb-0 bg-gray-900 text-white`}
               error={!!errors.phone && touched.phone}
             />
+            <p className="ml-2 mb-2 text-xs text-gray-300">
+              Phone number should be 12char with prefix
+            </p>
             <label
               htmlFor="name"
-              className={`ml-2 mt-2 font-medium text-gray-300 ${
+              className={`ml-2  font-medium text-gray-300 ${
                 !!errors.email && touched.email && "!text-rose-600"
               }`}
             >

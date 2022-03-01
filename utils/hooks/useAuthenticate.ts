@@ -35,15 +35,11 @@ export default function useAuthenticate(type: "login" | "register") {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  async function onSubmit({ email, password }: DataProps) {
+  async function onSubmit(props: any) {
     return axios
-      .post(
-        url,
-        { email, password },
-        {
-          withCredentials: true,
-        }
-      )
+      .post(url, props, {
+        withCredentials: true,
+      })
       .then(({ data, status }) => ({ data, status }));
   }
 
@@ -86,6 +82,8 @@ export default function useAuthenticate(type: "login" | "register") {
   async function signOut() {
     try {
       await axiosbase.post("/user/signout");
+      localStorage.removeItem("user");
+      dispatch(userActions.setLoggedOut());
     } catch (error) {}
   }
 
