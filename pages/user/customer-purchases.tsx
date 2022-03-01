@@ -1,9 +1,10 @@
+import { H1 } from "@components/UI/Text";
 import UserLayout from "@utils/Layout/User";
 
 export default function CustomerPurchases() {
   return (
     <UserLayout>
-      <h1>Customer purchases</h1>
+      <H1>Customer purchases</H1>
     </UserLayout>
   );
 }

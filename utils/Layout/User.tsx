@@ -11,7 +11,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
       <section className="flex flex-row w-4/5">
         <aside className="flex flex-1 flex-col m-3 bg-gray-800 rounded">
           <nav className="w-full p-2">
-            <ul className="bg-gray-900 rounded">
+            <ul>
               <h2 className="text-white font-bold mb-2 p-2 text-2xl rounded-md">
                 MY SALES
               </h2>

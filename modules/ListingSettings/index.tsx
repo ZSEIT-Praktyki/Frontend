@@ -1,23 +1,41 @@
-import { Button } from "@components/index";
 import { API } from "@utils/assets/constants/routes";
+import {
+  useActivateListingMutation,
+  useRemoveListingMutation,
+} from "@utils/services/accountService";
+import { useRouter } from "next/router";
 
 const nt =
   "https://previews.123rf.com/images/kaymosk/kaymosk1804/kaymosk180400005/99776312-fehler-404-seite-nicht-gefunden-fehler-mit-glitch-effekt-auf-dem-bildschirm-vektor-illustration-f%C3%BCr-.jpg";
 
+interface ListingProps extends ListingMinified {
+  remove?: boolean;
+  activate?: boolean;
+}
+
 export default function ListingSettings({
   images,
   title,
+  listing_id,
   price,
   added_date,
-}: ListingMinified) {
+  remove,
+  activate,
+}: ListingProps) {
+  const [onRemove] = useRemoveListingMutation();
+  const [onActivate] = useActivateListingMutation();
+  const router = useRouter();
+
   return (
-    <article className="w-full m-2 flex flex-row p-2 bg-gray-700 rounded-lg">
-      <img
-        src={images ? `${API}/listings/images/${images.filename}` : nt}
-        alt="Thumbnail"
-        className="rounded-md h-32 w-64 object-cover"
-      />
-      <section className="flex flex-col w-full">
+    <article className="w-full m-2 flex flex-row p-2  rounded-lg">
+      <button onClick={() => router.push(`/listing/${listing_id}`)}>
+        <img
+          src={images ? `${API}/listings/images/${images.filename}` : nt}
+          alt="Thumbnail"
+          className="rounded-md h-36 w-72 object-cover"
+        />
+      </button>
+      <section className="flex flex-col w-full ml-2">
         <header className="flex flex-row justify-between w-full items-center">
           <h2 className="text-orange-500 font-medium text-2xl ml-2">{title}</h2>
           <section className="flex flex-col items-end">
@@ -35,9 +53,22 @@ export default function ListingSettings({
           </span>
         </h2>
         <div className="flex ">
-          <button className="text-red-700 border-2 border-red-700 p-1 px-2 m-2 rounded">
-            Remove
-          </button>
+          {remove && (
+            <button
+              onClick={() => onRemove(listing_id)}
+              className="text-white bg-red-600 m-2 p-2 rounded"
+            >
+              Remove
+            </button>
+          )}
+          {activate && (
+            <button
+              onClick={() => onActivate(listing_id)}
+              className="text-white bg-green-600 m-2 p-2 rounded"
+            >
+              Activate
+            </button>
+          )}
         </div>
       </section>
     </article>

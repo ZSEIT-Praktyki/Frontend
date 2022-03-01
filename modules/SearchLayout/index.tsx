@@ -3,11 +3,18 @@ interface SearchLayoutProps {
 }
 
 import { Button, Input } from "@components/index";
-import Categories from "@modules/Categories";
+import { Paragraph } from "@components/UI/Text";
 import Listing from "@modules/Listing";
 import PagingTab from "@modules/PagingTab";
+import { categories } from "@utils/assets/constants/categories";
 import { SearchContext, SearchProps } from "pages/search";
 import { useContext, useState } from "react";
+
+const LAYOUT = {
+  block:
+    "p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4",
+  horizontal: "flex flex-col w-full p-2",
+};
 
 export default function SearchLayout({ data }: SearchLayoutProps) {
   const [min, setMin] = useState("");
@@ -16,17 +23,35 @@ export default function SearchLayout({ data }: SearchLayoutProps) {
   const { setParams } = useContext(SearchContext);
 
   function onApply() {
+    if (!min || !max) return;
     setParams({
       min,
       max,
     });
   }
 
+  const [layout, setLayout] = useState<"block" | "horizontal">("block");
+
+  function onLayoutChange(type: "block" | "horizontal") {
+    setLayout(type);
+  }
+
   return (
     <main className="flex max-w-7xl ">
-      <div className="hidden md:flex max-h-full flex-col w-80 p-4 m-2 mr-5 bg-gray-800 rounded">
-        <Categories />
-
+      <aside
+        className="hidden md:flex flex-col w-80 p-4 m-2 mr-5 bg-gray-800 rounded"
+        style={{ maxHeight: "110vh" }}
+      >
+        <ul>
+          {categories.map(({ icon, text }) => (
+            <li key={text} className="p-2 items-center">
+              <button className="flex text-white">
+                <span className="pr-2">{icon}</span>
+                <Paragraph>{text}</Paragraph>
+              </button>
+            </li>
+          ))}
+        </ul>
         <hr className="w-full mt-2 border-gray-700" />
 
         <h2 className="text-white text-2xl font-medium mt-2">Cities</h2>
@@ -85,16 +110,30 @@ export default function SearchLayout({ data }: SearchLayoutProps) {
         <Button variants="fire" classes="py-4 !m-0 !mt-2" onClick={onApply}>
           Apply filters
         </Button>
-      </div>
+      </aside>
       <main className="flex flex-col flex-1">
-        <PagingTab amount={data.amount} hasMore={data.hasMore} />
-        <section className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4">
+        <PagingTab
+          amount={data.amount}
+          hasMore={data.hasMore}
+          layout={layout}
+          onLayoutChange={onLayoutChange}
+        />
+        <section className={LAYOUT[layout]}>
           {data.results.map((listing) => (
-            <Listing key={listing.listing_id} {...listing} />
+            <Listing
+              key={listing.listing_id}
+              horizontal={layout === "horizontal"}
+              {...listing}
+            />
           ))}
         </section>
 
-        <PagingTab amount={data.amount} hasMore={data.hasMore} />
+        <PagingTab
+          amount={data.amount}
+          hasMore={data.hasMore}
+          layout={layout}
+          onLayoutChange={onLayoutChange}
+        />
       </main>
     </main>
   );
