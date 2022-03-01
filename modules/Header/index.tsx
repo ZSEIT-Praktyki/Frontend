@@ -28,9 +28,6 @@ export default function Header() {
       </Head>
       <main className="flex w-full justify-between p-2 items-center">
         <section className="p-2 font-bold !text-white text-2xl flex flex-1 items-center">
-          <button className="hidden sm:flex">
-            <GiHamburgerMenu size={30} color="white" className="mr-2" />
-          </button>
           <div className="relative w-50 h-50">
             <Link href={"/"}>LOGO</Link>
           </div>
@@ -53,7 +50,7 @@ export default function Header() {
 
           <button
             className="p-2 flex justify-center"
-            onClick={() => router.push("/watchlist")}
+            onClick={() => router.push("/user/watchlist")}
           >
             <AiOutlineHeart color="white" size={25} />
           </button>
@@ -90,9 +87,6 @@ export default function Header() {
         </section>
       </main>
       <section className="flex sm:hidden w-full">
-        <button>
-          <GiHamburgerMenu size={30} color="white" />
-        </button>
         <SearchForm />
       </section>
     </header>
