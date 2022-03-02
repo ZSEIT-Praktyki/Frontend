@@ -23,6 +23,8 @@ function Listing({ data }: { data: ListingProps }) {
 
   const { isLoggedIn } = useSelector((state) => state.user);
 
+  if (router.isFallback) return <></>;
+
   return (
     <>
       <main className="w-full flex flex-col items-center">
@@ -141,7 +143,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths,
-    fallback: false,
+    fallback: "blocking",
   };
 }
 
