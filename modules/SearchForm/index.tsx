@@ -37,6 +37,7 @@ export default function SearchForm() {
         variants="text"
         classes="border-gray-800 bg-gray-800 hover:bg-gray-800"
         type="submit"
+        name="search"
       >
         <AiOutlineSearch color="white" />
       </Button>

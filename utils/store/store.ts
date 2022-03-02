@@ -5,17 +5,20 @@ import { TypedUseSelectorHook } from "react-redux";
 import { watchlistApi } from "@utils/services/watchlistService";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { accountApi } from "@utils/services/accountService";
+import { searchApi } from "@utils/services/searchService";
 
 const store = configureStore({
   reducer: {
     user: userReducers,
     [watchlistApi.reducerPath]: watchlistApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
+    [searchApi.reducerPath]: searchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       watchlistApi.middleware,
-      accountApi.middleware
+      accountApi.middleware,
+      searchApi.middleware
     ),
 });
 

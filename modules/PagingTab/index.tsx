@@ -12,7 +12,7 @@ import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { ChangeEvent, useContext, useEffect } from "react";
 import { useState } from "react";
 import { SearchContext } from "pages/search";
-import Dropdown from "@components/Dropdown";
+import Dropdown, { Item } from "@components/Dropdown";
 
 export default function PagingTab({
   hasMore,
@@ -52,13 +52,21 @@ export default function PagingTab({
   return (
     <nav className="bg-gray-800 mt-2 mb-5 items-center flex flex-col sm:flex-row  justify-between p-2 rounded">
       <section className="hidden sm:flex flex-1">
-        <button className="p-2" onClick={() => onLayoutChange("block")}>
+        <button
+          name="grid layout"
+          className="p-2"
+          onClick={() => onLayoutChange("block")}
+        >
           <RiLayoutGridLine
             color={layout === "block" ? "purple" : "white"}
             size={25}
           />
         </button>
-        <button className="p-2" onClick={() => onLayoutChange("horizontal")}>
+        <button
+          name="bar layout"
+          className="p-2"
+          onClick={() => onLayoutChange("horizontal")}
+        >
           <AiOutlineBars
             color={layout === "horizontal" ? "purple" : "white"}
             size={25}
@@ -69,18 +77,24 @@ export default function PagingTab({
         <p className="text-white font-medium text-md mr-5">Sort by:</p>
 
         <Dropdown value="Cheapest">
-          <Dropdown.Item value="" text="Dearest" />
-          <Dropdown.Item value="" text="Cheapest" />
-          <Dropdown.Item value="" text="Latest" />
-          <Dropdown.Item value="" text="Oldest" />
+          <Item value="" text="Dearest" />
+          <Item value="" text="Cheapest" />
+          <Item value="" text="Latest" />
+          <Item value="" text="Oldest" />
         </Dropdown>
       </section>
       <section className="flex-1 flex flex-row items-center justify-end">
-        <button className="p-1 px-2" onClick={onPrev} disabled={page - 1 === 0}>
+        <button
+          name="previous page"
+          className="p-1 px-2"
+          onClick={onPrev}
+          disabled={page - 1 === 0}
+        >
           <BiChevronLeft color="white" size={30} />
         </button>
         <form onSubmit={onSubmit}>
           <input
+            name="current page"
             value={input}
             onChange={onChange}
             type="text"
@@ -89,7 +103,12 @@ export default function PagingTab({
         </form>
         <span className="text-white px-4 font-medium text-xl">of</span>
         <span className="text-white font-medium text-xl">{amount}</span>
-        <button className="p-1 px-2" onClick={onNext} disabled={!hasMore}>
+        <button
+          name="next page"
+          className="p-1 px-2"
+          onClick={onNext}
+          disabled={!hasMore}
+        >
           <BiChevronRight color="white" size={30} />
         </button>
       </section>

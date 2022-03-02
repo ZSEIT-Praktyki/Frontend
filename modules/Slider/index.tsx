@@ -37,11 +37,12 @@ export default function Slider({ images }: SliderProps) {
             ? `${API}/listings/images/${thumbnail.filename}`
             : notFound
         }
-        alt=""
+        alt="preview"
       />
       {images.length > 0 && (
         <section className="flex justify-between items-center bg-gray-800 pl-10 pr-10 pt-3 pb-3 mt-5 w-full rounded-lg">
           <button
+            name="previous image"
             onClick={onPrev}
             className="bg-purple-900 p-2 mr-10 rounded-full z-10 h-8"
           >
@@ -53,6 +54,7 @@ export default function Slider({ images }: SliderProps) {
                 style={{
                   transform: `translateX(${100 * thumbnail.index}px)`,
                 }}
+                alt="preview variant photos"
                 onClick={() => setThumbnail((p) => ({ ...p, filename }))}
                 key={photo_id}
                 className="mr-2 rounded last:mr-0 max-h-36 transition border-2 border-zinc-600 hover:border-purple-600"
@@ -61,6 +63,7 @@ export default function Slider({ images }: SliderProps) {
             ))}
           </div>
           <button
+            name="next image"
             onClick={onNext}
             className="bg-purple-900 p-2 ml-10 rounded-full z-10 h-8"
           >

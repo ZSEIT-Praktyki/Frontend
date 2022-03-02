@@ -2,20 +2,43 @@ import { useSelector } from "@utils/store/store";
 import useUploadListing from "@utils/hooks/useUploadListing";
 import AddForm from "@modules/AddForm";
 import Head from "next/head";
+import Image from "next/image";
+import Container from "@components/Container";
+import { H1 } from "@components/UI/Text";
+import { Button } from "@components/index";
+import { useRouter } from "next/router";
 
 export default function AddListing() {
   const { isLoggedIn } = useSelector((state) => state.user);
-
+  const router = useRouter();
   const { onSubmit } = useUploadListing();
 
   if (!isLoggedIn)
     return (
-      <main className="flex h-full justify-center p-2">
+      <Container type="center-vertical" col>
         <Head>
-          <title>Post a listing</title>
+          <title>Sign in first</title>
         </Head>
-        <h1 className="text-9xl text-white text-center">Sign in first</h1>
-      </main>
+
+        <div className="mb-5 mt-5 w-full text-center">
+          <H1>This page requires authentication</H1>
+        </div>
+        <img
+          src="/security_SVG.svg"
+          //  layout="fill"
+          className="w-full md:w-2/4"
+          alt=""
+        />
+        <div className="w-1/2 mt-2">
+          <Button
+            classes="w-full !py-3"
+            variants="fire"
+            onClick={() => router.push("/auth/login")}
+          >
+            Login
+          </Button>
+        </div>
+      </Container>
     );
 
   return (

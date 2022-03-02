@@ -25,6 +25,13 @@ function Listing({ data }: { data: ListingProps }) {
       <main className="w-full flex flex-col items-center">
         <Head>
           <title>{data.title}</title>
+          <meta content={data.title.split(" ").join(", ")} name="keywords" />
+          <meta name="author" content={data.seller_id.owners_name} />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta name="description" content={data.description} />
         </Head>
         <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
           <Slider images={data.images} />
@@ -112,12 +119,12 @@ function Listing({ data }: { data: ListingProps }) {
             <span className="text-xl sm:text-3xl text-white font-bold">
               Seller: {data.seller_id.owners_name}
             </span>
-            <a
-              href=""
+            {/*   <a
+              href="/"
               className="text-lg sm:text-lg transition text-gray-300 hover:text-gray-200 font-bold"
             >
               See seller&apos;s other items
-            </a>
+            </a> */}
           </section>
         </section>
       </main>

@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import useFetch from "@utils/hooks/useFetch";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import SearchLayout from "@modules/SearchLayout";
+import { useGetSearchResultsQuery } from "@utils/services/searchService";
 
 export interface SearchProps {
   hasMore: boolean;
@@ -13,6 +13,7 @@ export interface SearchProps {
 const init = {
   hasMore: false,
   results: [],
+  amount: 1,
 };
 
 export const SearchContext = createContext({
@@ -20,6 +21,7 @@ export const SearchContext = createContext({
   params: {},
   setPage: (arg: any) => {},
   setParams: (arg: any) => {},
+  onClear: () => {},
 });
 
 export default function Search() {
@@ -28,16 +30,25 @@ export default function Search() {
   const [params, setParams] = useState({
     min: 0,
     max: 9999 * 100,
+    subcategory_id: null,
   });
-  // const [category, setCategory] = useState<number>(0);
 
-  const { data } = useFetch<SearchProps>(
-    `/listings/search?query=${router.query.q ?? ""}&page=${page}&min=${
-      params.min * 100
-    }&max=${params.max}`,
-    [page, params],
-    init
-  );
+  const { data = init } = useGetSearchResultsQuery({
+    max: params.max ?? 9999 * 100,
+    min: params.min,
+    page,
+    query: router.query.q as string,
+    subcategory_id:
+      params.subcategory_id ?? Number(router.query.subcategory_id),
+  });
+
+  function onClear() {
+    setParams({
+      min: 0,
+      max: 9999 * 100,
+      subcategory_id: null,
+    });
+  }
 
   return (
     <SearchContext.Provider
@@ -46,11 +57,16 @@ export default function Search() {
         setPage,
         params,
         setParams,
+        onClear,
       }}
     >
       <main className="p-2 flex flex-col items-center">
         <Head>
-          <title>Search</title>
+          <title>Search {router.query.q ?? ""}</title>
+          <meta
+            name="description"
+            content="Page containing listings based on params"
+          />
         </Head>
 
         <div className="flex w-full max-w-7xl">

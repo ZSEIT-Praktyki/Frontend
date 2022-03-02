@@ -87,13 +87,21 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         </article>
       </section>
 
-      <section className="flex flex-col justify-center md:flex-row h-auto">
+      <section className="flex flex-col justify-center md:flex-row md:min-h-screen">
         <Categories />
-        <div className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3 ">
-          {data.map((listing) => (
-            <Listing key={listing.listing_id} {...listing} />
-          ))}
-        </div>
+
+        {data.length === 0 && (
+          <article className="w-full md:h-screen p-10 flex justify-center items-center mt-2">
+            <img src="/Empty.svg" className="w-full " />
+          </article>
+        )}
+        {data.length !== 0 && (
+          <div className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3 ">
+            {data.map((listing) => (
+              <Listing key={listing.listing_id} {...listing} />
+            ))}
+          </div>
+        )}
       </section>
 
       <FloatingButton />

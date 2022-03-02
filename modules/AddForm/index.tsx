@@ -6,6 +6,7 @@ import Select from "@components/UI/Select";
 import { useState } from "react";
 import Condition from "./components/Condition";
 import FileDrop from "@components/FileDrop";
+import { categories } from "@utils/assets/constants/categories";
 
 interface AddFormProps {
   onSubmit: (arg: any) => Promise<void>;
@@ -85,7 +86,10 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 onBlur={handleBlur("subcategory_id")}
                 label="Category*"
                 error={!!errors.subcategory_id && touched.subcategory_id}
-                options={[{ value: "Home", text: "Home" }]}
+                options={categories.map(({ text }, index) => ({
+                  text,
+                  value: index + 1,
+                }))}
               />
 
               <Condition
