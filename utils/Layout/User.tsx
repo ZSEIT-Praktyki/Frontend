@@ -1,16 +1,14 @@
 import { ReactNode } from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useSelector } from "@utils/store/store";
+import NotAuthenticated from "@modules/NotAuthenticated";
 
 interface UserLayoutProps {
   children: ReactNode;
 }
 
 export default function UserLayout({ children }: UserLayoutProps) {
-  const router = useRouter();
-
-  console.log(router.pathname);
-
+  const { isLoggedIn } = useSelector((state) => state.user);
   return (
     <main className="w-full min-h-screen flex justify-center">
       <section className="flex flex-col w-full md:w-4/5 md:flex-row">
@@ -49,7 +47,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
           </nav>
         </aside>
         <article className="flex flex-[3] m-3 bg-gray-800 rounded p-2">
-          {children}
+          {isLoggedIn ? children : <NotAuthenticated />}
         </article>
       </section>
     </main>

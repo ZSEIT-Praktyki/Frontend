@@ -6,7 +6,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function Login() {
-  const { onLogin } = useAuthenticate("login");
+  const { onLogin, state } = useAuthenticate("login");
   return (
     <main className="w-full h-screen flex justify-center items-center">
       <Head>
@@ -31,7 +31,6 @@ export default function Login() {
           dirty,
           touched,
         }) => {
-          console.log(errors);
           return (
             <div className="w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-2/4 bg-gray-800 ">
               <h1 className="text-5xl  text-center mt-5 mb-10 font-bold p-2 text-purple-800">
@@ -84,20 +83,22 @@ export default function Login() {
                 Password must be at least 6 characters long
               </p>
 
-              <section className="ml-2 text-4-l  text-purple-800 m-2">
-                <Link href="/auth/Forgot-password">Forgot my password?</Link>
-              </section>
+              {typeof state.error?.message !== "undefined" && (
+                <div className="text-red-600 pl-2 font-medium mt-2">
+                  {state.error?.message}
+                </div>
+              )}
               <Button
                 variants="fire"
                 disabled={!(isValid && dirty)}
                 onClick={() => handleSubmit()}
                 type="submit"
-                classes="!border-0 py-3 !mt-2"
+                classes="!border-0 !py-3 !mt-4"
               >
                 LOGIN
               </Button>
 
-              <div className="text-center text-l text-purple-800 font-medium mt-2">
+              <div className="text-center text-purple-800 font-medium mt-2">
                 <Link href="/auth/register">Sign up</Link>
               </div>
             </div>

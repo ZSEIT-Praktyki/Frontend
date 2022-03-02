@@ -8,7 +8,6 @@ import {
   AiOutlineHeart,
   AiOutlinePlusCircle,
 } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/gi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import useAuthenticate from "@utils/hooks/useAuthenticate";
 import Head from "next/head";
@@ -16,9 +15,7 @@ import Head from "next/head";
 export default function Header() {
   const { isLoggedIn } = useSelector((state) => state.user);
   const router = useRouter();
-
   const [show, setShow] = useState(false);
-
   const { signOut } = useAuthenticate("login");
 
   return (
@@ -67,22 +64,44 @@ export default function Header() {
             />
           </button>
 
-          {show && isLoggedIn && (
+          {show && (
             <article className="bg-gray-800 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52">
-              <button
-                name="my account"
-                className="transition-colors p-2 hover:bg-gray-700 rounded font-medium"
-                onClick={() => router.push("/user/account")}
-              >
-                My account
-              </button>
-              <button
-                name="sign out"
-                className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
-                onClick={signOut}
-              >
-                Sign out
-              </button>
+              {isLoggedIn && (
+                <>
+                  <button
+                    name="my account"
+                    className="transition-colors p-2 hover:bg-gray-700 rounded font-medium"
+                    onClick={() => router.push("/user/account")}
+                  >
+                    My account
+                  </button>
+                  <button
+                    name="sign out"
+                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                    onClick={signOut}
+                  >
+                    Sign out
+                  </button>
+                </>
+              )}
+              {!isLoggedIn && (
+                <>
+                  <button
+                    onClick={() => router.push("/auth/login")}
+                    name="sign out"
+                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                  >
+                    Log in
+                  </button>
+                  <button
+                    onClick={() => router.push("/auth/register")}
+                    name="sign out"
+                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                  >
+                    Register
+                  </button>
+                </>
+              )}
             </article>
           )}
         </section>

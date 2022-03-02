@@ -21,7 +21,7 @@ export default function Listing({
 
   if (!horizontal)
     return (
-      <article className="bg-gray-800 text-white flex flex-col justify-between rounded mb-2 relative">
+      <article className="bg-gray-800 text-white flex flex-col justify-between rounded mb-2 relative h-96">
         <section className="h-1/2 w-full">
           <img
             onClick={() => router.push("/listing/" + listing_id)}
@@ -67,7 +67,7 @@ export default function Listing({
               : "https://previews.123rf.com/images/kaymosk/kaymosk1804/kaymosk180400005/99776312-fehler-404-seite-nicht-gefunden-fehler-mit-glitch-effekt-auf-dem-bildschirm-vektor-illustration-f%C3%BCr-.jpg"
           }
           alt={title}
-          className="cursor-pointer rounded h-full object-cover w-full"
+          className="cursor-pointer rounded h-full  object-cover w-full"
         />
       </section>
       <section className="flex-[3] p-2 flex flex-col">
