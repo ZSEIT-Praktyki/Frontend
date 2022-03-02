@@ -13,7 +13,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
     <main className="w-full min-h-screen flex justify-center">
       <section className="flex flex-col w-full md:w-4/5 md:flex-row">
         <aside
-          className="flex flex-1 flex-col m-3 bg-gray-800 rounded "
+          className="flex flex-1 flex-col m-3 bg-gray-800 rounded sticky top-28"
           style={{ maxHeight: "30rem" }}
         >
           <nav className="w-full p-2">

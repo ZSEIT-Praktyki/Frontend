@@ -6,6 +6,7 @@ import { watchlistApi } from "@utils/services/watchlistService";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { accountApi } from "@utils/services/accountService";
 import { searchApi } from "@utils/services/searchService";
+import { addressService } from "@utils/services/addressService";
 
 const store = configureStore({
   reducer: {
@@ -13,12 +14,14 @@ const store = configureStore({
     [watchlistApi.reducerPath]: watchlistApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
     [searchApi.reducerPath]: searchApi.reducer,
+    [addressService.reducerPath]: addressService.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       watchlistApi.middleware,
       accountApi.middleware,
-      searchApi.middleware
+      searchApi.middleware,
+      addressService.middleware
     ),
 });
 

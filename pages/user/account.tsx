@@ -1,12 +1,32 @@
-import Head from 'next/head'
-import UserLayout from '@utils/Layout/User'
+import UserLayout from "@utils/Layout/User";
+import { H1 } from "@components/UI/Text";
+import { Button } from "@components/index";
+import Modal from "@components/Modal";
+import { useState } from "react";
+import { useGetAddressesQuery } from "@utils/services/addressService";
+import AddAddress from "@modules/AddAddress";
 
 export default function Account() {
+  const [show, setShow] = useState(false);
+
+  const { data = [] } = useGetAddressesQuery({});
+
   return (
-    <UserLayout>
-      <h1 className='text-white text-5xl font-bold p-2 italic text-center'>
-        Account
-      </h1>
-    </UserLayout>
-  )
+    <>
+      <Modal
+        title="Create new address"
+        onClose={() => setShow(false)}
+        vissible={show}
+      >
+        <AddAddress onClose={() => setShow(false)} />
+      </Modal>
+
+      <UserLayout>
+        <section className="flex flex-col">
+          <H1>Account</H1>
+          <Button onClick={() => setShow(true)}>Add new address</Button>
+        </section>
+      </UserLayout>
+    </>
+  );
 }

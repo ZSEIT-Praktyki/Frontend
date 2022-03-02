@@ -65,7 +65,7 @@ export default function Header() {
           </button>
 
           {show && (
-            <article className="bg-gray-800 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52">
+            <article className="bg-gray-800 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52 shadow-xl">
               {isLoggedIn && (
                 <>
                   <button
