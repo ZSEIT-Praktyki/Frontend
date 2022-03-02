@@ -14,6 +14,7 @@ interface AddressProps {
   city: string;
   phone: string;
   state: string;
+  address_id: number;
 }
 
 export const addressService = createApi({
@@ -36,6 +37,7 @@ export const addressService = createApi({
         method: "POST",
         body: v,
       }),
+      invalidatesTags: ["Adr"],
     }),
   }),
 });

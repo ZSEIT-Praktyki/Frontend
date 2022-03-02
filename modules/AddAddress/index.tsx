@@ -64,7 +64,7 @@ export default function AddAddress({ onClose }: AddAddressProps) {
               onChange={handleChange("surname")}
               onBlur={handleBlur("surname")}
             />
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row">
               <Input
                 value={values.street}
                 placeholder="Street"
@@ -95,7 +95,7 @@ export default function AddAddress({ onClose }: AddAddressProps) {
               onChange={handleChange("state")}
               options={data.map(({ state }) => ({ text: state, value: state }))}
             />
-            <div className="flex">
+            <div className="flex flex-col sm:flex-col">
               <Input
                 value={values.apartment_number}
                 label={
@@ -140,7 +140,7 @@ export default function AddAddress({ onClose }: AddAddressProps) {
             <Button
               type="submit"
               variants="fire"
-              classes="w-1/2 py-3"
+              classes="w-full sm:w-1/2 py-3"
               onClick={() => handleSubmit()}
               disabled={!(isValid && dirty)}
             >

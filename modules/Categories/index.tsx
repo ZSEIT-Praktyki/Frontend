@@ -37,7 +37,7 @@ export default function Categories() {
   return (
     <aside
       style={{ minWidth: 300, maxHeight: "40rem" }}
-      className="flex flex-col sticky top-28 p-4 bg-gray-800 mt-2 rounded-md mb-4 m-2 max-h-screen"
+      className="flex flex-col sm:sticky top-28 p-4 bg-gray-800 mt-2 rounded-md mb-4 m-2 max-h-screen"
     >
       <section className="flex justify-between items-center">
         <h2 className="text-3xl text-white font-bold mb-2">Categories:</h2>
