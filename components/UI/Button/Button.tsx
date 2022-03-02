@@ -5,7 +5,8 @@ const buttonVariants = {
     "border-purple-900 bg-purple-900 hover:bg-purple-800 active:bg-purple-700",
   secondary:
     "border-indigo-900 bg-indigo-900 hover:bg-indigo-800 active:bg-indigo-600",
-  outlined: "border-teal-500 text-black hover:bg-teal-500 hover:text-white",
+  outlined:
+    "border-zinc-600 text-white font-medium hover:border-purple-500 hover:text-purple-500",
   outlinedPrimary:
     "border-purple-600 text-purple-400 font-medium hover:bg-purple-500 hover:text-white",
   warning: "bg-amber-700 hover:bg-amber-600 active:bg-amber-500",
