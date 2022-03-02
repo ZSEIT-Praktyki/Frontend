@@ -8,7 +8,7 @@ import { useSelector } from "@utils/store/store";
 interface Props {
   name: string;
   surname: string;
-  address: string;
+  address: number;
 }
 
 export default function useCheckout() {

@@ -6,10 +6,10 @@ import useCheckout from "@utils/hooks/useCheckout";
 import Button from "@components/UI/Button/Button";
 
 interface CheckoutFormProps {
-  address: number;
+  orderDetails: { name: string; surname: string; address: number };
 }
 
-export default function CheckoutForm({ address }: CheckoutFormProps) {
+export default function CheckoutForm({ orderDetails }: CheckoutFormProps) {
   const { details } = useSelector((state) => state.user);
   const { onSubmit, stripe } = useCheckout();
 
@@ -45,7 +45,13 @@ export default function CheckoutForm({ address }: CheckoutFormProps) {
       </div>
       <Button
         classes="w-96 m-0 mt-5"
-        onClick={() => onSubmit({ address: address })}
+        onClick={() =>
+          onSubmit({
+            name: orderDetails.name,
+            surname: orderDetails.surname,
+            address: orderDetails.address,
+          })
+        }
       >
         Confirm Order & Pay
       </Button>

@@ -6,8 +6,9 @@ import { API } from "@utils/assets/constants/routes";
 import Button from "@components/UI/Button/Button";
 import Input from "@components/UI/Input/Input";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { useState } from "react";
-import { Callback } from "yup/lib/types";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 const stripePromise = loadStripe(
   "pk_test_51KHt5OJFFDDymwGwp9gsCogqhxvzYvyo2wJsIAwSrPflIZjFZn2OtUhBbQAwt9SNek6Ol2e7QZUSh86NJyNByl2m00scfwXXjW"
@@ -71,9 +72,11 @@ export default function Checkout() {
       phone: "+48123456789",
     },
   ];
-  const [selectedAddress, setSelectedAddress] = useState(
-    addresses[0].address_id
-  );
+  const [orderDetails, setOrderDetails] = useState({
+    name: addresses[0].name,
+    surname: addresses[0].surname,
+    address: addresses[0].address_id,
+  });
 
   return (
     <Elements stripe={stripePromise}>
@@ -91,11 +94,11 @@ export default function Checkout() {
               <hr className="mx-4 border-top border-gray-700" />
               <ShippingDetails
                 addresses={addresses}
-                selectedAddress={selectedAddress}
-                handleClick={setSelectedAddress}
+                orderDetails={orderDetails}
+                handleClick={setOrderDetails}
               />
               <hr className="m-4 border-top border-gray-700" />
-              <CheckoutForm address={selectedAddress} />
+              <CheckoutForm orderDetails={orderDetails} />
             </section>
           </section>
         </section>
@@ -104,11 +107,28 @@ export default function Checkout() {
   );
 }
 
+// function getListingDetails(id: string | string[] | undefined) {
+//   axiosbase.get(`/listings/${id}`).then(({ data }) => console.log(data));
+// }
+
 function ListingDetails() {
+  const router = useRouter();
+  const id = router.query.id;
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    axios(`${API}/listings/${id}`).then((response) => {
+      setData(response.data);
+    });
+  }, []);
+
   return (
     <>
       <h1 className="text-white text-2xl">
-        Seller: <span className="font-semibold">Domino Jachaś</span>
+        Seller:{" "}
+        <span className="font-semibold">
+          {data.seller_id.owners_name} {data.seller_id.owners_surname}
+        </span>
       </h1>
       <section className="flex w-full items-center justify-between my-4">
         <section className="flex">
@@ -121,30 +141,22 @@ function ListingDetails() {
           />
           <article className="ml-2">
             <h1 className="text-white font-normal text-xl sm:text-2xl">
-              Lorem Ipsum
+              {data.title}
             </h1>
             <p className="text-white font-semibold text-xl sm:text-2xl">
-              &euro;21.37
+              &euro;{parseFloat(`${data.price / 100}`).toFixed(2)}
             </p>
           </article>
         </section>
         <section className="flex flex-col-reverse sm:flex-row">
-          <Button
-            variants="outlinedPrimary"
-            classes="w-10 h-10 m-0"
-            // onClick={() => count > 1 && setCount((prev: number) => prev - 1)}
-          >
+          <Button variants="outlinedPrimary" classes="w-10 h-10 m-0">
             -
           </Button>
           <Input
             classes="!w-10 h-10 m-0 my-1 sm:my-0 sm:mx-2 text-center"
             value={1}
           />
-          <Button
-            variants="outlinedPrimary"
-            classes="w-10 h-10 m-0"
-            // onClick={() => setCount((prev: number) => prev + 1)}
-          >
+          <Button variants="outlinedPrimary" classes="w-10 h-10 m-0">
             +
           </Button>
         </section>
@@ -165,13 +177,13 @@ interface ShippingDetailsProps {
     city: string;
     phone: string;
   }>;
-  selectedAddress: number;
-  handleClick: SetStateAction<number>;
+  orderDetails: { name: string; surname: string; address: number };
+  handleClick: any;
 }
 
 function ShippingDetails({
   addresses,
-  selectedAddress,
+  orderDetails,
   handleClick,
 }: ShippingDetailsProps) {
   return (
@@ -181,9 +193,15 @@ function ShippingDetails({
         {addresses.map((address) => (
           <article
             key={address.address_id}
-            onClick={() => handleClick(address.address_id)}
+            onClick={() =>
+              handleClick({
+                name: address.name,
+                surname: address.surname,
+                address: address.address_id,
+              })
+            }
             className={`${
-              selectedAddress === address.address_id
+              orderDetails.address === address.address_id
                 ? "border-purple-500"
                 : "border-zinc-600"
             }
