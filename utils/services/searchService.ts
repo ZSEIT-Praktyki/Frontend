@@ -23,7 +23,13 @@ export const searchApi = createApi({
       query: () => "/listings/subcategories",
     }),
     getSearchResults: builder.query<SearchProps, PagingProps>({
-      query: ({ max, min = 0, query = "", page = 1, subcategory_id }) => ({
+      query: ({
+        max = 9999,
+        min = 0,
+        query = "",
+        page = 1,
+        subcategory_id,
+      }) => ({
         url: "/listings/search",
         method: "GET",
         params: {

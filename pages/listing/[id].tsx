@@ -6,6 +6,7 @@ import {
   useCheckWatchlistQuery,
   useRemoveWatchlistMutation,
 } from "@utils/services/watchlistService";
+import { useSelector } from "@utils/store/store";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import {
@@ -19,6 +20,8 @@ function Listing({ data }: { data: ListingProps }) {
   const { data: status } = useCheckWatchlistQuery(data.listing_id);
   const [Append] = useAddWatchlistMutation();
   const [Remove] = useRemoveWatchlistMutation();
+
+  const { isLoggedIn } = useSelector((state) => state.user);
 
   return (
     <>
@@ -35,15 +38,15 @@ function Listing({ data }: { data: ListingProps }) {
         </Head>
         <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
           <Slider images={data.images} />
-          <article className="p-10 flex w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
+          <article className="p-10 flex flex-col md:flex-row w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
             <section className="mr-5">
               {/* Auction title */}
-              <h1 className="text-2xl sm:text-4xl text-white font-bold">
+              <h1 className="text-3xl sm:text-4xl text-white font-bold">
                 {data.title}
               </h1>
 
               {/* Tags */}
-              <div className="mt-2 flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
+              <div className="mt-2 w-full flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
                 {/* Tag */}
                 <span className="p-2 rounded border mr-2 mt-2">
                   Category:{" "}
@@ -71,61 +74,55 @@ function Listing({ data }: { data: ListingProps }) {
                 &euro;
                 {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
               </h2>
-              {/* Purchase button */}
-              <Button
-                classes="m-0 mt-4"
-                onClick={() => router.push(`/checkout?id=${data.listing_id}`)}
-              >
-                <AiOutlineShoppingCart className="text-xl mr-1" />
-                <span>Purchase now</span>
-              </Button>
-              {/* watchlist button */}
-              <Button
-                classes="m-0 mt-2"
-                variants="outlinedPrimary"
-                onClick={() =>
-                  status?.isIn
-                    ? Remove(data.listing_id)
-                    : Append(data.listing_id)
-                }
-              >
-                {!status?.isIn ? (
-                  <>
-                    <AiOutlineHeart className="text-xl mr-1" />
-                    <span>Add to watchlist</span>
-                  </>
-                ) : (
-                  <>
-                    <AiFillHeart className="text-xl mr-1" />
-                    <span>
-                      Remove from
-                      <br />
-                      watchlist
-                    </span>
-                  </>
-                )}
-              </Button>
+
+              {isLoggedIn && (
+                <>
+                  <Button
+                    classes="m-0 mt-4"
+                    onClick={() =>
+                      router.push(`/checkout?id=${data.listing_id}`)
+                    }
+                  >
+                    <AiOutlineShoppingCart className="text-xl mr-1" />
+                    <span>Purchase now</span>
+                  </Button>
+
+                  <Button
+                    classes="m-0 mt-2"
+                    variants="outlinedPrimary"
+                    onClick={() =>
+                      status?.isIn
+                        ? Remove(data.listing_id)
+                        : Append(data.listing_id)
+                    }
+                  >
+                    {!status?.isIn ? (
+                      <>
+                        <AiOutlineHeart className="text-xl mr-1" />
+                        <span>Add to watchlist</span>
+                      </>
+                    ) : (
+                      <>
+                        <AiFillHeart className="text-xl mr-1" />
+                        <span>
+                          Remove from
+                          <br />
+                          watchlist
+                        </span>
+                      </>
+                    )}
+                  </Button>
+                </>
+              )}
             </section>
           </article>
-          {/* Description */}
+
           <article className="bg-gray-800 p-10 mt-4 rounded-lg">
             <header className="text-xl sm:text-3xl text-white font-bold">
               Description
             </header>
             <p className="mt-4 text-white">{data.description}</p>
           </article>
-          {/* Seller info */}
-          <section className="bg-gray-800 p-10 mt-4 rounded-lg flex items-baseline justify-between">
-            <span className="text-xl sm:text-3xl text-white font-bold">
-              Seller: {data.seller_id.owners_name}
-            </span>
-            {/*   <a
-              href="/"
-              className="text-lg sm:text-lg transition text-gray-300 hover:text-gray-200 font-bold"
-            >
-              See seller&apos;s other items
-            </a> */}
-          </section>
         </section>
       </main>
     </>
@@ -153,8 +150,8 @@ export async function getStaticProps({ params }: any) {
   const data = await res.json();
 
   return {
-    props: { data },
-    revalidate: 60,
+    props: { data, fallback: true },
+    revalidate: 120,
   };
 }
 

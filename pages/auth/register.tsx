@@ -6,7 +6,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function Login() {
-  const { onRegister } = useAuthenticate("register");
+  const { onRegister, state } = useAuthenticate("register");
   return (
     <main className="w-full h-1/3 flex justify-center items-center">
       <Head>
@@ -136,6 +136,11 @@ export default function Login() {
             <p className="ml-2 mb-4 text-xs text-gray-300">
               Password must be at least 6 characters long
             </p>
+
+            {typeof state.error?.message !== "undefined" && (
+              <div className="font-medium mt-2">{state.error?.message}</div>
+            )}
+
             <Button
               disabled={!(isValid && dirty)}
               onClick={() => handleSubmit()}

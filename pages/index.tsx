@@ -87,7 +87,7 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         </article>
       </section>
 
-      <section className="flex flex-col justify-center md:flex-row md:min-h-screen">
+      <section className="flex flex-col justify-center md:flex-row md:min-h-screen w-full ">
         <Categories />
 
         {data.length === 0 && (
@@ -96,7 +96,7 @@ export default function Home({ data }: { data: ListingMinified[] }) {
           </article>
         )}
         {data.length !== 0 && (
-          <div className="p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4 xl:w-2/3 ">
+          <div className="w-full h-full grid p-2 grid-cols-2 gap-2 grid-flow-row-dense lg:grid-cols-3 xl:grid-cols-4">
             {data.map((listing) => (
               <Listing key={listing.listing_id} {...listing} />
             ))}

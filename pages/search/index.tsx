@@ -18,7 +18,12 @@ const init = {
 
 export const SearchContext = createContext({
   page: 0,
-  params: {},
+  params: {
+    min: 0,
+    max: 9999 * 100,
+    subcategory_id: null,
+    condition: [],
+  },
   setPage: (arg: any) => {},
   setParams: (arg: any) => {},
   onClear: () => {},
@@ -31,10 +36,11 @@ export default function Search() {
     min: 0,
     max: 9999 * 100,
     subcategory_id: null,
+    condition: [],
   });
 
   const { data = init } = useGetSearchResultsQuery({
-    max: params.max ?? 9999 * 100,
+    max: params.max,
     min: params.min,
     page,
     query: router.query.q as string,
@@ -47,6 +53,7 @@ export default function Search() {
       min: 0,
       max: 9999 * 100,
       subcategory_id: null,
+      condition: [],
     });
   }
 

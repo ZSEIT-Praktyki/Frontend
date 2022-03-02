@@ -1,6 +1,7 @@
 import { Input, Button } from "@components/index";
 import Modal from "@components/Modal";
 import Label from "@components/UI/Label";
+import editSchema from "@utils/helpers/editSchema";
 import {
   useGetSingleListingQuery,
   useUpdateSingleListingMutation,
@@ -26,16 +27,17 @@ export default function EditModal({
   return (
     <Modal onClose={onClose} {...rest}>
       <Formik
+        validationSchema={editSchema}
         enableReinitialize
         onSubmit={async (v) => {
           await onUpdate({ ...v, listing_id });
           onClose();
         }}
         initialValues={{
-          title: data?.title ?? "",
-          description: data?.description ?? "",
-          price: data?.price / 100 ?? "",
-          quantity: data?.quantity ?? "",
+          title: data?.title || "",
+          description: data?.description || "",
+          price: data?.price / 100 || 0,
+          quantity: data?.quantity || 0,
         }}
       >
         {({
@@ -93,7 +95,11 @@ export default function EditModal({
               >
                 Cancel Edition
               </Button>
-              <Button variants="ok" onClick={() => handleSubmit()}>
+              <Button
+                type="submit"
+                variants="ok"
+                onClick={() => handleSubmit()}
+              >
                 Save edition
               </Button>
             </section>
