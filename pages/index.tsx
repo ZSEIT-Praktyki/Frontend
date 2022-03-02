@@ -91,8 +91,8 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         <Categories />
 
         {data.length === 0 && (
-          <article className="w-full md:h-screen p-10 flex justify-center items-center mt-2">
-            <img src="/Empty.svg" className="w-full " />
+          <article className="md:h-screen p-10 w-3/5 flex justify-center items-center mt-2">
+            <img src="/Empty.svg" className="w-4/5" />
           </article>
         )}
         {data.length !== 0 && (

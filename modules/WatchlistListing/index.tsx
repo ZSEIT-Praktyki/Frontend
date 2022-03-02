@@ -18,7 +18,7 @@ export default function WatchlistListing({
   const [Remove] = useRemoveWatchlistMutation();
   const router = useRouter();
   return (
-    <article className="w-full p-2 h-44 flex flex-row bg-gray-800 mb-2 rounded-xl">
+    <article className="w-full flex-col p-2  flex sm:flex-row bg-gray-800 mb-2 rounded-xl">
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
