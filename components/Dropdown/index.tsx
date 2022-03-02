@@ -11,6 +11,7 @@ export default function Dropdown({ value, children }: DropdownProps) {
   return (
     <section className="bg-gray-900 p-2 px-3 rounded relative">
       <button
+        name="options"
         onClick={() => setIsOpen(!isOpen)}
         className="bg-gray-900 text-white font-medium z-20"
       >
@@ -39,7 +40,7 @@ interface ItemProps {
   value: string;
 }
 
-Dropdown.Item = ({ text, value }: ItemProps) => (
+export const Item = ({ text, value }: ItemProps) => (
   <motion.li
     className="py-2 font-medium whitespace-nowrap overflow-hidden cursor-pointer"
     onClick={() => {}}

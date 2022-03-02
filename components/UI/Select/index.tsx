@@ -13,7 +13,7 @@ interface SelectProps
   error?: boolean;
   label?: string;
   options: {
-    value: string;
+    value: any;
     text: string;
   }[];
 }

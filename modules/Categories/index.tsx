@@ -8,6 +8,7 @@ interface CategoryProps {
   icon: ReactNode;
   text: string;
   categoriesExtended: boolean;
+  index: number;
 }
 
 function Category(props: CategoryProps) {
@@ -15,7 +16,9 @@ function Category(props: CategoryProps) {
   return (
     <button
       onClick={() =>
-        router.push(`/search?q=&min=0&max=99999&page=1&category=${props.text}`)
+        router.push(
+          `/search?q=&min=0&max=99999&page=1&subcategory_id=${props.index + 1}`
+        )
       }
       className={`${
         props.categoriesExtended ? "flex" : "hidden"
@@ -32,7 +35,10 @@ export default function Categories() {
   const [categoriesExtended, setCategoriesExtended] = React.useState(false);
 
   return (
-    <aside className="flex flex-col p-4 bg-gray-800 mt-2 rounded-md mb-4 m-2">
+    <aside
+      style={{ minWidth: 300 }}
+      className="flex flex-col p-4 bg-gray-800 mt-2 rounded-md mb-4 m-2 max-h-screen"
+    >
       <section className="flex justify-between items-center">
         <h2 className="text-3xl text-white font-bold mb-2">Categories:</h2>
         <ai.AiOutlineBars
@@ -40,8 +46,9 @@ export default function Categories() {
           onClick={() => setCategoriesExtended((prevState) => !prevState)}
         />
       </section>
-      {categories.map((category) => (
+      {categories.map((category, index) => (
         <Category
+          index={index}
           key={category.text}
           icon={category.icon}
           text={category.text}

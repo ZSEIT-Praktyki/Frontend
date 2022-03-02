@@ -20,10 +20,9 @@ export default function SearchLayout({ data }: SearchLayoutProps) {
   const [min, setMin] = useState("");
   const [max, setMax] = useState("");
 
-  const { setParams } = useContext(SearchContext);
+  const { setParams, params } = useContext(SearchContext);
 
   function onApply() {
-    if (!min || !max) return;
     setParams({
       min,
       max,
@@ -43,11 +42,22 @@ export default function SearchLayout({ data }: SearchLayoutProps) {
         style={{ maxHeight: "110vh" }}
       >
         <ul>
-          {categories.map(({ icon, text }) => (
+          {categories.map(({ icon, text }, index) => (
             <li key={text} className="p-2 items-center">
-              <button className="flex text-white">
+              <button
+                //@ts-ignore
+                className={`flex ${
+                  //@ts-ignore
+                  params?.subcategory_id === index + 1
+                    ? "text-purple-600"
+                    : "text-white"
+                }`}
+                onClick={() =>
+                  setParams((p: any) => ({ ...p, subcategory_id: index + 1 }))
+                }
+              >
                 <span className="pr-2">{icon}</span>
-                <Paragraph>{text}</Paragraph>
+                <p className="font-medium">{text}</p>
               </button>
             </li>
           ))}
@@ -118,7 +128,7 @@ export default function SearchLayout({ data }: SearchLayoutProps) {
           layout={layout}
           onLayoutChange={onLayoutChange}
         />
-        <section className={LAYOUT[layout]}>
+        <section className={`w-full ${LAYOUT[layout]}`}>
           {data.results.map((listing) => (
             <Listing
               key={listing.listing_id}
@@ -127,6 +137,12 @@ export default function SearchLayout({ data }: SearchLayoutProps) {
             />
           ))}
         </section>
+
+        {data.results.length === 0 && (
+          <section className="flex flex-1">
+            <img src="/404.svg" className="w-full h-full" alt="not found" />
+          </section>
+        )}
 
         <PagingTab
           amount={data.amount}

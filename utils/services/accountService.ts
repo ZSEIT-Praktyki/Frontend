@@ -1,6 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { API } from "@utils/assets/constants/routes";
 
+interface UpdateProps {
+  listing_id: number;
+  title: string;
+  description: string;
+  price: number;
+  quantity: number;
+}
+
 export const accountApi = createApi({
   reducerPath: "account",
   baseQuery: fetchBaseQuery({ baseUrl: API, credentials: "include" }),
@@ -10,6 +18,24 @@ export const accountApi = createApi({
       query: () => "/listings/managment/active",
       providesTags: ["Acc"],
     }),
+
+    getSingleListing: builder.query<ListingProps, number>({
+      query: (id) => "/listings/managment/" + id,
+      providesTags: ["Acc"],
+    }),
+
+    updateSingleListing: builder.mutation<ListingMinified[], UpdateProps>({
+      query: ({ listing_id, ...rest }) => ({
+        method: "PUT",
+        url: "/listings/managment/" + listing_id,
+        body: {
+          ...rest,
+          price: rest?.price * 100,
+        },
+      }),
+      invalidatesTags: ["Acc"],
+    }),
+
     getNotActiveListings: builder.query<ListingMinified[], unknown>({
       query: () => "/listings/managment/not-active",
       providesTags: ["Acc"],
@@ -36,4 +62,6 @@ export const {
   useGetNotActiveListingsQuery,
   useRemoveListingMutation,
   useActivateListingMutation,
+  useGetSingleListingQuery,
+  useUpdateSingleListingMutation,
 } = accountApi;

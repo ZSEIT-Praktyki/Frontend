@@ -34,14 +34,12 @@ export default function Header() {
         </section>
 
         <section className="hidden sm:flex w-full justify-center">
-          <button className="flex sm:hidden">
-            <GiHamburgerMenu size={30} color="white" />
-          </button>
           <SearchForm />
         </section>
 
         <section className="flex">
           <button
+            name="add post"
             className="p-2 flex justify-center"
             onClick={() => router.push("/add")}
           >
@@ -49,13 +47,18 @@ export default function Header() {
           </button>
 
           <button
+            name="followed posts"
             className="p-2 flex justify-center"
             onClick={() => router.push("/user/watchlist")}
           >
             <AiOutlineHeart color="white" size={25} />
           </button>
 
-          <button className="flex p-2" onClick={() => setShow(!show)}>
+          <button
+            name="account"
+            className="flex p-2"
+            onClick={() => setShow(!show)}
+          >
             <AiOutlineUser color="white" size={25} />
             <MdKeyboardArrowDown
               color="white"
@@ -64,24 +67,22 @@ export default function Header() {
             />
           </button>
 
-          {show && (
+          {show && isLoggedIn && (
             <article className="bg-gray-800 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52">
-              {isLoggedIn && (
-                <>
-                  <button
-                    className="transition-colors p-2 hover:bg-gray-700 rounded font-medium"
-                    onClick={() => router.push("/user/account")}
-                  >
-                    My account
-                  </button>
-                  <button
-                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
-                    onClick={signOut}
-                  >
-                    Sign out
-                  </button>
-                </>
-              )}
+              <button
+                name="my account"
+                className="transition-colors p-2 hover:bg-gray-700 rounded font-medium"
+                onClick={() => router.push("/user/account")}
+              >
+                My account
+              </button>
+              <button
+                name="sign out"
+                className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                onClick={signOut}
+              >
+                Sign out
+              </button>
             </article>
           )}
         </section>
