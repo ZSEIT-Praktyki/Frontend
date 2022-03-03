@@ -27,6 +27,7 @@ export default function AddForm({ onSubmit }: AddFormProps) {
         subcategory_id: 1,
         price: 0,
         condition: "",
+        city: "",
       }}
     >
       {({
@@ -124,7 +125,15 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 error={!!errors.quantity && touched.quantity}
               />
 
-              <Input label="Location*" containerStyle="mt-4" />
+              <Input
+                label="City*"
+                value={values.city}
+                onChange={handleChange("city")}
+                onBlur={handleBlur("city")}
+                error={!!errors.city && touched.city}
+                containerStyle="mt-4"
+                placeholder="City"
+              />
             </section>
             <section className="bg-gray-800 flex-1 flex items-center flex-col justify-around rounded-md h-96 m-2 p-2">
               <h1 className="text-white text-4xl font-bold text-center p-2">

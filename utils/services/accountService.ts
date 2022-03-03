@@ -9,6 +9,11 @@ interface UpdateProps {
   quantity: number;
 }
 
+export interface SoldProps extends ListingMinified {
+  order_id: number;
+  purchased_at: Date;
+}
+
 export const accountApi = createApi({
   reducerPath: "account",
   baseQuery: fetchBaseQuery({ baseUrl: API, credentials: "include" }),
@@ -54,6 +59,14 @@ export const accountApi = createApi({
       }),
       invalidatesTags: ["Acc"],
     }),
+
+    getPurchases: builder.query<SoldProps[], any>({
+      query: () => "/orders/history",
+    }),
+
+    getSold: builder.query<SoldProps[], any>({
+      query: () => "/orders/sold",
+    }),
   }),
 });
 
@@ -64,4 +77,6 @@ export const {
   useActivateListingMutation,
   useGetSingleListingQuery,
   useUpdateSingleListingMutation,
+  useGetPurchasesQuery,
+  useGetSoldQuery,
 } = accountApi;

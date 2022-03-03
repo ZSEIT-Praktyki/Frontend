@@ -22,7 +22,8 @@ export const SearchContext = createContext({
     min: 0,
     max: 9999 * 100,
     subcategory_id: null,
-    condition: [],
+    sort: "",
+    city: "",
   },
   setPage: (arg: any) => {},
   setParams: (arg: any) => {},
@@ -37,12 +38,16 @@ export default function Search() {
     max: 9999 * 100,
     subcategory_id: null,
     condition: [],
+    sort: "ASC" as "ASC" | "DESC",
+    city: "",
   });
 
   const { data = init } = useGetSearchResultsQuery({
     max: params.max,
     min: params.min,
     page,
+    city: params.city,
+    sort: params.sort,
     query: router.query.q as string,
     subcategory_id:
       params.subcategory_id ?? Number(router.query.subcategory_id),
@@ -50,6 +55,8 @@ export default function Search() {
 
   function onClear() {
     setParams({
+      city: "",
+      sort: "ASC",
       min: 0,
       max: 9999 * 100,
       subcategory_id: null,

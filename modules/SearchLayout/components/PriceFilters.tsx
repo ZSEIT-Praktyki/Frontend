@@ -1,21 +1,13 @@
-import { SearchContext } from "pages/search";
-import { memo, useContext, useState } from "react";
-import { Button } from "@components/index";
+import { memo } from "react";
 
-function PriceFilters() {
-  const [min, setMin] = useState("");
-  const [max, setMax] = useState("");
+interface PriceFiltersProps {
+  min: string;
+  max: string;
+  setMin: (str: string) => void;
+  setMax: (str: string) => void;
+}
 
-  const { setParams } = useContext(SearchContext);
-
-  function onApply() {
-    setParams((p: any) => ({
-      ...p,
-      min: +min || 0,
-      max: +max || 9999,
-    }));
-  }
-
+function PriceFilters({ max, min, setMax, setMin }: PriceFiltersProps) {
   return (
     <>
       <section className="flex flex-row w-full justify-between">
@@ -34,10 +26,6 @@ function PriceFilters() {
           className="bg-gray-900 text-white first:mr-2 p-2 w-1/2 py-2 rounded mb-2 mt-2 border-2 border-zinc-600"
         />
       </section>
-
-      <Button variants="fire" classes="py-4 !m-0 !mt-2" onClick={onApply}>
-        Apply filters
-      </Button>
     </>
   );
 }

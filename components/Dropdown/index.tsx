@@ -38,12 +38,13 @@ export default function Dropdown({ value, children }: DropdownProps) {
 interface ItemProps {
   text: string;
   value: string;
+  onClick: (v: string) => void;
 }
 
-export const Item = ({ text, value }: ItemProps) => (
+export const Item = ({ text, value, onClick }: ItemProps) => (
   <motion.li
     className="py-2 font-medium whitespace-nowrap overflow-hidden cursor-pointer"
-    onClick={() => {}}
+    onClick={() => onClick(value)}
   >
     {text}
   </motion.li>

@@ -34,7 +34,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
                 MY PURCHASES
               </h2>
               <li className="mt-2 ml-2 p-2 text-white font-medium">
-                <Link href="/user/active-listings">Purcharsed</Link>
+                <Link href="/user/purchases">Purcharsed</Link>
               </li>
 
               <h2 className="text-white font-bold mb-2 p-2 text-2xl rounded-md">
@@ -42,6 +42,9 @@ export default function UserLayout({ children }: UserLayoutProps) {
               </h2>
               <li className="mt-2 ml-2 p-2 text-white font-medium">
                 <Link href="/user/watchlist">Watchlist</Link>
+              </li>
+              <li className="mt-2 ml-2 p-2 text-white font-medium">
+                <Link href="/user/account">Account</Link>
               </li>
             </ul>
           </nav>

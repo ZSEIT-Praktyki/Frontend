@@ -13,6 +13,8 @@ interface PagingProps {
   min: number;
   max: number;
   subcategory_id: number;
+  sort: "ASC" | "DESC";
+  city: string;
 }
 
 export const searchApi = createApi({
@@ -29,6 +31,8 @@ export const searchApi = createApi({
         query = "",
         page = 1,
         subcategory_id,
+        sort,
+        city,
       }) => ({
         url: "/listings/search",
         method: "GET",
@@ -37,6 +41,9 @@ export const searchApi = createApi({
           max: max * 100,
           query,
           page,
+          sort,
+          city,
+
           ...(subcategory_id && { subcategory_id }),
         },
       }),

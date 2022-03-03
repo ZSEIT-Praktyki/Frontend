@@ -10,4 +10,5 @@ export default yup.object().shape({
     .required("Price is required"),
   quantity: yup.number().positive().required("Quantity is required"),
   subcategory_id: yup.string().required("Select valid Category"),
+  city: yup.string().required("City is required"),
 });
