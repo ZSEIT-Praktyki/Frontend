@@ -138,7 +138,9 @@ export default function Login() {
             </p>
 
             {typeof state.error?.message !== "undefined" && (
-              <div className="font-medium mt-2">{state.error?.message}</div>
+              <div className="font-medium mt-2 text-red-600">
+                {state.error?.message}
+              </div>
             )}
 
             <Button

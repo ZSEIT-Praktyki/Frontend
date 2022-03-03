@@ -20,7 +20,7 @@ export default function PagingTab({
   layout,
   onLayoutChange,
 }: PagingTabProps) {
-  const { page, setPage } = useContext(SearchContext);
+  const { page, setPage, setParams, params } = useContext(SearchContext);
   const [input, setInput] = useState<number>(1);
 
   useEffect(() => {
@@ -76,11 +76,17 @@ export default function PagingTab({
       <section className="flex flex-1 items-center justify-center mb-2 sm:mb-0">
         <p className="text-white font-medium text-md mr-5">Sort by:</p>
 
-        <Dropdown value="Cheapest">
-          <Item value="" text="Dearest" />
-          <Item value="" text="Cheapest" />
-          <Item value="" text="Latest" />
-          <Item value="" text="Oldest" />
+        <Dropdown value={params.sort}>
+          <Item
+            onClick={(v) => setParams((p: any) => ({ ...p, sort: v }))}
+            value="ASC"
+            text="ASC"
+          />
+          <Item
+            value="DESC"
+            text="DESC"
+            onClick={(v) => setParams((p: any) => ({ ...p, sort: v }))}
+          />
         </Dropdown>
       </section>
       <section className="flex-1 flex flex-row items-center justify-end">

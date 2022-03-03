@@ -21,7 +21,7 @@ export default function Watchlist() {
 
           {data.length === 0 && (
             <section className=" w-4/5 h-4/5">
-              <h1 className="text-white text-8xl w-full font-bold text-center">
+              <h1 className="text-white text-4xl md:text-8xl w-full font-bold text-center">
                 Empty List
               </h1>
               <div className="relative w-full h-full">

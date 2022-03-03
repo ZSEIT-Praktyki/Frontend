@@ -91,12 +91,12 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         <Categories />
 
         {data.length === 0 && (
-          <article className="w-full md:h-screen p-10 flex justify-center items-center mt-2">
-            <img src="/Empty.svg" className="w-full " />
+          <article className="md:h-screen p-10 w-3/5 flex justify-center items-center mt-2">
+            <img src="/Empty.svg" className="w-4/5" />
           </article>
         )}
         {data.length !== 0 && (
-          <div className="w-full h-full grid p-2 grid-cols-2 gap-2 grid-flow-row-dense lg:grid-cols-3 xl:grid-cols-4">
+          <div className="w-full h-full grid p-2 grid-cols-2 gap-2 grid-flow-row-dense lg:grid-cols-3 lg:w-4/6 xl:grid-cols-4 ">
             {data.map((listing) => (
               <Listing key={listing.listing_id} {...listing} />
             ))}

@@ -9,6 +9,27 @@ interface UpdateProps {
   quantity: number;
 }
 
+export interface SoldProps {
+  order_id: number;
+  purchased_at: Date;
+  listing: {
+    images: ListingImagesProps | null;
+    title: string;
+    quantity: number;
+    price: number;
+  };
+  buyer_address: {
+    name: string;
+    surname: string;
+    street: string;
+    street_number: string;
+    apartment_number: string;
+    postal_code: string;
+    phone: string;
+    state: string;
+  };
+}
+
 export const accountApi = createApi({
   reducerPath: "account",
   baseQuery: fetchBaseQuery({ baseUrl: API, credentials: "include" }),
@@ -54,6 +75,14 @@ export const accountApi = createApi({
       }),
       invalidatesTags: ["Acc"],
     }),
+
+    getPurchases: builder.query<SoldProps[], any>({
+      query: () => "/orders/history",
+    }),
+
+    getSold: builder.query<SoldProps[], any>({
+      query: () => "/orders/sold",
+    }),
   }),
 });
 
@@ -64,4 +93,6 @@ export const {
   useActivateListingMutation,
   useGetSingleListingQuery,
   useUpdateSingleListingMutation,
+  useGetPurchasesQuery,
+  useGetSoldQuery,
 } = accountApi;

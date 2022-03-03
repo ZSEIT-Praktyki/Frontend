@@ -11,9 +11,9 @@ export default function UserLayout({ children }: UserLayoutProps) {
   const { isLoggedIn } = useSelector((state) => state.user);
   return (
     <main className="w-full min-h-screen flex justify-center">
-      <section className="flex flex-col w-full md:w-4/5 md:flex-row">
+      <section className="flex flex-col w-full  md:flex-row">
         <aside
-          className="flex flex-1 flex-col m-3 bg-gray-800 rounded "
+          className="flex flex-1 flex-col m-3 bg-gray-800 rounded md:sticky top-28"
           style={{ maxHeight: "30rem" }}
         >
           <nav className="w-full p-2">
@@ -34,7 +34,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
                 MY PURCHASES
               </h2>
               <li className="mt-2 ml-2 p-2 text-white font-medium">
-                <Link href="/user/active-listings">Purcharsed</Link>
+                <Link href="/user/purchases">Purcharsed</Link>
               </li>
 
               <h2 className="text-white font-bold mb-2 p-2 text-2xl rounded-md">
@@ -42,6 +42,9 @@ export default function UserLayout({ children }: UserLayoutProps) {
               </h2>
               <li className="mt-2 ml-2 p-2 text-white font-medium">
                 <Link href="/user/watchlist">Watchlist</Link>
+              </li>
+              <li className="mt-2 ml-2 p-2 text-white font-medium">
+                <Link href="/user/account">Account</Link>
               </li>
             </ul>
           </nav>

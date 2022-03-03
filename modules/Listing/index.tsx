@@ -21,9 +21,10 @@ export default function Listing({
 
   if (!horizontal)
     return (
-      <article className="bg-gray-800 text-white flex flex-col justify-between rounded mb-2 relative h-96">
+      <article className="bg-gray-800 overflow-hidden text-white flex flex-col justify-between rounded mb-2 relative h-96">
         <section className="h-1/2 w-full">
           <img
+            style={{ maxHeight: 180 }}
             onClick={() => router.push("/listing/" + listing_id)}
             src={
               images
@@ -35,7 +36,9 @@ export default function Listing({
           />
         </section>
 
-        <h2 className="font-medium p-2 text-xl">{title}</h2>
+        <h2 className="font-medium p-2 text-xl">
+          {title.length > 50 ? `${title.substring(0, 30)}...` : title}
+        </h2>
         <div className="flex flex-row text-gray-400 p-2 font-medium justify-between text-md">
           <p>
             Olsztyn at <br />
@@ -57,7 +60,7 @@ export default function Listing({
       </article>
     );
   return (
-    <article className="w-full mb-4 flex bg-gray-800 rounded-md">
+    <article className="w-full mb-4 flex bg-gray-800 rounded-md overflow-hidden">
       <section className="h-full flex-1">
         <img
           onClick={() => router.push("/listing/" + listing_id)}
@@ -67,6 +70,7 @@ export default function Listing({
               : "https://previews.123rf.com/images/kaymosk/kaymosk1804/kaymosk180400005/99776312-fehler-404-seite-nicht-gefunden-fehler-mit-glitch-effekt-auf-dem-bildschirm-vektor-illustration-f%C3%BCr-.jpg"
           }
           alt={title}
+          style={{ maxHeight: "20rem" }}
           className="cursor-pointer rounded h-full  object-cover w-full"
         />
       </section>

@@ -4,6 +4,7 @@ import { useGetActiveListingsQuery } from "@utils/services/accountService";
 import { H1 } from "@components/UI/Text";
 import EditModal from "@modules/EditModal";
 import { useState } from "react";
+import Head from "next/head";
 
 export default function ActiveListings() {
   const { data = [] } = useGetActiveListingsQuery({});
@@ -18,6 +19,9 @@ export default function ActiveListings() {
   }
   return (
     <>
+      <Head>
+        <title>Active listings</title>
+      </Head>
       <EditModal
         vissible={modal.open}
         title="Edit your listing"

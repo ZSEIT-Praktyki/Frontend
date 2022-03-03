@@ -32,7 +32,7 @@ export default function Login() {
           touched,
         }) => {
           return (
-            <div className="w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-2/4 bg-gray-800 ">
+            <div className="w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-3/5 bg-gray-800 ">
               <h1 className="text-5xl  text-center mt-5 mb-10 font-bold p-2 text-purple-800">
                 Log in
               </h1>

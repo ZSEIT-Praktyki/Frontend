@@ -1,5 +1,5 @@
 import { API } from "@utils/assets/constants/routes";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import {
   BsFillArrowLeftCircleFill,
@@ -40,24 +40,24 @@ export default function Slider({ images }: SliderProps) {
         alt="preview"
       />
       {images.length > 0 && (
-        <section className="flex justify-between items-center bg-gray-800 pl-10 pr-10 pt-3 pb-3 mt-5 w-full rounded-lg">
+        <section className="flex justify-between items-center bg-gray-800 p-3 mt-5 w-full rounded-lg">
           <button
             name="previous image"
             onClick={onPrev}
-            className="bg-purple-900 p-2 mr-10 rounded-full z-10 h-8"
+            className="bg-purple-900 p-2  rounded-full z-10 h-8"
           >
             <BsFillArrowLeftCircleFill color="white" />
           </button>
-          <div className="flex overflow-hidden sm:overflow-hidden items-center justify-center w-full">
+          <div className="flex w-full overflow-hidden sm:overflow-hidden p-2 ">
             {images.map(({ filename, photo_id }) => (
               <img
                 style={{
-                  transform: `translateX(${100 * thumbnail.index}px)`,
+                  transform: `translateX(${13.5 * thumbnail.index}rem)`,
                 }}
                 alt="preview variant photos"
                 onClick={() => setThumbnail((p) => ({ ...p, filename }))}
                 key={photo_id}
-                className="mr-2 rounded last:mr-0 max-h-36 transition border-2 border-zinc-600 hover:border-purple-600"
+                className="mr-2 rounded last:mr-0 max-h-36  object-cover transition border-2 border-zinc-600 hover:border-purple-600"
                 src={`${API}/listings/images/${filename}`}
               />
             ))}
@@ -65,7 +65,7 @@ export default function Slider({ images }: SliderProps) {
           <button
             name="next image"
             onClick={onNext}
-            className="bg-purple-900 p-2 ml-10 rounded-full z-10 h-8"
+            className="bg-purple-900 p-2 rounded-full z-10 h-8"
           >
             <BsFillArrowRightCircleFill color="white" />
           </button>

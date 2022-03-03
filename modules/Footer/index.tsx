@@ -11,7 +11,7 @@ export default function Footer() {
         </section>
         <section className=" flex-1 pr-4 pl-4 pb-6 flex flex-col items-center md:justify-start md:items-start">
           <p className="text-purple-50 font-bold pb-4 text-lg">About us</p>
-          <p>We have huge canons</p>
+          <p>Helloooo</p>
         </section>
         <section className=" flex-1 pr-4 pl-4 pb-6 flex flex-col items-center md:justify-start md:items-start">
           <p className="text-purple-50 font-bold pb-4 text-lg">

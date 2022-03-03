@@ -11,14 +11,14 @@ const stripePromise = loadStripe(
 export default function Checkout() {
   return (
     <Elements stripe={stripePromise}>
-      <main className="w-full flex items-center bg-gray-900 h-full">
+      <main className="w-full flex  bg-gray-900 h-full">
         <Head>
           <title>Checkout</title>
         </Head>
-        <article className="w-1/2 h-screen relative hidden sm:block">
+        <article className="flex-1 h-screen relative hidden sm:block">
           <Image src={"/card.svg"} layout="fill" priority={true} alt="" />
         </article>
-        <article className="w-full sm:w-1/2 h-screen flex items-center p-5 bg-gray-800">
+        <article className="flex-1 bg-gray-800 h-screen">
           <CheckoutForm />
         </article>
       </main>

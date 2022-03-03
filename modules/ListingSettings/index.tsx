@@ -31,9 +31,10 @@ export default function ListingSettings({
   const router = useRouter();
 
   return (
-    <article className="w-full m-2 flex flex-col p-2 rounded-lg md:flex-row">
+    <article className="w-full  flex flex-col p-2 rounded-lg md:flex-row">
       <button onClick={() => router.push(`/listing/${listing_id}`)}>
         <img
+          style={{ maxHeight: 150 }}
           src={images ? `${API}/listings/images/${images.filename}` : nt}
           alt="Thumbnail"
           className="rounded-md h-36 w-72 object-cover"
@@ -43,20 +44,19 @@ export default function ListingSettings({
         <header className="flex flex-row justify-between w-full items-center">
           <h2 className="text-orange-500 font-medium text-2xl ml-2">{title}</h2>
           <section className="flex flex-col items-end">
-            <h2 className="text-orange-500 font-bold text-md ml-2">Price</h2>
-            <p className="text-white font-medium text-2xl">
+            <h2 className="text-white font-medium text-2xl">
               &euro;{price / 100}
-            </p>
+            </h2>
           </section>
         </header>
 
-        <h2 className="text-white font-medium text-xl ml-2">
+        <h2 className="text-white font-medium text-xl mt-2 ml-2 mb-2">
           Added date:{" "}
           <span className="text-orange-500">
             {new Date(added_date).toLocaleDateString()}
           </span>
         </h2>
-        <div className="flex ">
+        <div className="flex">
           {remove && (
             <button
               onClick={() => onRemove(listing_id)}
