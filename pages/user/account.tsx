@@ -6,6 +6,7 @@ import { useGetAddressesQuery } from "@utils/services/addressService";
 import AddAddress from "@modules/AddAddress";
 import Image from "next/image";
 import { IoMdAdd } from "react-icons/io";
+import Head from "next/head";
 
 export default function Account() {
   const [show, setShow] = useState(false);
@@ -30,6 +31,9 @@ export default function Account() {
       </button>
 
       <UserLayout>
+        <Head>
+          <title>Account Settings</title>
+        </Head>
         <section className="flex flex-col w-full h-full">
           <article className=" w-full">
             <ul className="w-full p-2">

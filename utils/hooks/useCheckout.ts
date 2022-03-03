@@ -5,13 +5,7 @@ import { P24BankElement } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import { useSelector } from "@utils/store/store";
 
-interface Props {
-  name: string;
-  surname: string;
-  address: string;
-}
-
-export default function useCheckout() {
+export default function useCheckout(address_id: number) {
   const stripe = useStripe();
   const elements = useElements();
   const { email, user_id, details } = useSelector((state) => state.user);
@@ -22,56 +16,59 @@ export default function useCheckout() {
   useEffect(() => {
     if (!router.query.id) router.back();
 
-    (async () => {
-      try {
-        const { data } = await axiosbase.post("/orders/create-intent", {
-          listing_id: router.query.id,
-        });
+    if (address_id) {
+      (async () => {
+        try {
+          const { data } = await axiosbase.post("/orders/create-intent", {
+            listing_id: router.query.id,
+            address_id,
+          });
 
-        setSecret(data.paymentIntent.client_secret);
-      } catch (error) {}
-    })();
-  }, []);
+          setSecret(data.paymentIntent.client_secret);
+        } catch (error) {}
+      })();
+    }
+  }, [address_id]);
 
-  async function onSubmit(props: Props) {
+  async function onSubmit({ address_id }: any) {
     if (!stripe || !elements) {
       return;
     }
 
     const p24Bank = elements.getElement(P24BankElement);
 
-    const { error } = await stripe.confirmP24Payment(secret, {
-      receipt_email: email,
+    try {
+      const { error } = await stripe.confirmP24Payment(secret, {
+        receipt_email: email,
 
-      payment_method: {
-        //@ts-ignore
-        p24: p24Bank,
+        payment_method: {
+          //@ts-ignore
+          p24: p24Bank,
 
-        metadata: {
-          user_id: user_id,
-          description: "Purchased product: " + router.query.id,
-          listing_id: router.query.id as string,
-        },
-        billing_details: {
-          name: props.name,
-          address: {
-            city: "",
+          metadata: {
+            user_id: user_id,
+            description: "Purchased product: " + router.query.id,
+            listing_id: router.query.id as string,
           },
-          phone: details.phone,
-          email: email,
+          billing_details: {
+            address: {
+              city: "",
+            },
+            phone: details.phone,
+            email: email,
+          },
         },
-      },
-      payment_method_options: {
-        p24: {
-          tos_shown_and_accepted: true,
+        payment_method_options: {
+          p24: {
+            tos_shown_and_accepted: true,
+          },
         },
-      },
-      return_url: "http://localhost:3000/checkout/success",
-    });
-
-    if (error) {
-      console.log(error.message);
-    }
+        return_url: "http://localhost:3000/checkout/success",
+      });
+      if (error) {
+        console.log(error.message);
+      }
+    } catch (error) {}
   }
 
   return { onSubmit, stripe, elements };

@@ -2,11 +2,15 @@ import { H1 } from "@components/UI/Text";
 import UserLayout from "@utils/Layout/User";
 import { useGetPurchasesQuery } from "@utils/services/accountService";
 import Listing from "@modules/Listing";
+import Head from "next/head";
 
 export default function Purchases() {
   const { data = [] } = useGetPurchasesQuery({});
   return (
     <UserLayout>
+      <Head>
+        <title>Purchases</title>
+      </Head>
       <article className="flex flex-col w-full">
         <H1>My purchases</H1>
         <section className="w-full flex flex-col mt-5">

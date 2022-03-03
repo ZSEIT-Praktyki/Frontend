@@ -4,6 +4,7 @@ import ListingSettings from "@modules/ListingSettings";
 import { H1 } from "@components/UI/Text";
 import { useState } from "react";
 import EditModal from "@modules/EditModal";
+import Head from "next/head";
 
 export default function EndedListings() {
   const { data = [] } = useGetNotActiveListingsQuery({});
@@ -19,6 +20,9 @@ export default function EndedListings() {
 
   return (
     <>
+      <Head>
+        <title>Ended listings</title>
+      </Head>
       <EditModal
         vissible={modal.open}
         title="Edit your listing"

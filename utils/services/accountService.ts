@@ -9,9 +9,25 @@ interface UpdateProps {
   quantity: number;
 }
 
-export interface SoldProps extends ListingMinified {
+export interface SoldProps {
   order_id: number;
   purchased_at: Date;
+  listing: {
+    images: ListingImagesProps | null;
+    title: string;
+    quantity: number;
+    price: number;
+  };
+  buyer_address: {
+    name: string;
+    surname: string;
+    street: string;
+    street_number: string;
+    apartment_number: string;
+    postal_code: string;
+    phone: string;
+    state: string;
+  };
 }
 
 export const accountApi = createApi({

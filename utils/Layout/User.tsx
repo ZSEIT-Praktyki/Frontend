@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { useSelector } from "@utils/store/store";
 import NotAuthenticated from "@modules/NotAuthenticated";
+import Head from "next/head";
 
 interface UserLayoutProps {
   children: ReactNode;
