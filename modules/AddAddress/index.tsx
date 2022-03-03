@@ -18,7 +18,7 @@ export default function AddAddress({ onClose }: AddAddressProps) {
   return (
     <Formik
       onSubmit={async (v) => {
-        await onSubmit(v);
+        await onSubmit(v as any);
         onClose();
       }}
       validationSchema={addressSchema}

@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import { useSelector } from "@utils/store/store";
 import NotAuthenticated from "@modules/NotAuthenticated";
-import Head from "next/head";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -12,7 +11,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
   const { isLoggedIn } = useSelector((state) => state.user);
   return (
     <main className="w-full min-h-screen flex justify-center">
-      <section className="flex flex-col w-full md:w-4/5 md:flex-row">
+      <section className="flex flex-col w-full  md:flex-row">
         <aside
           className="flex flex-1 flex-col m-3 bg-gray-800 rounded md:sticky top-28"
           style={{ maxHeight: "30rem" }}

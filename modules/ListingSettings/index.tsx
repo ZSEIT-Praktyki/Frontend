@@ -34,6 +34,7 @@ export default function ListingSettings({
     <article className="w-full  flex flex-col p-2 rounded-lg md:flex-row">
       <button onClick={() => router.push(`/listing/${listing_id}`)}>
         <img
+          style={{ maxHeight: 150 }}
           src={images ? `${API}/listings/images/${images.filename}` : nt}
           alt="Thumbnail"
           className="rounded-md h-36 w-72 object-cover"

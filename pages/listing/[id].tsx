@@ -38,7 +38,7 @@ function Listing({ data }: { data: ListingProps }) {
           />
           <meta name="description" content={data.description} />
         </Head>
-        <section className="flex flex-col w-full xl:w-2/4 sm:w-3/4">
+        <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5">
           <Slider images={data.images} />
           <article className="p-10 flex flex-col md:flex-row w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
             <section className="mr-5">
@@ -58,11 +58,7 @@ function Listing({ data }: { data: ListingProps }) {
                   </span>
                 </span>
                 <span className="p-2 rounded border mr-2 mt-2">
-                  Condition:{" "}
-                  <span className="font-bold">
-                    {/* Possibly it should be all around, but someone who did backend fucked up enums */}
-                    {data.condition ? "New" : "Used"}
-                  </span>
+                  Condition: <span className="font-bold">{data.condition}</span>
                 </span>
                 <span className="p-2 rounded border mr-2 mt-2">
                   Quantity: <span className="font-bold">{data.quantity}</span>
@@ -153,7 +149,7 @@ export async function getStaticProps({ params }: any) {
 
   return {
     props: { data, fallback: true },
-    revalidate: 120,
+    revalidate: 60,
   };
 }
 

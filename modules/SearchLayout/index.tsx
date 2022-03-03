@@ -12,7 +12,7 @@ import { Input, Button } from "@components/index";
 
 const LAYOUT = {
   block:
-    "p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 lg:gap-4",
+    "p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 ",
   horizontal: "flex flex-col w-full p-2",
 };
 
@@ -43,11 +43,6 @@ function SearchLayout({ data }: SearchLayoutProps) {
         style={{ maxHeight: "100vh" }}
       >
         <Categories />
-        {/*    <hr className="w-full mt-2 border-gray-700" />
-
-        <h2 className="text-white text-2xl font-medium mt-2">Condition</h2>
-
-        <Conditions /> */}
 
         <hr className="w-full mt-2 border-gray-700" />
 
