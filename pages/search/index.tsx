@@ -30,38 +30,31 @@ export const SearchContext = createContext({
   onClear: () => {},
 });
 
+const initParams = {
+  min: 0,
+  max: 9999 * 100,
+  subcategory_id: null,
+  condition: [],
+  sort: "ASC" as "ASC" | "DESC",
+  city: "",
+};
 export default function Search() {
   const router = useRouter();
   const [page, setPage] = useState(1);
-  const [params, setParams] = useState({
-    min: 0,
-    max: 9999 * 100,
-    subcategory_id: null,
-    condition: [],
-    sort: "ASC" as "ASC" | "DESC",
-    city: "",
-  });
+  const [params, setParams] = useState(initParams);
 
-  const { data = init } = useGetSearchResultsQuery({
-    max: params.max,
-    min: params.min,
+  const { data = init, isLoading } = useGetSearchResultsQuery({
+    ...params,
     page,
-    city: params.city,
-    sort: params.sort,
     query: router.query.q as string,
     subcategory_id:
       params.subcategory_id ?? Number(router.query.subcategory_id),
   });
 
   function onClear() {
-    setParams({
-      city: "",
-      sort: "ASC",
-      min: 0,
-      max: 9999 * 100,
-      subcategory_id: null,
-      condition: [],
-    });
+    setParams(initParams);
+    router.query.subcategory_id = undefined;
+    router.push(router);
   }
 
   return (
@@ -89,7 +82,7 @@ export default function Search() {
           </h1>
         </div>
 
-        <SearchLayout data={data} />
+        <SearchLayout data={data} loading={isLoading} />
       </main>
     </SearchContext.Provider>
   );

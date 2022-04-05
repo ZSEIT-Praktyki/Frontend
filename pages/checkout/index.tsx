@@ -3,10 +3,28 @@ import { Elements } from "@stripe/react-stripe-js";
 import Head from "next/head";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
+import { NextPageContext } from "next";
 
 const stripePromise = loadStripe(
   "pk_test_51KHt5OJFFDDymwGwp9gsCogqhxvzYvyo2wJsIAwSrPflIZjFZn2OtUhBbQAwt9SNek6Ol2e7QZUSh86NJyNByl2m00scfwXXjW"
 );
+
+export function getServerSideProps(context: NextPageContext) {
+  const prodId = Number(context.query.id);
+
+  if (!prodId || prodId === NaN) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 export default function Checkout() {
   return (

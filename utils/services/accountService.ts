@@ -37,12 +37,30 @@ export const accountApi = createApi({
   endpoints: (builder) => ({
     getActiveListings: builder.query<ListingMinified[], unknown>({
       query: () => "/listings/managment/active",
-      providesTags: ["Acc"],
+      providesTags: (result) =>
+        result
+          ? result.map(({ listing_id }) => ({ type: "Acc", listing_id }))
+          : ["Acc"],
     }),
 
     getSingleListing: builder.query<ListingProps, number>({
       query: (id) => "/listings/managment/" + id,
-      providesTags: ["Acc"],
+      providesTags: (result) => [
+        {
+          listing_id: result?.listing_id,
+          type: "Acc",
+        },
+      ],
+    }),
+
+    getListingPreview: builder.query<ListingMinified, number>({
+      query: (id) => "/listings/preview/" + id,
+      providesTags: (result) => [
+        {
+          listing_id: result?.listing_id,
+          type: "Acc",
+        },
+      ],
     }),
 
     updateSingleListing: builder.mutation<ListingMinified[], UpdateProps>({
@@ -54,7 +72,7 @@ export const accountApi = createApi({
           price: rest?.price * 100,
         },
       }),
-      invalidatesTags: ["Acc"],
+      invalidatesTags: ({ listing_id }: any) => [{ type: "Acc", listing_id }],
     }),
 
     getNotActiveListings: builder.query<ListingMinified[], unknown>({
@@ -73,7 +91,7 @@ export const accountApi = createApi({
         url: "/listings/managment/activate/" + listing_id,
         method: "PUT",
       }),
-      invalidatesTags: ["Acc"],
+      invalidatesTags: ({ listing_id }: any) => [{ type: "Acc", listing_id }],
     }),
 
     getPurchases: builder.query<SoldProps[], any>({
@@ -95,4 +113,5 @@ export const {
   useUpdateSingleListingMutation,
   useGetPurchasesQuery,
   useGetSoldQuery,
+  useGetListingPreviewQuery,
 } = accountApi;

@@ -22,10 +22,12 @@ export default function WatchlistListing({
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
-        className="h-full rounded-md w-64 object-cover"
+        className="h-full rounded-md sm:w-64 object-cover"
       />
       <section className="pl-2 flex flex-col justify-between">
-        <h2 className="text-white font-medium text-2xl">{title}</h2>
+        <h2 className="text-white font-medium text-2xl mt-2 sm:mt-0">
+          {title}
+        </h2>
 
         <p className="text-gray-300">
           Olsztyn at {new Date(added_date).toLocaleDateString()} <br />

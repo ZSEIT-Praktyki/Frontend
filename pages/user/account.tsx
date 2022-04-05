@@ -1,10 +1,8 @@
 import UserLayout from "@utils/Layout/User";
-
 import Modal from "@components/Modal";
 import { useState } from "react";
 import { useGetAddressesQuery } from "@utils/services/addressService";
 import AddAddress from "@modules/AddAddress";
-import Image from "next/image";
 import { IoMdAdd } from "react-icons/io";
 import Head from "next/head";
 
@@ -41,29 +39,42 @@ export default function Account() {
                 Available addresses
               </h2>
               {data.map(
-                ({ name, address_id, surname, city, phone, state, street }) => (
+                ({
+                  name,
+                  address_id,
+                  surname,
+                  city,
+                  phone,
+                  street,
+                  street_number,
+                }) => (
                   <li
                     key={address_id}
-                    className=" bg-gray-900 p-3 rounded-2xl w-full flex flex-row mb-3"
+                    className="grid grid-rows-2 grid-cols-2 sm:grid-rows-1 sm:grid-cols-5 gap-1 text-white font-medium mb-5 bg-gray-900 p-2 rounded"
                   >
-                    <div className="relative h-24 w-24">
-                      <Image
-                        src="/default-user-image.png"
-                        layout="fill"
-                        className="rounded-full"
-                      />
-                    </div>
-                    <div className="ml-5 flex flex-col">
-                      <h2 className="text-gray-300 font-medium text-2xl">
-                        {name} {surname}
-                      </h2>
-                      <h2 className="text-gray-300 font-medium text-2xl">
-                        {city} {phone}
-                      </h2>
-                      <h2 className="text-gray-300 font-medium text-2xl">
-                        {state} {street}
-                      </h2>
-                    </div>
+                    <section className="flex flex-col">
+                      <h2 className="text-xl mb-2">Name</h2>
+                      <p className="text-gray-300">{name}</p>
+                    </section>
+                    <section className="flex flex-col">
+                      <h2 className="text-xl mb-2">Surname</h2>
+                      <p className="text-gray-300">{surname}</p>
+                    </section>
+                    <section className="flex flex-col">
+                      <h2 className="text-xl mb-2">City</h2>
+                      <p className="text-gray-300">{city}</p>
+                    </section>
+                    <section className="flex flex-col">
+                      <h2 className="text-xl mb-2">Phone</h2>
+                      <p className="text-gray-300">{phone}</p>
+                    </section>
+
+                    <section className="flex flex-col">
+                      <h2 className="text-xl mb-2">Street</h2>
+                      <p className="text-gray-300">
+                        {street} {street_number}
+                      </p>
+                    </section>
                   </li>
                 )
               )}

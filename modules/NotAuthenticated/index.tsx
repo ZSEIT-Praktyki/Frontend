@@ -13,16 +13,23 @@ export default function NotAuthenticated() {
       <img
         src="/security_SVG.svg"
         //  layout="fill"
-        className="w-full md:w-2/4"
+        className="w-full md:w-2/4 p-4"
         alt=""
       />
-      <div className="w-1/2 mt-2">
+      <div className="w-1/2 mt-2 flex">
         <Button
           classes="w-full !py-3"
           variants="fire"
           onClick={() => router.push("/auth/login")}
         >
           Login
+        </Button>
+        <Button
+          classes="w-full !py-3"
+          variants="fire"
+          onClick={() => router.push("/auth/register")}
+        >
+          Register
         </Button>
       </div>
     </Container>
