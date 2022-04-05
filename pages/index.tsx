@@ -51,7 +51,7 @@ export default function Home({ data }: { data: ListingMinified[] }) {
                 <Button
                   variants="fire"
                   classes="!py-3 w-2/3 sm:w-1/2 font-medium hover:scale-[1.1] "
-                  onClick={() => router.push("/add")}
+                  onClick={() => router.push("/listing/create")}
                 >
                   START SELLING
                 </Button>
@@ -60,14 +60,14 @@ export default function Home({ data }: { data: ListingMinified[] }) {
               <>
                 <Button
                   variants="fire"
-                  classes="w-1/4 !py-3 font-medium"
+                  classes="w-1/2 sm:w-1/4 !py-3 font-medium"
                   onClick={() => router.push("/auth/login")}
                 >
                   LOGIN
                 </Button>
                 <Button
                   variants="fire"
-                  classes="w-1/4 font-medium"
+                  classes="w-1/2 sm:w-1/4 font-medium"
                   onClick={() => router.push("/auth/register")}
                 >
                   REGISTER

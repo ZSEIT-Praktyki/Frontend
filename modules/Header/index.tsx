@@ -38,7 +38,7 @@ export default function Header() {
           <button
             name="add post"
             className="p-2 flex justify-center"
-            onClick={() => router.push("/add")}
+            onClick={() => router.push("/listing/create")}
           >
             <AiOutlinePlusCircle color="white" size={25} />
           </button>

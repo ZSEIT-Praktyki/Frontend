@@ -14,7 +14,7 @@ export default function useCheckout(address_id: number) {
   const router = useRouter();
 
   useEffect(() => {
-    if (!router.query.id) router.back();
+    //  if (!router.query.id) router.back();
 
     if (address_id) {
       (async () => {
@@ -30,7 +30,7 @@ export default function useCheckout(address_id: number) {
     }
   }, [address_id]);
 
-  async function onSubmit({ address_id }: any) {
+  async function onSubmit() {
     if (!stripe || !elements) {
       return;
     }
@@ -63,7 +63,7 @@ export default function useCheckout(address_id: number) {
             tos_shown_and_accepted: true,
           },
         },
-        return_url: "http://localhost:3000/checkout/success",
+        return_url: window.location.origin + "/checkout/success",
       });
       if (error) {
         console.log(error.message);

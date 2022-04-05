@@ -6,13 +6,12 @@ interface PagingTabProps {
   onLayoutChange: (type: "block" | "horizontal") => void;
 }
 
-import { AiOutlineBars } from "react-icons/ai";
-import { RiLayoutGridLine } from "react-icons/ri";
 import { BiChevronRight, BiChevronLeft } from "react-icons/bi";
 import { ChangeEvent, useContext, useEffect } from "react";
 import { useState } from "react";
 import { SearchContext } from "pages/search";
 import Dropdown, { Item } from "@components/Dropdown";
+import ToggleLayout from "./components/toggle-layout";
 
 export default function PagingTab({
   hasMore,
@@ -44,35 +43,14 @@ export default function PagingTab({
   }
 
   function onChange(e: ChangeEvent<HTMLInputElement>) {
-    setInput(+e.target.value);
+    if (+e.target.value >= 0) {
+      setInput(+e.target.value);
+    }
   }
-
-  // TODO: Prevent inserting invalid values
 
   return (
     <nav className="bg-gray-800 mt-2 mb-5 items-center flex flex-col sm:flex-row  justify-between p-2 rounded">
-      <section className="hidden sm:flex flex-1">
-        <button
-          name="grid layout"
-          className="p-2"
-          onClick={() => onLayoutChange("block")}
-        >
-          <RiLayoutGridLine
-            color={layout === "block" ? "purple" : "white"}
-            size={25}
-          />
-        </button>
-        <button
-          name="bar layout"
-          className="p-2"
-          onClick={() => onLayoutChange("horizontal")}
-        >
-          <AiOutlineBars
-            color={layout === "horizontal" ? "purple" : "white"}
-            size={25}
-          />
-        </button>
-      </section>
+      <ToggleLayout onLayoutChange={onLayoutChange} layout={layout} />
       <section className="flex flex-1 items-center justify-center mb-2 sm:mb-0">
         <p className="text-white font-medium text-md mr-5">Sort by:</p>
 

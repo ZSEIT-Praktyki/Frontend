@@ -1,5 +1,6 @@
 interface SearchLayoutProps {
   data: SearchProps;
+  loading: boolean;
 }
 
 import Listing from "@modules/Listing";
@@ -9,14 +10,19 @@ import { memo, useContext, useState } from "react";
 import Categories from "./components/Categories";
 import PriceFilters from "./components/PriceFilters";
 import { Input, Button } from "@components/index";
+import Skeleton from "@components/Skeleton";
 
 const LAYOUT = {
   block:
-    "p-2 w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 ",
-  horizontal: "flex flex-col w-full p-2",
+    "w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 ",
+  horizontal: "flex flex-col w-full p-4",
 };
 
-function SearchLayout({ data }: SearchLayoutProps) {
+const loading_grid = new Array(12)
+  .fill({ id: 0 })
+  .map((_, index) => ({ id: index }));
+
+function SearchLayout({ data, loading }: SearchLayoutProps) {
   const { onClear, setParams } = useContext(SearchContext);
   const [layout, setLayout] = useState<"block" | "horizontal">("block");
   const [min, setMin] = useState("");
@@ -82,13 +88,33 @@ function SearchLayout({ data }: SearchLayoutProps) {
               {...listing}
             />
           ))}
-        </section>
 
-        {data.results.length === 0 && (
-          <section className="flex flex-1">
-            <img src="/404.svg" className="w-full h-full" alt="not found" />
-          </section>
-        )}
+          {loading &&
+            !data.results &&
+            loading_grid.map(({ id }) => (
+              <article
+                key={id}
+                className={`h-80 bg-gray-800 rounded w-40  sm:w-52 ${
+                  layout === "horizontal" && "mb-2"
+                } `}
+              >
+                <Skeleton height={150} classes="mb-0 w-full" />
+                <div className="p-2">
+                  <Skeleton height={20} classes="mt-1 rounded" />
+                  <Skeleton height={10} classes="p-2 mt-2 rounded" />
+                  <Skeleton height={10} classes="p-2 mt-2 rounded !w-1/2" />
+
+                  <Skeleton height={40} classes="mt-10 w-full rounded" />
+                </div>
+              </article>
+            ))}
+
+          {data.results.length === 0 && (
+            <section className="w-full">
+              <img src="/404.svg" className="w-full h-full" alt="not found" />
+            </section>
+          )}
+        </section>
 
         <PagingTab
           amount={data.amount}

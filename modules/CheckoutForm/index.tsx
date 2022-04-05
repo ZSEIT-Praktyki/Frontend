@@ -50,9 +50,9 @@ export default function CheckoutForm() {
 
         <Button
           disabled={!stripe && !!address}
-          onClick={() => onSubmit(address)}
+          onClick={onSubmit}
           variants={"fire"}
-          classes="border-0 !py-3 w-full"
+          classes="border-0 !m-0 !py-3 w-full"
           type="submit"
         >
           Submit Payment
