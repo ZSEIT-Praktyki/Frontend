@@ -23,7 +23,10 @@ export default function useCheckout(address_id: number) {
           });
 
           setSecret(data.paymentIntent.client_secret);
-        } catch (error) {}
+        } catch (error) {
+          alert("Sorry this product is currently unavailable");
+          router.back();
+        }
       })();
     }
   }, [address_id]);
@@ -65,7 +68,7 @@ export default function useCheckout(address_id: number) {
         return_url: window.location.origin + "/checkout/success",
       });
       if (error) {
-        console.log(error.message);
+        console.error(error);
       }
     } catch (error) {
       setLoading(false);

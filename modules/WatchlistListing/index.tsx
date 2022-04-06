@@ -36,6 +36,7 @@ export default function WatchlistListing({
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
+        style={{ maxHeight: 200 }}
         className="h-full rounded-md sm:w-64 object-cover"
       />
       <section className="pl-2 flex flex-col justify-between">

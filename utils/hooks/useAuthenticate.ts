@@ -64,8 +64,6 @@ export default function useAuthenticate(type: "login" | "register") {
     onSubmit(props)
       .then(({ data }) => {
         if (data.statusCode === 200) {
-          console.log(data);
-
           dispatch(userActions.setLoggedIn());
           router.push("/");
         }

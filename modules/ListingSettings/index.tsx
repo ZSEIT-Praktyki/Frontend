@@ -40,14 +40,17 @@ export default function ListingSettings({
       transition={{
         delay: index * 0.05,
       }}
-      className="w-full flex flex-col p-2 rounded-lg md:flex-row bg-gray-900 mt-2"
+      className="w-full flex flex-col p-2 rounded-lg xs:flex-row bg-gray-900 mt-2"
     >
-      <button onClick={() => router.push(`/listing/${listing_id}`)}>
+      <button
+        onClick={() => router.push(`/listing/${listing_id}`)}
+        disabled={router.asPath === "/user/ended-listings"}
+      >
         <img
-          style={{ maxHeight: 150 }}
+          style={{ maxHeight: 200 }}
           src={images ? `${API}/listings/images/${images.filename}` : nt}
           alt="Thumbnail"
-          className="rounded-md h-36 w-72 object-cover"
+          className="rounded-md w-full xs:w-72 object-cover"
         />
       </button>
       <section className="flex flex-col w-full md:ml-2">

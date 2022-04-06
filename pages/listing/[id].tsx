@@ -30,7 +30,7 @@ function Listing({ data }: { data: ListingProps }) {
       <main className="w-full flex flex-col items-center">
         <Head>
           <title>{data.title}</title>
-          <meta content={data.title.split(" ").join(", ")} name="keywords" />
+          <meta content={data?.title?.split(" ").join(", ")} name="keywords" />
           <meta name="author" content={data.seller_id.owners_name} />
           <meta
             name="viewport"
