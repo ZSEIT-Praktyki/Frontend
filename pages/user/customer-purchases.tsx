@@ -1,4 +1,4 @@
-import { H1, H2, Paragraph } from "@components/UI/Text";
+import { H1, H2 } from "@components/UI/Text";
 import UserLayout from "@utils/Layout/User";
 import { SoldProps, useGetSoldQuery } from "@utils/services/accountService";
 
@@ -15,13 +15,16 @@ export default function CustomerPurchases() {
               key={order_id}
               className="rounded p-2 mb-5 items-center bg-gray-700 flex flex-col sm:flex-row"
             >
-              <section className="ml-2 flex flex-col">
-                <Paragraph>
+              <section className=" flex flex-col">
+                <p className="text-sm text-gray-300">
                   purchased at: {new Date(purchased_at).toLocaleDateString()}
-                </Paragraph>
-                <H2>Product: {listing.title}</H2>
+                </p>
+                <H2>
+                  <span className="text-gray-300">Product: </span>
+                  {listing.title}
+                </H2>
 
-                <div>
+                <div className="pt-2 pb-2">
                   <span className="text-white mr-2">Quantity</span>
                   <input
                     value={listing.quantity}
@@ -32,13 +35,13 @@ export default function CustomerPurchases() {
 
                 <H2>Delivery address</H2>
 
-                <div className="flex flex-row flex-wrap">
-                  {Object.entries(buyer_address).map(([key, value]) => (
+                <div className="flex flex-row flex-wrap mt-2">
+                  {Object.entries(buyer_address).map(([key, value]: any) => (
                     <section
                       key={key}
-                      className="flex p-2 bg-gray-800 m-1 rounded  text-white"
+                      className="p-2  bg-gray-800 m-1 rounded text-white"
                     >
-                      <p className="mr-1">{key}: </p>
+                      <span>{key} </span>
                       <span className="text-purple-400">{value}</span>
                     </section>
                   ))}

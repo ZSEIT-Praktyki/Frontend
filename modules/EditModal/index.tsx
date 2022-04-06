@@ -49,7 +49,6 @@ export default function EditModal({
           touched,
           errors,
         }) => {
-          console.log(errors);
           return (
             <>
               <Input

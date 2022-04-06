@@ -4,7 +4,7 @@ import {
   useRemoveListingMutation,
 } from "@utils/services/accountService";
 import { useRouter } from "next/router";
-
+import { motion } from "framer-motion";
 import { MdEdit } from "react-icons/md";
 
 const nt =
@@ -14,6 +14,7 @@ interface ListingProps extends ListingMinified {
   remove?: boolean;
   activate?: boolean;
   onOpenModal: (id: number) => void;
+  index?: number;
 }
 
 export default function ListingSettings({
@@ -25,13 +26,22 @@ export default function ListingSettings({
   remove,
   activate,
   onOpenModal,
+  index = 1,
 }: ListingProps) {
   const [onRemove] = useRemoveListingMutation();
   const [onActivate] = useActivateListingMutation();
   const router = useRouter();
 
   return (
-    <article className="w-full  flex flex-col p-2 rounded-lg md:flex-row">
+    <motion.article
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        delay: index * 0.05,
+      }}
+      className="w-full flex flex-col p-2 rounded-lg md:flex-row bg-gray-900 mt-2"
+    >
       <button onClick={() => router.push(`/listing/${listing_id}`)}>
         <img
           style={{ maxHeight: 150 }}
@@ -42,7 +52,9 @@ export default function ListingSettings({
       </button>
       <section className="flex flex-col w-full md:ml-2">
         <header className="flex flex-row justify-between w-full items-center">
-          <h2 className="text-orange-500 font-medium text-2xl ml-2">{title}</h2>
+          <h2 className="text-orange-500 font-medium text-2xl ml-2">
+            {title.substring(0, 30)}...
+          </h2>
           <section className="flex flex-col items-end">
             <h2 className="text-white font-medium text-2xl">
               &euro;{price / 100}
@@ -75,12 +87,12 @@ export default function ListingSettings({
           )}
           <button
             onClick={() => onOpenModal(listing_id)}
-            className="p-2 rounded-full bg-gray-900 m-2 w-10 h-10 flex justify-center items-center"
+            className="p-2 rounded-full bg-gray-800 m-2 w-10 h-10 flex justify-center items-center"
           >
             <MdEdit color="white" />
           </button>
         </div>
       </section>
-    </article>
+    </motion.article>
   );
 }

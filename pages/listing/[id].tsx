@@ -74,7 +74,7 @@ function Listing({ data }: { data: ListingProps }) {
               </h2>
 
               {isLoggedIn && (
-                <>
+                <section className="flex flex-row">
                   <Button
                     classes="m-0 mt-4"
                     onClick={() =>
@@ -102,15 +102,11 @@ function Listing({ data }: { data: ListingProps }) {
                     ) : (
                       <>
                         <AiFillHeart className="text-xl mr-1" />
-                        <span>
-                          Remove from
-                          <br />
-                          watchlist
-                        </span>
+                        <span>Remove</span>
                       </>
                     )}
                   </Button>
-                </>
+                </section>
               )}
             </section>
           </article>

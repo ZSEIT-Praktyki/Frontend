@@ -12,15 +12,16 @@ export default function SelectAddress({ address, setAddress }: AddressProps) {
   const { data = [] } = useGetAddressesQuery({});
 
   return (
-    <section>
+    <section className="mt-3">
       <div className="mb-5 mt-2">
         <H2>Select address</H2>
       </div>
+
       {data.map(({ name, address_id, surname, city, phone, state, street }) => (
         <li
           onClick={() => setAddress(address_id)}
           key={address_id}
-          className={` bg-gray-900 p-3 cursor-pointer border-2 border-gray-900 items-center w-full flex justify-between flex-row mb-3 ${
+          className={` bg-gray-900 rounded-xl p-3 cursor-pointer border-2 border-gray-900 items-center w-full flex justify-between flex-row mb-3 ${
             address === address_id && "!border-purple-600"
           }`}
         >

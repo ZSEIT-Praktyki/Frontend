@@ -36,7 +36,7 @@ export default function Checkout() {
         <article className="flex-1 h-screen relative hidden sm:block">
           <Image src={"/card.svg"} layout="fill" priority={true} alt="" />
         </article>
-        <article className="flex-1 bg-gray-800 h-screen">
+        <article className="flex flex-1 justify-center items-center  h-screen pb-10">
           <CheckoutForm />
         </article>
       </main>

@@ -10,12 +10,10 @@ export default function useCheckout(address_id: number) {
   const elements = useElements();
   const { email, user_id, details } = useSelector((state) => state.user);
   const [secret, setSecret] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
-    //  if (!router.query.id) router.back();
-
     if (address_id) {
       (async () => {
         try {
@@ -37,6 +35,7 @@ export default function useCheckout(address_id: number) {
 
     const p24Bank = elements.getElement(P24BankElement);
 
+    setLoading(true);
     try {
       const { error } = await stripe.confirmP24Payment(secret, {
         receipt_email: email,
@@ -68,8 +67,10 @@ export default function useCheckout(address_id: number) {
       if (error) {
         console.log(error.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    }
   }
 
-  return { onSubmit, stripe, elements };
+  return { onSubmit, stripe, elements, loading };
 }

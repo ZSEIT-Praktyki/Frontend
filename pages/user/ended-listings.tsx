@@ -36,11 +36,12 @@ export default function EndedListings() {
             <H1>Ended listings</H1>
           </div>
 
-          {data.map((arg) => (
+          {data.map((arg,index) => (
             <ListingSettings
               onOpenModal={onModalOpen}
               key={arg.listing_id}
               activate
+              index={index}
               {...arg}
             />
           ))}

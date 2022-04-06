@@ -5,6 +5,7 @@ import { H1 } from "@components/UI/Text";
 import EditModal from "@modules/EditModal";
 import { useState } from "react";
 import Head from "next/head";
+import { AnimatePresence } from "framer-motion";
 
 export default function ActiveListings() {
   const { data = [] } = useGetActiveListingsQuery({});
@@ -30,19 +31,22 @@ export default function ActiveListings() {
       />
 
       <UserLayout>
-        <section className="flex flex-col w-full">
+        <section className="flex flex-col w-full relative">
           <div className="ml-4">
             <H1>Active listings</H1>
           </div>
 
-          {data.map((arg) => (
-            <ListingSettings
-              onOpenModal={onModalOpen}
-              key={arg.listing_id}
-              remove
-              {...arg}
-            />
-          ))}
+          <AnimatePresence>
+            {data.map((arg, index) => (
+              <ListingSettings
+                onOpenModal={onModalOpen}
+                key={arg.listing_id}
+                index={index}
+                remove
+                {...arg}
+              />
+            ))}
+          </AnimatePresence>
         </section>
       </UserLayout>
     </>

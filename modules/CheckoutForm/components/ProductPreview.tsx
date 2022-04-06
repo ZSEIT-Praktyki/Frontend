@@ -12,7 +12,7 @@ export default function ProductPreview() {
     <section className="mb-2">
       <H2>Product preview</H2>
 
-      <article className="bg-gray-900 w-full p-2 mt-5 flex">
+      <article className="bg-gray-900 w-full p-2 mt-1 rounded-md flex">
         <img
           className="w-32 h-24 rounded mr-2 object-cover"
           src={

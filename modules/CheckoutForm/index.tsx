@@ -1,7 +1,7 @@
 import { Button } from "@components/index";
 import { P24BankElement } from "@stripe/react-stripe-js";
 import useCheckout from "@utils/hooks/useCheckout";
-
+import { CgSpinner } from "react-icons/cg";
 import { useState } from "react";
 import SelectAddress from "@modules/CheckoutForm/components/SelectAddress";
 import ProductPreview from "./components/ProductPreview";
@@ -9,10 +9,10 @@ import { H2 } from "@components/UI/Text";
 
 export default function CheckoutForm() {
   const [address, setAddress] = useState(0);
-  const { onSubmit, stripe } = useCheckout(address);
+  const { onSubmit, stripe, loading } = useCheckout(address);
 
   return (
-    <div className="p-2 rounded flex flex-col w-full xl:w-3/4 text-white">
+    <div className="rounded flex flex-col p-4 py-5 bg-gray-800 w-full xl:w-3/5 text-white">
       <ProductPreview />
 
       <SelectAddress address={address} setAddress={setAddress} />
@@ -41,7 +41,7 @@ export default function CheckoutForm() {
           <a
             href="https://www.przelewy24.pl/en/regulations"
             target={"_blank"}
-            className="text-center pl-2 text-gray-400 text-xs mt-1 font-medium"
+            className=" pl-2 text-gray-400 text-xs mt-1 font-medium"
           >
             I declare that I have familiarized myself with the regulations and
             information obligation of the Przelewy24 service.
@@ -52,9 +52,10 @@ export default function CheckoutForm() {
           disabled={!stripe && !!address}
           onClick={onSubmit}
           variants={"fire"}
-          classes="border-0 !m-0 !py-3 w-full"
+          classes="border-0 !m-0 !mt-3 !py-3 w-full"
           type="submit"
         >
+          {loading && <CgSpinner size={30} className="animate-spin mr-2" />}
           Submit Payment
         </Button>
       </section>

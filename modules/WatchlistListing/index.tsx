@@ -5,8 +5,14 @@ import { BsCashCoin } from "react-icons/bs";
 import { useRemoveWatchlistMutation } from "@utils/services/watchlistService";
 import { useRouter } from "next/router";
 
+import { motion } from "framer-motion";
+
 const nt =
   "https://previews.123rf.com/images/kaymosk/kaymosk1804/kaymosk180400005/99776312-fehler-404-seite-nicht-gefunden-fehler-mit-glitch-effekt-auf-dem-bildschirm-vektor-illustration-f%C3%BCr-.jpg";
+
+interface WatchlistProps extends ListingMinified {
+  index: number;
+}
 
 export default function WatchlistListing({
   images,
@@ -14,11 +20,19 @@ export default function WatchlistListing({
   added_date,
   price,
   listing_id,
-}: ListingMinified) {
+  index,
+}: WatchlistProps) {
   const [Remove] = useRemoveWatchlistMutation();
   const router = useRouter();
   return (
-    <article className="w-full flex-col p-2  flex sm:flex-row bg-gray-800 mb-2 rounded-xl">
+    <motion.article
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        delay: index * 0.05,
+      }}
+      className="w-full flex-col p-2  flex sm:flex-row bg-gray-800 mb-2 rounded-xl"
+    >
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
@@ -53,6 +67,6 @@ export default function WatchlistListing({
           </Button>
         </section>
       </section>
-    </article>
+    </motion.article>
   );
 }
