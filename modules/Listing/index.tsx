@@ -37,7 +37,7 @@ export default function Listing({
         </section>
 
         <h2 className="font-medium p-2 text-xl">
-          {title.length > 50 ? `${title.substring(0, 30)}...` : title}
+          {title.length > 30 ? `${title.substring(0, 30)}...` : title}
         </h2>
         <div className="flex flex-row text-gray-400 p-2 font-medium justify-between text-md">
           <p>
