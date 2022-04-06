@@ -67,14 +67,14 @@ function Listing({ data }: { data: ListingProps }) {
             </section>
 
             {/* Price and buttons */}
-            <section className="flex flex-col">
-              <h2 className="text-white mt-2 text-2xl sm:text-4xl font-bold">
+            <section className="flex items-center md:items-start md:flex-col">
+              <h2 className="text-white mr-5 md:m-0 mt-2 text-2xl sm:text-4xl font-bold">
                 &euro;
                 {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
               </h2>
 
               {isLoggedIn && (
-                <section className="flex flex-row">
+                <section className="flex flex-col">
                   <Button
                     classes="m-0 mt-4"
                     onClick={() =>

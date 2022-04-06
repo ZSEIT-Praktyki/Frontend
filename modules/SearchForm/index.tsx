@@ -35,7 +35,7 @@ export default function SearchForm() {
       />
       <Button
         variants="text"
-        classes="border-gray-800 bg-gray-800 hover:bg-gray-800"
+        classes="border-gray-800 bg-gray-800 hover:bg-gray-800 m-2"
         type="submit"
         name="search"
       >

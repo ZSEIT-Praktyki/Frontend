@@ -35,7 +35,7 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`border-2 py-2 px-4 text-white rounded-md m-2 transition flex items-center justify-center ${
+      className={`border-2 py-2 px-4 text-white rounded-md transition flex items-center justify-center ${
         classes ?? ""
       } ${buttonVariants[variants]} ${
         disabled ? "opacity-25 disabled:bg-gray-500" : ""
