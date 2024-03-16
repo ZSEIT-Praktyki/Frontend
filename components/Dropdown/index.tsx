@@ -9,11 +9,11 @@ interface DropdownProps {
 export default function Dropdown({ value, children }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className="bg-gray-900 p-2 px-3 rounded relative">
+    <section className="bg-zinc-950 p-2 px-3 rounded relative">
       <button
         name="options"
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-gray-900 text-white font-medium z-20"
+        className="bg-zinc-950 text-white font-medium z-20"
       >
         {value}
       </button>
@@ -21,7 +21,7 @@ export default function Dropdown({ value, children }: DropdownProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.ul
-            className="absolute z-10 left-0 w-full bg-gray-900 p-2 px-3 text-white"
+            className="absolute z-10 left-0 w-full bg-zinc-950 min-w-14 p-2 px-3 text-white"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}

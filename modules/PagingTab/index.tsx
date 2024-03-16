@@ -49,7 +49,7 @@ export default function PagingTab({
   }
 
   return (
-    <nav className="bg-gray-800 mt-2 mb-5 items-center flex flex-col sm:flex-row  justify-between p-2 rounded">
+    <nav className="bg-zinc-900 mt-2 mb-5 items-center flex flex-col sm:flex-row  justify-between p-2 rounded">
       <ToggleLayout onLayoutChange={onLayoutChange} layout={layout} />
       <section className="flex flex-1 items-center justify-center mb-2 sm:mb-0">
         <p className="text-white font-medium text-md mr-5">Sort by:</p>
@@ -82,7 +82,7 @@ export default function PagingTab({
             value={input}
             onChange={onChange}
             type="text"
-            className="bg-gray-900 p-2 rounded w-12 text-white text-center"
+            className="bg-zinc-950 p-2 rounded w-12 text-white text-center"
           />
         </form>
         <span className="text-white px-4 font-medium text-xl">of</span>

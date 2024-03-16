@@ -13,7 +13,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
     <main className="w-full min-h-screen flex justify-center">
       <section className="flex flex-col w-full  md:flex-row">
         <aside
-          className="flex flex-1 flex-col m-3 bg-gray-800 rounded md:sticky top-28"
+          className="flex flex-1 flex-col m-3 bg-zinc-900 rounded md:sticky top-28"
           style={{ maxHeight: "30rem" }}
         >
           <nav className="w-full p-2">
@@ -49,7 +49,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
             </ul>
           </nav>
         </aside>
-        <article className="flex flex-[3] m-3 bg-gray-800 rounded p-2">
+        <article className="flex flex-[3] m-3 bg-zinc-900 rounded p-2">
           {isLoggedIn ? children : <NotAuthenticated />}
         </article>
       </section>

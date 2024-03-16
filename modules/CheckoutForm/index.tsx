@@ -12,7 +12,7 @@ export default function CheckoutForm() {
   const { onSubmit, stripe, loading } = useCheckout(address);
 
   return (
-    <div className="rounded flex flex-col p-4 py-5 bg-gray-800 w-full xl:w-3/5 text-white">
+    <div className="rounded flex flex-col p-4 py-5 bg-zinc-900 w-full xl:w-3/5 text-white">
       <ProductPreview />
 
       <SelectAddress address={address} setAddress={setAddress} />
@@ -21,7 +21,7 @@ export default function CheckoutForm() {
         <H2>Payment method</H2>
 
         <P24BankElement
-          className="bg-gray-900  mt-2 rounded border-2 border-zinc-600 py-1 mb-0"
+          className="bg-zinc-950  mt-2 rounded border-2 border-zinc-600 py-1 mb-0"
           options={{
             style: {
               base: {

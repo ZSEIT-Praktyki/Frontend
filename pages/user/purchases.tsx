@@ -33,7 +33,7 @@ export default function Purchases() {
                 delay: index * 0.05,
               }}
               key={listing.order_id}
-              className="w-full bg-gray-900 rounded-xl p-2"
+              className="w-full bg-zinc-950 rounded-xl p-2"
             >
               <img
                 src={

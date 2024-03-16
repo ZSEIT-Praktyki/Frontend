@@ -42,7 +42,7 @@ export default function Account() {
               }) => (
                 <li
                   key={address_id}
-                  className="grid grid-rows-2 grid-cols-2 sm:grid-rows-1 sm:grid-cols-5 gap-1 text-white font-medium mb-5 bg-gray-900 p-2 rounded"
+                  className="grid grid-rows-2 grid-cols-2 sm:grid-rows-1 sm:grid-cols-5 gap-1 text-white font-medium mb-5 bg-zinc-950 p-2 rounded"
                 >
                   <section className="flex flex-col">
                     <h2 className="text-xl mb-2">Name</h2>

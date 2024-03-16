@@ -15,6 +15,7 @@ function Category(props: CategoryProps) {
   const router = useRouter();
   return (
     <button
+      style={{ minWidth: 250 }}
       onClick={() =>
         router.push(
           `/search?q=&min=0&max=99999&page=1&subcategory_id=${props.index + 1}`
@@ -22,11 +23,11 @@ function Category(props: CategoryProps) {
       }
       className={`${
         props.categoriesExtended ? "flex" : "hidden"
-      } md:flex items-center justify-between py-2 mt-2 rounded-md text-white transition hover:text-purple-500`}
+      } md:flex items-center text-md justify-between py-2 mt-2 rounded-md text-white transition hover:text-purple-500`}
     >
       {props.icon}
-      <span className="font-normal text-xl px-2">{props.text}</span>
-      <ai.AiOutlineRight size={20} />
+      <span className="font-normal text-lg px-2">{props.text}</span>
+      <ai.AiOutlineRight size={18} />
     </button>
   );
 }
@@ -37,7 +38,7 @@ export default function Categories() {
   return (
     <aside
       style={{ minWidth: 300, maxHeight: "40rem" }}
-      className="flex flex-col md:sticky top-28 p-4 bg-gray-800 mt-2 rounded-md mb-4 m-2 max-h-screen"
+      className="flex flex-col md:sticky top-28 p-4 bg-zinc-900 mt-2 rounded-md mb-4 m-2 max-h-screen"
     >
       <section className="flex justify-between items-center">
         <h2 className="text-3xl text-white font-bold mb-2">Categories:</h2>

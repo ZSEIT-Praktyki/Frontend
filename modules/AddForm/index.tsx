@@ -12,6 +12,16 @@ interface AddFormProps {
   onSubmit: (arg: any) => Promise<void>;
 }
 
+const initialValues = {
+  title: "",
+  description: "",
+  quantity: 0,
+  subcategory_id: 1,
+  price: 0,
+  condition: "",
+  city: "",
+};
+
 export default function AddForm({ onSubmit }: AddFormProps) {
   const [files, setFiles] = useState<File[]>([]);
 
@@ -20,15 +30,7 @@ export default function AddForm({ onSubmit }: AddFormProps) {
       onSubmit={(v) => onSubmit({ ...v, files })}
       validationSchema={addSchema}
       validateOnChange
-      initialValues={{
-        title: "",
-        description: "",
-        quantity: 0,
-        subcategory_id: 1,
-        price: 0,
-        condition: "",
-        city: "",
-      }}
+      initialValues={initialValues}
     >
       {({
         handleChange,
@@ -41,9 +43,9 @@ export default function AddForm({ onSubmit }: AddFormProps) {
         touched,
       }) => {
         return (
-          <article className="max-w-6xl flex flex-col items-center md:items-start lg:flex-row mt-5 mb-5">
-            <section className="bg-gray-800 w-full sm:w-3/4 lg:w-full flex-1 m-2 flex flex-col rounded-md p-4">
-              <section className="w-full h-80 bg-gray-900 rounded-md mb-5">
+          <article className="w-3/4 flex flex-col items-center md:items-start lg:flex-row mt-5 mb-5">
+            <section className="bg-zinc-900 w-full sm:w-3/4 lg:w-full flex-[2] m-2 flex flex-col rounded-md p-4">
+              <section className="w-full h-80 bg-zinc-950 rounded-md mb-5">
                 <FileDrop files={files} setState={setFiles} />
               </section>
 
@@ -74,7 +76,7 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 onBlur={handleBlur("description")}
                 placeholder="Say someting more to the customers about the product "
                 rows={10}
-                className={`bg-gray-900 text-white mb-4 resize-none m-2 mt-0 p-2 rounded  border-2 ${
+                className={`bg-zinc-950 text-white mb-4 resize-none m-2 mt-2 p-2 rounded  border-2 ${
                   !!errors.description && touched.description
                     ? "border-rose-600"
                     : "border-zinc-600"
@@ -135,24 +137,22 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 placeholder="City"
               />
             </section>
-            <section className="bg-gray-800 flex-1 flex items-center flex-col justify-around rounded-md h-96 m-2 p-2">
-              <h1 className="text-white text-4xl font-bold text-center p-2">
-                Add
+            <section className="bg-zinc-900 flex-1 flex flex-col rounded-md mt-2 p-4">
+              <h1 className="text-white text-3xl font-bold">
+                Upload your product!
               </h1>
-              <p className="text-white p-3 w-full sm:w-3/4 text-center">
+              <p className="text-zinc-300 mt-3 w-full ">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
-                rem eos aliquam necessitatibus! Sit, cumque consectetur. Sunt
-                blanditiis molestiae dolores ullam officia accusamus culpa
-                officiis commodi voluptas consequatur, quisquam similique.
+                rem eos aliquam necessitatibus! Sit,
               </p>
               <Button
                 onClick={() => handleSubmit()}
                 disabled={!(isValid && dirty)}
                 variants="fire"
                 type="submit"
-                classes="w-full !m-0 w-4/5 py-4 rounded-2xl font-medium"
+                classes="w-full py-4 mt-5"
               >
-                ADD AS BUY NOW
+                Upload now!
               </Button>
             </section>
           </article>

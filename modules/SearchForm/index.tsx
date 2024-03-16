@@ -24,18 +24,18 @@ export default function SearchForm() {
 
   return (
     <form
-      className="w-full flex-[3] justify-center flex m-0 max-w-6xl"
+      className="w-full flex-[3] justify-center flex m-0 max-w-6xl items-stretch"
       onSubmit={onSearch}
     >
       <Input
         value={query}
         onChange={({ target }) => setQuery(target.value)}
-        classes="bg-gray-800 mr-0 py-3 !text-white border-0"
+        classes="mr-0 py-3 !text-white border-none hover:border-none hover:bg-zinc-800"
         placeholder="Search anything, we may have it"
       />
       <Button
         variants="text"
-        classes="border-gray-800 bg-gray-800 hover:bg-gray-800 m-2"
+        classes="border-zinc-900 bg-zinc-950 hover:bg-zinc-800 m-2"
         type="submit"
         name="search"
       >

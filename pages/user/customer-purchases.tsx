@@ -28,7 +28,7 @@ export default function CustomerPurchases() {
                   <span className="text-white mr-2">Quantity</span>
                   <input
                     value={listing.quantity}
-                    className="bg-gray-800 text-white rounded text-center w-8 h-8 p-2"
+                    className="bg-zinc-900 text-white rounded text-center w-8 h-8 p-2"
                     disabled
                   />
                 </div>
@@ -39,7 +39,7 @@ export default function CustomerPurchases() {
                   {Object.entries(buyer_address).map(([key, value]: any) => (
                     <section
                       key={key}
-                      className="p-2  bg-gray-800 m-1 rounded text-white"
+                      className="p-2  bg-zinc-900 m-1 rounded text-white"
                     >
                       <span>{key} </span>
                       <span className="text-purple-400">{value}</span>

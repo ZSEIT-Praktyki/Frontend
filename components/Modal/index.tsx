@@ -34,12 +34,12 @@ export default function Modal({
         >
           <article
             onClick={(e) => e.stopPropagation()}
-            className="max-w-xl rounded-md p-2 bg-gray-900  w-full"
+            className="max-w-xl rounded-md p-2 bg-zinc-950  w-full"
           >
             <header className="flex justify-between w-full p-3 border-b-2 border-b-gray-800 ">
               <H3>{title}</H3>
               <button
-                className="bg-gray-800 p-2 rounded-full w-8 h-8"
+                className="bg-zinc-900 p-2 rounded-full w-8 h-8"
                 onClick={onClose}
               >
                 <AiOutlineClose className="text-gray-200" />

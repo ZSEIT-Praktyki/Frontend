@@ -21,7 +21,12 @@ export default function Login() {
           password: "",
         }}
         validationSchema={registerSchema}
-        onSubmit={onRegister}
+        onSubmit={(v) =>
+          onRegister({
+            email: v.email.trim(),
+            password: v.password.trim(),
+          })
+        }
         validateOnBlur
       >
         {({
@@ -34,7 +39,7 @@ export default function Login() {
           dirty,
           touched,
         }) => (
-          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 m-3 bg-gray-800 ">
+          <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 m-3 bg-zinc-900 ">
             <h1 className="text-5xl text-center mt-5 mb-8 font-bold p-2 text-purple-800">
               Register
             </h1>
@@ -52,7 +57,7 @@ export default function Login() {
               placeholder="Name"
               onChange={handleChange("name")}
               onBlur={handleBlur("name")}
-              classes={`mt-0 mb-0 bg-gray-900 text-white`}
+              classes={`mt-0 mb-0 bg-zinc-950 text-white`}
               error={!!errors.name && touched.name}
             />
             <label
@@ -69,7 +74,7 @@ export default function Login() {
               placeholder="Surname"
               onChange={handleChange("surname")}
               onBlur={handleBlur("surname")}
-              classes={`mt-0 mb-0 bg-gray-900 text-white`}
+              classes={`mt-0 mb-0 bg-zinc-950 text-white`}
               error={!!errors.surname && touched.surname}
             />
             <label
@@ -87,7 +92,7 @@ export default function Login() {
               onChange={handleChange("phone")}
               onBlur={handleBlur("phone")}
               type="tel"
-              classes={`mt-0 mb-0 bg-gray-900 text-white`}
+              classes={`mt-0 mb-0 bg-zinc-950 text-white`}
               error={!!errors.phone && touched.phone}
             />
             <p className="ml-2 mb-2 text-xs text-gray-300">
@@ -107,7 +112,7 @@ export default function Login() {
               placeholder="Email"
               onChange={handleChange("email")}
               onBlur={handleBlur("email")}
-              classes={`mt-0 mb-0 bg-gray-900 text-white`}
+              classes={`mt-0 mb-0 bg-zinc-950 text-white`}
               error={!!errors.email && touched.email}
             />
             <p className="ml-2 text-xs text-gray-300">Must be a valid email</p>
@@ -129,7 +134,7 @@ export default function Login() {
               onChange={handleChange("password")}
               onBlur={handleBlur("password")}
               type="password"
-              classes={`mt-0 mb-0 bg-gray-900 text-white`}
+              classes={`mt-0 mb-0 bg-zinc-950 text-white`}
               error={!!errors.password && touched.password}
             />
 

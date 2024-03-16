@@ -40,7 +40,7 @@ function Listing({ data }: { data: ListingProps }) {
         </Head>
         <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5">
           <Slider images={data.images} />
-          <article className="p-10 flex flex-col md:flex-row w-full justify-between items-center bg-gray-800 rounded-lg mt-5">
+          <article className="p-10 flex flex-col md:flex-row w-full justify-between items-center bg-zinc-900 rounded-lg mt-5">
             <section className="mr-5">
               {/* Auction title */}
               <h1 className="text-3xl sm:text-4xl text-white font-bold">
@@ -48,7 +48,7 @@ function Listing({ data }: { data: ListingProps }) {
               </h1>
 
               {/* Tags */}
-              <div className="mt-2 w-full flex flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
+              <div className="mt-2 w-full flex flex-col  md:flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
                 {/* Tag */}
                 <span className="p-2 rounded border mr-2 mt-2">
                   Category:{" "}
@@ -67,7 +67,7 @@ function Listing({ data }: { data: ListingProps }) {
             </section>
 
             {/* Price and buttons */}
-            <section className="flex items-center md:items-start md:flex-col">
+            <section className="flex items-center flex-col md:flex-row gap-5">
               <h2 className="text-white mr-5 md:m-0 mt-2 text-2xl sm:text-4xl font-bold">
                 &euro;
                 {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
@@ -101,8 +101,8 @@ function Listing({ data }: { data: ListingProps }) {
                       </>
                     ) : (
                       <>
-                        <AiFillHeart className="text-xl mr-1" />
-                        <span>Remove</span>
+                        {/* <AiFillHeart className="text-xl mr-1" /> */}
+                        <span>Remove from watchlist</span>
                       </>
                     )}
                   </Button>
@@ -111,7 +111,7 @@ function Listing({ data }: { data: ListingProps }) {
             </section>
           </article>
 
-          <article className="bg-gray-800 p-10 mt-4 rounded-lg">
+          <article className="bg-zinc-900 p-10 mt-4 rounded-lg">
             <header className="text-xl sm:text-3xl text-white font-bold">
               Description
             </header>
@@ -145,7 +145,7 @@ export async function getStaticProps({ params }: any) {
 
   return {
     props: { data, fallback: true },
-    revalidate: 60,
+    revalidate: 3600,
   };
 }
 

@@ -31,7 +31,7 @@ export default function Select({
         <Label text={label} error={error} htmlFor={label} />
       )}
       <select
-        className={`bg-gray-900 border-2 border-zinc-600 p-2 m-2 text-white rounded mt-0 ${
+        className={`bg-zinc-950 border-2 mt-2 border-zinc-600 p-2 m-2 text-white rounded ${
           error && "border-rose-600"
         } ${classes}`}
         {...rest}

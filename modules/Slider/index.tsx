@@ -30,7 +30,7 @@ export default function Slider({ images }: SliderProps) {
   return (
     <article className="mt-5">
       <img
-        className="w-full rounded-lg bg-gray-800 object-contain"
+        className="w-full rounded-lg  object-contain"
         style={{ maxHeight: "36rem" }}
         src={
           images[0]?.filename
@@ -40,7 +40,7 @@ export default function Slider({ images }: SliderProps) {
         alt="preview"
       />
       {images.length > 0 && (
-        <section className="flex justify-between items-center bg-gray-800 p-3 mt-5 w-full rounded-lg">
+        <section className="flex justify-between items-center bg-zinc-900 p-3 mt-5 w-full rounded-lg">
           <button
             name="previous image"
             onClick={onPrev}

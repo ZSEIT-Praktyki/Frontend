@@ -15,7 +15,7 @@ import Skeleton from "@components/Skeleton";
 const LAYOUT = {
   block:
     "w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 ",
-  horizontal: "flex flex-col w-full p-4",
+  horizontal: "flex flex-col w-full",
 };
 
 const loading_grid = new Array(12)
@@ -43,9 +43,9 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
   }
 
   return (
-    <main className="flex max-w-7xl ">
+    <main className="flex w-10/12 ">
       <aside
-        className="hidden md:flex flex-col w-80 p-4 m-2 mr-5 bg-gray-800 rounded"
+        className="hidden md:flex flex-col w-80 p-4 m-2 mr-5 bg-zinc-900 rounded"
         style={{ maxHeight: "100vh" }}
       >
         <Categories />
@@ -94,7 +94,7 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
             loading_grid.map(({ id }) => (
               <article
                 key={id}
-                className={`h-80 bg-gray-800 rounded w-40  sm:w-52 ${
+                className={`h-80 bg-zinc-900 rounded w-40  sm:w-52 ${
                   layout === "horizontal" && "mb-2"
                 } `}
               >

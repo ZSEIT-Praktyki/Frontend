@@ -18,7 +18,12 @@ export default function Login() {
           password: "",
         }}
         validationSchema={loginSchema}
-        onSubmit={onLogin}
+        onSubmit={(v) =>
+          onLogin({
+            email: v.email.trim(),
+            password: v.password.trim(),
+          })
+        }
         validateOnBlur
       >
         {({
@@ -32,7 +37,7 @@ export default function Login() {
           touched,
         }) => {
           return (
-            <div className="w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-3/5 bg-gray-800 ">
+            <div className="w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-3/5 bg-zinc-900 ">
               <h1 className="text-5xl  text-center mt-5 mb-10 font-bold p-2 text-purple-800">
                 Log in
               </h1>
@@ -51,7 +56,7 @@ export default function Login() {
                 placeholder="Email"
                 onChange={handleChange("email")}
                 onBlur={handleBlur("email")}
-                classes={`mt-0 mb-0 bg-gray-900 text-white`}
+                classes={`mt-0 mb-0 bg-zinc-950 text-white`}
                 error={!!errors.email && touched.email}
               />
               <p className="ml-2 text-xs text-gray-300">
@@ -75,7 +80,7 @@ export default function Login() {
                 onChange={handleChange("password")}
                 onBlur={handleBlur("password")}
                 type="password"
-                classes={`mt-0 mb-0 bg-gray-900 text-white`}
+                classes={`mt-0 mb-0 bg-zinc-950 text-white`}
                 error={!!errors.password && touched.password}
               />
 

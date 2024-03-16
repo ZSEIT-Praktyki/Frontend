@@ -31,7 +31,7 @@ export default function WatchlistListing({
       transition={{
         delay: index * 0.05,
       }}
-      className="w-full flex-col p-2  flex sm:flex-row bg-gray-800 mb-2 rounded-xl"
+      className="w-full flex-col p-2  flex sm:flex-row bg-zinc-900 mb-2 rounded-xl"
     >
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}

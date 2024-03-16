@@ -24,7 +24,7 @@ export default function Layout({ children }: LayoutProps) {
   }, []);
 
   return (
-    <main className="w-full h-full bg-gray-900 min-h-screen">
+    <main className="w-full h-full bg-zinc-950 min-h-screen">
       <Header></Header>
       <section>{children}</section>
 

@@ -76,7 +76,7 @@ export default function Search() {
           />
         </Head>
 
-        <div className="flex w-full max-w-7xl">
+        <div className="flex w-10/12">
           <h1 className="text-white my-10 text-5xl font-bold text-left">
             Looking for &quot;{router.query.q}&quot;.
           </h1>

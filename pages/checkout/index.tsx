@@ -29,7 +29,7 @@ export function getServerSideProps(context: NextPageContext) {
 export default function Checkout() {
   return (
     <Elements stripe={stripePromise}>
-      <main className="w-full flex  bg-gray-900 h-full">
+      <main className="w-full flex  bg-zinc-950 h-full">
         <Head>
           <title>Checkout</title>
         </Head>

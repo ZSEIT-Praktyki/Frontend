@@ -40,7 +40,7 @@ export default function ListingSettings({
       transition={{
         delay: index * 0.05,
       }}
-      className="w-full flex flex-col p-2 rounded-lg xs:flex-row bg-gray-900 mt-2"
+      className="w-full flex flex-col p-2 rounded-lg xs:flex-row bg-zinc-950 mt-2"
     >
       <button
         onClick={() => router.push(`/listing/${listing_id}`)}
@@ -90,7 +90,7 @@ export default function ListingSettings({
           )}
           <button
             onClick={() => onOpenModal(listing_id)}
-            className="p-2 rounded-full bg-gray-800 m-2 w-10 h-10 flex justify-center items-center"
+            className="p-2 rounded-full bg-zinc-900 m-2 w-10 h-10 flex justify-center items-center"
           >
             <MdEdit color="white" />
           </button>

@@ -19,7 +19,7 @@ export default function Header() {
   const { signOut } = useAuthenticate("login");
 
   return (
-    <header className="w-full p-2 flex flex-col bg-gray-900 justify-between items-center border-b-2 border-gray-800 sticky top-0 z-20">
+    <header className="w-full p-2 flex flex-col bg-zinc-900 justify-between items-center border-b-2 border-zinc-900 sticky top-0 z-20">
       <Head>
         <title>Home</title>
       </Head>
@@ -65,7 +65,7 @@ export default function Header() {
           </button>
 
           {show && (
-            <article className="bg-gray-800 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52 shadow-xl">
+            <article className="bg-zinc-900 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52 shadow-xl">
               {isLoggedIn && (
                 <>
                   <button

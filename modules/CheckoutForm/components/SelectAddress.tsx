@@ -21,7 +21,7 @@ export default function SelectAddress({ address, setAddress }: AddressProps) {
         <li
           onClick={() => setAddress(address_id)}
           key={address_id}
-          className={` bg-gray-900 rounded-xl p-3 cursor-pointer border-2 border-gray-900 items-center w-full flex justify-between flex-row mb-3 ${
+          className={` bg-zinc-950 rounded-xl p-3 cursor-pointer border-2 border-gray-900 items-center w-full flex justify-between flex-row mb-3 ${
             address === address_id && "!border-purple-600"
           }`}
         >

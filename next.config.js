@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  Images: {
-    domains: ["localhost:3001"],
+  images: {
+    domains: ["localhost", "localhost:3001", "http://localhost:3001"],
   },
 };
 
