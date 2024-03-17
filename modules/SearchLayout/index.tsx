@@ -14,7 +14,7 @@ import Skeleton from "@components/Skeleton";
 
 const LAYOUT = {
   block:
-    "w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 lg:gap-4 xl:grid-cols-4 ",
+    "w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto lg:gap-4 xl:grid-cols-4 ",
   horizontal: "flex flex-col w-full",
 };
 
@@ -45,33 +45,35 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
   return (
     <main className="flex w-10/12 ">
       <aside
-        className="hidden md:flex flex-col w-80 p-4 m-2 mr-5 bg-zinc-900 rounded"
+        className="hidden md:flex flex-col w-80 p-4 m-2 mr-5 bg-zinc-900 rounded-lg"
         style={{ maxHeight: "100vh" }}
       >
-        <Categories />
+        <div className="flex-1">
+          <Categories />
 
-        <hr className="w-full mt-2 border-gray-700" />
+          <hr className="w-full mt-2 border-gray-700" />
 
-        <h2 className="text-white text-2xl font-medium mt-2 mb-2">City</h2>
-        <Input
-          classes="!m-0"
-          value={city}
-          onChange={({ target }) => setCity(target.value)}
-        />
+          <h2 className="text-white text-2xl font-medium mt-2 mb-2">City</h2>
+          <Input
+            classes="!m-0"
+            value={city}
+            onChange={({ target }) => setCity(target.value)}
+          />
 
-        <hr className="w-full mt-2 border-gray-700" />
+          <hr className="w-full mt-2 border-gray-700" />
 
-        <h2 className="text-white text-2xl font-medium mt-2">Price</h2>
+          <h2 className="text-white text-2xl font-medium mt-2">Price</h2>
 
-        <PriceFilters max={max} min={min} setMax={setMax} setMin={setMin} />
+          <PriceFilters max={max} min={min} setMax={setMax} setMin={setMin} />
+        </div>
+
+        <button onClick={onClear} className="mt-2 text-zinc-400">
+          Clear filters
+        </button>
 
         <Button variants="fire" classes="py-4 !m-0 !mt-2" onClick={onApply}>
           Apply filters
         </Button>
-
-        <button onClick={onClear} className="mt-2 text-white">
-          Clear filters
-        </button>
       </aside>
       <main className="flex flex-col flex-1">
         <PagingTab
@@ -108,13 +110,13 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
                 </div>
               </article>
             ))}
-
-          {data.results.length === 0 && (
-            <section className="w-full">
-              <img src="/404.svg" className="w-full h-full" alt="not found" />
-            </section>
-          )}
         </section>
+
+        {data.results.length === 0 && (
+          <section className="w-3/4 m-auto">
+            <img src="/404.svg" className="h-full w-full" alt="not found" />
+          </section>
+        )}
 
         <PagingTab
           amount={data.amount}

@@ -31,12 +31,12 @@ export default function EndedListings() {
       />
 
       <UserLayout>
-        <section className="flex flex-col w-full">
-          <div className="ml-4">
-            <H1>Ended listings</H1>
+        <section className="flex flex-col w-full md:p-5">
+          <div className="mb-10 p-3">
+            <H1>Out of stock products</H1>
           </div>
 
-          {data.map((arg,index) => (
+          {data.map((arg, index) => (
             <ListingSettings
               onOpenModal={onModalOpen}
               key={arg.listing_id}

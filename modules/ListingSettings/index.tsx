@@ -33,15 +33,7 @@ export default function ListingSettings({
   const router = useRouter();
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0 }}
-      transition={{
-        delay: index * 0.05,
-      }}
-      className="w-full flex flex-col p-2 rounded-lg xs:flex-row bg-zinc-950 mt-2"
-    >
+    <article className="w-full flex flex-col p-3 md:p-5 rounded-xl xs:flex-row bg-zinc-950 mt-2 gap-5">
       <button
         onClick={() => router.push(`/listing/${listing_id}`)}
         disabled={router.asPath === "/user/ended-listings"}
@@ -50,32 +42,31 @@ export default function ListingSettings({
           style={{ maxHeight: 200 }}
           src={images ? `${API}/listings/images/${images.filename}` : nt}
           alt="Thumbnail"
-          className="rounded-md w-full xs:w-72 object-cover"
+          className="rounded-md w-full xs:w-80 object-cover h-56 flex-shrink-0"
         />
       </button>
-      <section className="flex flex-col w-full md:ml-2">
-        <header className="flex flex-row justify-between w-full items-center">
-          <h2 className="text-orange-500 font-medium text-2xl ml-2">
-            {title.substring(0, 30)}...
-          </h2>
-          <section className="flex flex-col items-end">
+      <section className="w-full flex flex-col">
+        <div className="flex-1">
+          <div className="flex flex-row justify-between w-full items-center">
+            <h2 className="text-purple-500 text-3xl font-bold">{title}</h2>
+
             <h2 className="text-white font-medium text-2xl">
               &euro;{price / 100}
             </h2>
-          </section>
-        </header>
+          </div>
 
-        <h2 className="text-white font-medium text-xl mt-2 ml-2 mb-2">
-          Added date:{" "}
-          <span className="text-orange-500">
-            {new Date(added_date).toLocaleDateString()}
-          </span>
-        </h2>
-        <div className="flex">
+          <p className="text-white font-medium text-sm flex flex-col">
+            Added date:{" "}
+            <span className="text-purple-500 text-xl">
+              {new Date(added_date).toLocaleDateString()}
+            </span>
+          </p>
+        </div>
+        <div className="flex flex-row w-full justify-between h-10">
           {remove && (
             <button
               onClick={() => onRemove(listing_id)}
-              className="text-white bg-red-600 m-2 p-2 rounded"
+              className="text-white bg-red-600 px-4 py-2 rounded-md"
             >
               Remove
             </button>
@@ -83,7 +74,7 @@ export default function ListingSettings({
           {activate && (
             <button
               onClick={() => onActivate(listing_id)}
-              className="text-white bg-green-600 m-2 p-2 rounded"
+              className="text-white bg-green-600 p-2 rounded"
             >
               Activate
             </button>
@@ -96,6 +87,6 @@ export default function ListingSettings({
           </button>
         </div>
       </section>
-    </motion.article>
+    </article>
   );
 }

@@ -7,8 +7,10 @@ export default function CustomerPurchases() {
 
   return (
     <UserLayout>
-      <article className="flex flex-col w-full">
-        <H1>Customer purchases</H1>
+      <article className="flex flex-col w-full md:p-5">
+        <div className="mb-10 p-3">
+          <H1>Customer purchases</H1>
+        </div>
         <section className="w-full flex flex-col mt-5">
           {data.map(({ listing, order_id, purchased_at, buyer_address }) => (
             <article

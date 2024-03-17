@@ -25,14 +25,7 @@ export default function WatchlistListing({
   const [Remove] = useRemoveWatchlistMutation();
   const router = useRouter();
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: index * 0.05,
-      }}
-      className="w-full flex-col p-2  flex sm:flex-row bg-zinc-900 mb-2 rounded-xl"
-    >
+    <article className="w-full flex-col p-3 md:p-5  flex sm:flex-row bg-zinc-950 mb-2 rounded-xl">
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
@@ -68,6 +61,6 @@ export default function WatchlistListing({
           </Button>
         </section>
       </section>
-    </motion.article>
+    </article>
   );
 }

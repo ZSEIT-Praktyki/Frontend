@@ -31,8 +31,8 @@ export default function ActiveListings() {
       />
 
       <UserLayout>
-        <section className="flex flex-col w-full relative">
-          <div className="ml-4">
+        <section className="flex flex-col w-full relative md:p-5">
+          <div className="mb-10 p-3">
             <H1>Active listings</H1>
           </div>
 

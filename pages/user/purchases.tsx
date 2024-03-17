@@ -19,8 +19,10 @@ export default function Purchases() {
       <Head>
         <title>Purchases</title>
       </Head>
-      <article className="flex flex-col w-full">
-        <H1>My purchases</H1>
+      <article className="flex flex-col w-full md:p-5">
+        <div className="mb-10 p-3">
+          <H1>Purchase history</H1>
+        </div>
         <section className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 mt-5 gap-2">
           {data.map((listing: any, index: number) => (
             <motion.article

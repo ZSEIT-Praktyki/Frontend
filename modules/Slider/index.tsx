@@ -30,7 +30,7 @@ export default function Slider({ images }: SliderProps) {
   return (
     <article className="mt-5">
       <img
-        className="w-full rounded-lg  object-contain"
+        className="w-full rounded-lg  object-contain pointer-events-none" // disable image dragging and zooming
         style={{ maxHeight: "36rem" }}
         src={
           images[0]?.filename
@@ -52,12 +52,12 @@ export default function Slider({ images }: SliderProps) {
             {images.map(({ filename, photo_id }) => (
               <img
                 style={{
-                  transform: `translateX(${13.5 * thumbnail.index}rem)`,
+                  transform: `translateX(${(256 + 8) * thumbnail.index}px)`,
                 }}
                 alt="preview variant photos"
                 onClick={() => setThumbnail((p) => ({ ...p, filename }))}
                 key={photo_id}
-                className="mr-2 rounded last:mr-0 max-h-36  object-cover transition border-2 border-zinc-600 hover:border-purple-600"
+                className="mr-2 rounded last:mr-0 max-h-36 w-64 pointer-events-none object-cover transition border-2 border-zinc-600 hover:border-purple-600"
                 src={`${API}/listings/images/${filename}`}
               />
             ))}

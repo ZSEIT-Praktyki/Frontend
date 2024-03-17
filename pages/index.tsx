@@ -2,18 +2,13 @@ import { Button } from "@components/index";
 import FloatingButton from "@components/FloatingButton";
 import Listing from "@modules/Listing";
 import { API } from "@utils/assets/constants/routes";
-import { useSelector } from "@utils/store/store";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Categories from "@modules/Categories";
-import Image from "next/image";
+import HomeButtons from "@modules/HomeButtons/HomeButtons";
 
 export async function getStaticProps() {
-  let data = [];
-  try {
-    const res = await fetch(`${API}/listings`);
-    data = await res.json();
-  } catch (error) {}
+  const res = await fetch(`${API}/listings`);
+  const data = await res.json();
 
   return {
     props: {
@@ -24,14 +19,10 @@ export async function getStaticProps() {
 }
 
 export default function Home({ data }: { data: ListingMinified[] }) {
-  const router = useRouter();
-
-  const { isLoggedIn } = useSelector((state) => state.user);
-
   return (
     <main className="w-full min-h-screen flex flex-col items-center mb-5">
       <Head>
-        <title>Home</title>
+        <title>Buy & Sell with US!</title>
       </Head>
 
       <section className="min-h-[calc(100vh-80px)] flex flex-col lg:flex-row w-10/12 mb-10 bg-zinc-950 gap-10">
@@ -53,41 +44,14 @@ export default function Home({ data }: { data: ListingMinified[] }) {
             adipisicing elit.
           </p>
           <div className="flex flex-col xs:flex-row w-full mt-10 lg:w-3/4">
-            {isLoggedIn ? (
-              <>
-                <Button
-                  variants="fire"
-                  classes="!py-3 w-full font-medium hover:scale-[1.1] "
-                  onClick={() => router.push("/listing/create")}
-                >
-                  START SELLING
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  variants="fire"
-                  classes="w-1/2 w-full mr-2 !py-5 font-medium mb-5 xs:mb-0"
-                  onClick={() => router.push("/auth/login")}
-                >
-                  LOGIN
-                </Button>
-                <Button
-                  variants="fire"
-                  classes="w-1/2 w-full !py-5 font-medium"
-                  onClick={() => router.push("/auth/register")}
-                >
-                  REGISTER
-                </Button>
-              </>
-            )}
+            <HomeButtons />
           </div>
         </article>
         <article className="flex flex-1 justify-center items-center lg:justify-end lg:items-center">
           <img
             src="/Online_shopping_SVG.svg"
             className="w-1/2 lg:w-full"
-            alt=""
+            alt="decorative image of online shopping"
           />
         </article>
       </section>

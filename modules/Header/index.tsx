@@ -34,10 +34,10 @@ export default function Header() {
           <SearchForm />
         </section>
 
-        <section className="flex">
+        <section className="flex gap-2">
           <button
             name="add post"
-            className="p-2 flex justify-center"
+            className="flex p-2 hover:bg-zinc-800 rounded justify-center items-center relative transition-colors cursor-pointer"
             onClick={() => router.push("/listing/create")}
           >
             <AiOutlinePlusCircle color="white" size={25} />
@@ -45,7 +45,7 @@ export default function Header() {
 
           <button
             name="followed posts"
-            className="p-2 flex justify-center"
+            className="flex p-2 hover:bg-zinc-800 rounded justify-center items-center relative transition-colors cursor-pointer"
             onClick={() => router.push("/user/watchlist")}
           >
             <AiOutlineHeart color="white" size={25} />
@@ -53,7 +53,7 @@ export default function Header() {
 
           <button
             name="account"
-            className="flex p-2"
+            className="flex p-2 hover:bg-zinc-800 rounded justify-center items-center relative transition-colors cursor-pointer"
             onClick={() => setShow(!show)}
           >
             <AiOutlineUser color="white" size={25} />
@@ -65,19 +65,22 @@ export default function Header() {
           </button>
 
           {show && (
-            <article className="bg-zinc-900 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52 shadow-xl">
+            <article
+              onMouseLeave={() => setShow(false)}
+              className="bg-zinc-900 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52 shadow-2xl drop-shadow-2xl border border-zinc-700"
+            >
               {isLoggedIn && (
                 <>
                   <button
                     name="my account"
-                    className="transition-colors p-2 hover:bg-gray-700 rounded font-medium"
+                    className="transition-colors p-2 hover:bg-zinc-800 rounded font-medium"
                     onClick={() => router.push("/user/account")}
                   >
                     My account
                   </button>
                   <button
                     name="sign out"
-                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                    className="transition-colors p-2 mt-2 hover:bg-zinc-800 rounded font-medium"
                     onClick={signOut}
                   >
                     Sign out
@@ -89,7 +92,7 @@ export default function Header() {
                   <button
                     onClick={() => router.push("/auth/login")}
                     name="sign out"
-                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                    className="transition-colors p-2 mt-2 hover:bg-zinc-800 rounded font-medium"
                   >
                     Log in
                   </button>

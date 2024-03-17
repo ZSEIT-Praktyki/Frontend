@@ -69,6 +69,7 @@ export default function PagingTab({
       </section>
       <section className="flex-1 flex flex-row items-center justify-end">
         <button
+          role="button"
           name="previous page"
           className="p-1 px-2"
           onClick={onPrev}
@@ -88,6 +89,7 @@ export default function PagingTab({
         <span className="text-white px-4 font-medium text-xl">of</span>
         <span className="text-white font-medium text-xl">{amount}</span>
         <button
+          role="button"
           name="next page"
           className="p-1 px-2"
           onClick={onNext}
