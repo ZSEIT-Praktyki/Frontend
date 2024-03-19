@@ -5,10 +5,13 @@ import { API } from "@utils/assets/constants/routes";
 import Head from "next/head";
 import Categories from "@modules/Categories";
 import HomeButtons from "@modules/HomeButtons/HomeButtons";
+import { axiosbase } from "@utils/helpers/axiosbase";
 
 export async function getStaticProps() {
-  const res = await fetch(`${API}/listings`);
-  const data = await res.json();
+  // const res = await fetch(`${API}/listings`);
+  // const data = await res.json();
+
+  const { data } = await axiosbase.get(`${API}/listings`);
 
   return {
     props: {
