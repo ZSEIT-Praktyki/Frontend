@@ -70,7 +70,7 @@ export default function EditModal({
                   rows={8}
                   value={values.description}
                   placeholder="description"
-                  className="bg-zinc-950 w-full text-white resize-none m-2 mt-0 p-2 rounded border-2 border-zinc-600"
+                  className="bg-zinc-950 w-full outline-none focus:text-purple-700 focus:border-purple-700 text-white resize-none m-2 p-2 rounded border-2 border-zinc-600"
                 />
               </div>
               <Input
@@ -89,20 +89,21 @@ export default function EditModal({
                 onBlur={handleBlur("quantity")}
                 error={!!errors.quantity && touched.quantity}
               />
-              <section className="flex justify-center">
+              <section className="flex justify-center mt-10 p-2">
                 <Button
                   onClick={onClose}
-                  classes="mr-2 border-2 border-red-700 text-red-700 hover:bg-zinc-950"
-                  variants="text"
+                  variants="error"
+                  classes="border-red-600 text-white bg-red-600 mr-5 rounded-md px-5"
                 >
-                  Cancel Edition
+                  Cancel edit
                 </Button>
                 <Button
                   type="submit"
                   variants="ok"
+                  classes="px-5 flex-1"
                   onClick={() => handleSubmit()}
                 >
-                  Save edition
+                  Save edited listing
                 </Button>
               </section>
             </>

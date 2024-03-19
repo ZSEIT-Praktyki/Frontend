@@ -12,6 +12,7 @@ import { useState } from "react";
 import { SearchContext } from "pages/search";
 import Dropdown, { Item } from "@components/Dropdown";
 import ToggleLayout from "./components/toggle-layout";
+import { useRouter } from "next/router";
 
 export default function PagingTab({
   hasMore,
@@ -21,9 +22,10 @@ export default function PagingTab({
 }: PagingTabProps) {
   const { page, setPage, setParams, params } = useContext(SearchContext);
   const [input, setInput] = useState<number>(1);
+  const router = useRouter();
 
   useEffect(() => {
-    setInput(page);
+    if (page) setInput(page);
   }, [page]);
 
   function onSubmit(e: ChangeEvent<HTMLFormElement>) {
@@ -34,12 +36,23 @@ export default function PagingTab({
     }
   }
 
+  const route = (p: number | string) =>
+    router.push({
+      pathname: "/search",
+      query: {
+        ...router.query,
+        page: p,
+      },
+    });
+
   function onNext() {
     setPage(page + 1);
+    route(page + 1);
   }
 
   function onPrev() {
     setPage(page - 1);
+    route(page - 1);
   }
 
   function onChange(e: ChangeEvent<HTMLInputElement>) {
@@ -49,7 +62,7 @@ export default function PagingTab({
   }
 
   return (
-    <nav className="bg-zinc-900 mt-2 mb-5 items-center flex flex-col sm:flex-row  justify-between p-2 rounded">
+    <nav className="bg-zinc-900 items-center flex flex-col sm:flex-row justify-between p-2 rounded">
       <ToggleLayout onLayoutChange={onLayoutChange} layout={layout} />
       <section className="flex flex-1 items-center justify-center mb-2 sm:mb-0">
         <p className="text-white font-medium text-md mr-5">Sort by:</p>

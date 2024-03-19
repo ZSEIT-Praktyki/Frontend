@@ -36,7 +36,7 @@ export default function Modal({
             onClick={(e) => e.stopPropagation()}
             className="max-w-xl rounded-md p-2 bg-zinc-950  w-full"
           >
-            <header className="flex justify-between w-full p-3 border-b-2 border-b-gray-800 ">
+            <header className="flex justify-between w-full p-3 border-b-2 border-b-zinc-800 ">
               <H3>{title}</H3>
               <button
                 className="bg-zinc-900 p-2 rounded-full w-8 h-8"
@@ -45,7 +45,7 @@ export default function Modal({
                 <AiOutlineClose className="text-gray-200" />
               </button>
             </header>
-            <section className="p-2">{children}</section>
+            <section className="p-2 overflow-y-auto">{children}</section>
           </article>
         </motion.main>
       )}

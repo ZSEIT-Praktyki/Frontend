@@ -25,7 +25,7 @@ export default function ActiveListings() {
       </Head>
       <EditModal
         vissible={modal.open}
-        title="Edit your listing"
+        title="Edit Listing "
         onClose={onClose}
         listing_id={modal.listing_id}
       />

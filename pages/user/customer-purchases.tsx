@@ -1,4 +1,4 @@
-import { H1, H2 } from "@components/UI/Text";
+import { H1, H2, H3, H4 } from "@components/UI/Text";
 import UserLayout from "@utils/Layout/User";
 import { SoldProps, useGetSoldQuery } from "@utils/services/accountService";
 
@@ -15,19 +15,22 @@ export default function CustomerPurchases() {
           {data.map(({ listing, order_id, purchased_at, buyer_address }) => (
             <article
               key={order_id}
-              className="rounded p-2 mb-5 items-center bg-gray-700 flex flex-col sm:flex-row"
+              className="rounded-lg p-5 mb-5 items-center bg-zinc-800 flex flex-col sm:flex-row"
             >
               <section className=" flex flex-col">
-                <p className="text-sm text-gray-300">
-                  purchased at: {new Date(purchased_at).toLocaleDateString()}
+                <p className="text-sm text-zinc-300">
+                  Transaction finalized at{" "}
+                  {new Date(purchased_at).toLocaleDateString()}
                 </p>
                 <H2>
-                  <span className="text-gray-300">Product: </span>
-                  {listing.title}
+                  {listing.title} - {listing.price}
                 </H2>
+                <p className="text-sm text-zinc-300">Product name</p>
 
                 <div className="pt-2 pb-2">
-                  <span className="text-white mr-2">Quantity</span>
+                  <span className="text-white mr-2 text-lg font-medium">
+                    Quantity
+                  </span>
                   <input
                     value={listing.quantity}
                     className="bg-zinc-900 text-white rounded text-center w-8 h-8 p-2"
@@ -35,7 +38,7 @@ export default function CustomerPurchases() {
                   />
                 </div>
 
-                <H2>Delivery address</H2>
+                <H4>Delivery address</H4>
 
                 <div className="flex flex-row flex-wrap mt-2">
                   {Object.entries(buyer_address).map(([key, value]: any) => (
@@ -43,8 +46,8 @@ export default function CustomerPurchases() {
                       key={key}
                       className="p-2  bg-zinc-900 m-1 rounded text-white"
                     >
-                      <span>{key} </span>
-                      <span className="text-purple-400">{value}</span>
+                      <span className="text-zinc-300 capitalize">{key}:</span>
+                      <span className="text-white ml-5">{value}</span>
                     </section>
                   ))}
                 </div>

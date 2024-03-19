@@ -25,7 +25,7 @@ function Category(props: CategoryProps) {
             min: 0,
             max: 99999,
             page: 1,
-            subcategory_id: props.index + 2,
+            subcategory_id: props.index + 1,
           },
         })
       }

@@ -68,7 +68,7 @@ export default function ListingSettings({
               onClick={() => onRemove(listing_id)}
               className="text-white bg-red-600 px-4 py-2 rounded-md"
             >
-              Remove
+              Remove from sale
             </button>
           )}
           {activate && (

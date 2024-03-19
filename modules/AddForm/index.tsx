@@ -79,7 +79,7 @@ export default function AddForm({ onSubmit }: AddFormProps) {
                 className={`bg-zinc-950 text-white mb-4 resize-none m-2 mt-2 p-2 rounded  border-2 ${
                   !!errors.description && touched.description
                     ? "border-rose-600"
-                    : "border-zinc-600"
+                    : "border-zinc-800"
                 }`}
               />
 

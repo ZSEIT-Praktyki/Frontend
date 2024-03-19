@@ -24,7 +24,7 @@ export default function useCheckout(address_id: number) {
 
           setSecret(data.paymentIntent.client_secret);
         } catch (error) {
-          alert("Sorry this product is currently unavailable");
+          alert("We encountered an error, please try again later.");
           router.back();
         }
       })();

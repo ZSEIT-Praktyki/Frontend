@@ -5,6 +5,7 @@ import { useGetAddressesQuery } from "@utils/services/addressService";
 import AddAddress from "@modules/AddAddress";
 import { IoMdAdd } from "react-icons/io";
 import Head from "next/head";
+import { H1 } from "@components/UI/Text";
 
 export default function Account() {
   const [show, setShow] = useState(false);
@@ -25,11 +26,11 @@ export default function Account() {
         <Head>
           <title>Account Settings</title>
         </Head>
-        <section className="flex flex-col w-full h-full relative">
+        <section className="flex flex-col w-full h-full md:p-5">
+          <div className="mb-10 p-3">
+            <H1>Available addresses</H1>
+          </div>
           <ul className="w-full p-2">
-            <h2 className="text-white font-bold my-5 text-5xl">
-              Available addresses
-            </h2>
             {data.map(
               ({
                 name,

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import SearchLayout from "@modules/SearchLayout";
 import { useGetSearchResultsQuery } from "@utils/services/searchService";
 
@@ -30,17 +30,19 @@ export const SearchContext = createContext({
   onClear: () => {},
 });
 
-const initParams = {
-  min: 0,
-  max: 9999 * 100,
-  subcategory_id: null,
-  condition: [],
-  sort: "ASC" as "ASC" | "DESC",
-  city: "",
-};
 export default function Search() {
   const router = useRouter();
   const [page, setPage] = useState(1);
+
+  const initParams = {
+    min: 0,
+    max: 9999 * 100,
+    subcategory_id: null,
+    condition: [],
+    sort: "ASC" as "ASC" | "DESC",
+    city: "",
+  };
+
   const [params, setParams] = useState(initParams);
 
   const { data = init, isLoading } = useGetSearchResultsQuery({
@@ -56,6 +58,10 @@ export default function Search() {
     router.query.subcategory_id = undefined;
     router.push(router);
   }
+
+  useEffect(() => {
+    setPage(router.query.page ? +router.query.page : 1);
+  }, []);
 
   return (
     <SearchContext.Provider

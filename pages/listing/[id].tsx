@@ -73,7 +73,7 @@ function Listing({ data }: { data: ListingProps }) {
                 {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
               </h2>
 
-              {isLoggedIn && (
+              {isLoggedIn && data.isActive && (
                 <section className="flex flex-col">
                   <Button
                     classes="m-0 mt-4"
@@ -140,13 +140,21 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }: any) {
-  const res = await fetch(`${API}/listings/${params.id.toString()}`);
-  const data = await res.json();
+  try {
+    const res = await fetch(`${API}/listings/${params.id.toString()}`);
+    const data = await res.json();
 
-  return {
-    props: { data, fallback: true },
-    revalidate: 3600,
-  };
+    if (data.statusCode === 404) throw new Error("Not found");
+
+    return {
+      props: { data, fallback: true },
+      revalidate: 3600,
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 }
 
 export default Listing;

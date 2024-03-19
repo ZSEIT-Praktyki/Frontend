@@ -12,7 +12,7 @@ export default function Label({
   return (
     <label
       htmlFor={htmlFor}
-      className={`pl-2 text-gray-300 font-medium ${error && "text-rose-600"}`}
+      className={`pl-2 text-white font-medium ${error && "text-rose-600"}`}
     >
       {text}
     </label>

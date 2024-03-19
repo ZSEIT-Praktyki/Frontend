@@ -43,26 +43,24 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
   }
 
   return (
-    <main className="flex w-10/12 ">
+    <main className="flex w-10/12 gap-5">
       <aside
-        className="hidden md:flex flex-col w-80 p-4 m-2 mr-5 bg-zinc-900 rounded-lg"
-        style={{ maxHeight: "100vh" }}
+        className="hidden md:flex flex-col w-80 p-4 bg-zinc-900 rounded-lg"
+        style={{ maxHeight: "110vh" }}
       >
         <div className="flex-1">
           <Categories />
 
-          <hr className="w-full mt-2 border-gray-700" />
+          <hr className="w-full mt-2 border-zinc-700" />
 
-          <h2 className="text-white text-2xl font-medium mt-2 mb-2">City</h2>
+          <h2 className="text-white text-xl font-medium mt-2 mb-2">City</h2>
           <Input
             classes="!m-0"
             value={city}
             onChange={({ target }) => setCity(target.value)}
           />
 
-          <hr className="w-full mt-2 border-gray-700" />
-
-          <h2 className="text-white text-2xl font-medium mt-2">Price</h2>
+          <h2 className="text-white text-xl font-medium mt-2">Price range</h2>
 
           <PriceFilters max={max} min={min} setMax={setMax} setMin={setMin} />
         </div>
@@ -75,7 +73,7 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
           Apply filters
         </Button>
       </aside>
-      <main className="flex flex-col flex-1">
+      <main className="flex flex-col flex-1 gap-5">
         <PagingTab
           amount={data.amount}
           hasMore={data.hasMore}

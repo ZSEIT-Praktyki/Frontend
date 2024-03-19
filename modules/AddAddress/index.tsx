@@ -137,15 +137,17 @@ export default function AddAddress({ onClose }: AddAddressProps) {
               onChange={handleChange("phone")}
               onBlur={handleBlur("phone")}
             />
-            <Button
-              type="submit"
-              variants="fire"
-              classes="w-full sm:w-1/2 py-3"
-              onClick={() => handleSubmit()}
-              disabled={!(isValid && dirty)}
-            >
-              Create new address
-            </Button>
+            <div className="p-2 mt-5">
+              <Button
+                type="submit"
+                variants="fire"
+                classes="w-full py-3"
+                onClick={() => handleSubmit()}
+                disabled={!(isValid && dirty)}
+              >
+                Create new address
+              </Button>
+            </div>
           </>
         );
       }}

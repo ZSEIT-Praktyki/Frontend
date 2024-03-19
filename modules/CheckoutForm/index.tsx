@@ -25,7 +25,7 @@ export default function CheckoutForm() {
           options={{
             style: {
               base: {
-                color: "black",
+                color: "white",
                 fontWeight: 500,
                 fontSize: "16px",
                 padding: "10px 20px",

@@ -12,7 +12,7 @@ const stripePromise = loadStripe(
 export function getServerSideProps(context: NextPageContext) {
   const prodId = Number(context.query.id);
 
-  if (!prodId || prodId === NaN) {
+  if (!prodId || Number.isNaN(prodId)) {
     return {
       redirect: {
         destination: "/",

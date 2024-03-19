@@ -37,6 +37,8 @@ interface ListingProps {
   title: string;
   subcategory_id: SubcategoryProps;
   description?: string;
+
+  isActive?: boolean;
 }
 
 interface ListingMinified {
@@ -45,6 +47,7 @@ interface ListingMinified {
   images: ListingImagesProps | null;
   title: string;
   price: number;
+  city: string;
 }
 
 interface WatchListProps extends ListingMinified {

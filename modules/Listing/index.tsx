@@ -16,6 +16,7 @@ export default function Listing({
   images,
   added_date,
   horizontal,
+  city,
 }: ListingProps) {
   const router = useRouter();
   const [Append, status] = useAddWatchlistMutation();
@@ -57,11 +58,11 @@ export default function Listing({
 
         <div className="flex-1 flex flex-col mt-2">
           <h2 className="font-semibold p-2 text-xl">
-            {title.length > 30 ? `${title.substring(0, 30)}...` : title}
+            {title.length > 30 ? `${title.substring(0, 35)}...` : title}
           </h2>
           <div className="flex flex-row text-zinc-500 p-2 font-medium justify-between text-md">
             <p>
-              Olsztyn at <br />
+              {city} at <br />
               {new Date(added_date).toLocaleDateString()}
             </p>
             <p>&euro;{Number.parseFloat(`${price / 100}`).toFixed(2)}</p>

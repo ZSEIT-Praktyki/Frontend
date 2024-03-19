@@ -21,12 +21,14 @@ export default function Login() {
           password: "",
         }}
         validationSchema={registerSchema}
-        onSubmit={(v) =>
+        onSubmit={(v) => {
+          console.log(v);
           onRegister({
+            ...v,
             email: v.email.trim(),
             password: v.password.trim(),
-          })
-        }
+          });
+        }}
         validateOnBlur
       >
         {({

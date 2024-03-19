@@ -27,7 +27,7 @@ export default function Input({
       {label !== undefined && (
         <label
           htmlFor={name ?? ""}
-          className={`pl-2 mb-2 text-gray-300 font-medium ${
+          className={`pl-2 mb-2 text-white font-medium ${
             error && "text-rose-600"
           }`}
         >
