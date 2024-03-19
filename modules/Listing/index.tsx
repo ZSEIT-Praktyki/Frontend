@@ -1,5 +1,5 @@
 import { Button } from "@components/index";
-import { H2, H3, H4, Paragraph } from "@components/UI/Text";
+import { H2, H4 } from "@components/UI/Text";
 import { API } from "@utils/assets/constants/routes";
 import { useAddWatchlistMutation } from "@utils/services/watchlistService";
 import Image from "next/image";
@@ -32,7 +32,7 @@ export default function Listing({
   if (!horizontal)
     return (
       <article className="bg-zinc-900 overflow-hidden text-white flex flex-col justify-between rounded-lg p-3 pb-3 mb-2 relative hover:bg-zinc-800">
-        <section className="h-1/2 w-full">
+        <section className="w-full">
           <button
             onClick={() =>
               router.push({
@@ -42,8 +42,8 @@ export default function Listing({
             }
           >
             <Image
-              width={300}
-              height={200}
+              width={450}
+              height={310}
               priority
               src={
                 images
@@ -58,7 +58,7 @@ export default function Listing({
 
         <div className="flex-1 flex flex-col mt-2">
           <h2 className="font-semibold p-2 text-xl">
-            {title.length > 30 ? `${title.substring(0, 35)}...` : title}
+            {title.length > 50 ? `${title.substring(0, 50)}...` : title}
           </h2>
           <div className="flex flex-row text-zinc-500 p-2 font-medium justify-between text-md">
             <p>

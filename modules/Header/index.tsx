@@ -1,6 +1,6 @@
 import SearchForm from "@modules/SearchForm";
 import { useSelector } from "@utils/store/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
@@ -17,6 +17,12 @@ export default function Header() {
   const router = useRouter();
   const [show, setShow] = useState(false);
   const { signOut } = useAuthenticate("login");
+
+  useEffect(() => {
+    setShow(false);
+
+    console.log("Header component mounted");
+  }, [router.push]);
 
   return (
     <header className="w-full p-2 flex flex-col bg-zinc-900 justify-between items-center border-b-2 border-zinc-900 sticky top-0 z-20">
@@ -67,20 +73,55 @@ export default function Header() {
           {show && (
             <article
               onMouseLeave={() => setShow(false)}
-              className="bg-zinc-900 text-white  flex flex-col absolute p-2 rounded-md -bottom-24 right-2 w-52 shadow-2xl drop-shadow-2xl border border-zinc-700"
+              className="bg-zinc-900 text-white flex flex-col absolute p-2 rounded-md top-[4.5rem] right-2 w-52 shadow-2xl drop-shadow-2xl border border-zinc-700"
             >
               {isLoggedIn && (
                 <>
                   <button
                     name="my account"
-                    className="transition-colors p-2 hover:bg-zinc-800 rounded font-medium"
+                    className="transition-colors p-2 text-start hover:bg-zinc-800 rounded font-medium"
                     onClick={() => router.push("/user/account")}
                   >
                     My account
                   </button>
                   <button
+                    name="my account"
+                    className="transition-colors p-2 text-start hover:bg-zinc-800 rounded font-medium"
+                    onClick={() => router.push("/user/active-listings")}
+                  >
+                    Active listings
+                  </button>
+                  <button
+                    name="my account"
+                    className="transition-colors p-2 text-start hover:bg-zinc-800 rounded font-medium"
+                    onClick={() => router.push("/user/ended-listings")}
+                  >
+                    Ended listings
+                  </button>
+                  <button
+                    name="my account"
+                    className="transition-colors p-2 text-start hover:bg-zinc-800 rounded font-medium"
+                    onClick={() => router.push("/user/customer-purchases")}
+                  >
+                    Customer purchases
+                  </button>
+                  <button
+                    name="my account"
+                    className="transition-colors p-2 text-start hover:bg-zinc-800 rounded font-medium"
+                    onClick={() => router.push("/user/purchases")}
+                  >
+                    Purchases
+                  </button>
+                  <button
+                    name="my account"
+                    className="transition-colors p-2 text-start hover:bg-zinc-800 rounded font-medium"
+                    onClick={() => router.push("/user/watchlist")}
+                  >
+                    Watchlist
+                  </button>
+                  <button
                     name="sign out"
-                    className="transition-colors p-2 mt-2 hover:bg-zinc-800 rounded font-medium"
+                    className="transition-colors p-2 mt-10 bg-red-500 hover:bg-red-700 rounded font-medium"
                     onClick={signOut}
                   >
                     Sign out
@@ -92,16 +133,16 @@ export default function Header() {
                   <button
                     onClick={() => router.push("/auth/login")}
                     name="sign out"
-                    className="transition-colors p-2 mt-2 hover:bg-zinc-800 rounded font-medium"
+                    className="transition-colors p-2 mt-2 text-start hover:bg-zinc-800 rounded font-medium"
                   >
                     Log in
                   </button>
                   <button
                     onClick={() => router.push("/auth/register")}
                     name="sign out"
-                    className="transition-colors p-2 mt-2 hover:bg-gray-700 rounded font-medium"
+                    className="transition-colors p-2 mt-2 text-start hover:bg-zinc-800 rounded font-medium"
                   >
-                    Register
+                    Create account
                   </button>
                 </>
               )}

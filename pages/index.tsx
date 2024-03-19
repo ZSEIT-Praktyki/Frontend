@@ -25,8 +25,8 @@ export default function Home({ data }: { data: ListingMinified[] }) {
         <title>Buy & Sell with US!</title>
       </Head>
 
-      <section className="min-h-[calc(100vh-80px)] flex flex-col lg:flex-row w-10/12 mb-10 bg-zinc-950 gap-10">
-        <article className="flex-[2] flex flex-col mt-10 md:mt-0 justify-center items-start">
+      <section className="min-h-[calc(100vh-80px)] flex flex-col lg:flex-row w-full md:w-10/12 mb-10 bg-zinc-950 gap-10">
+        <article className="flex-[2] flex flex-col mt-10 md:mt-0 justify-center items-start p-5">
           <h1 className="text-5xl text-start xl:text-7xl font-bold text-white">
             Unleash Your Potential.{" "}
             <span className="bg-gradient-to-r from-pink-600 to-red-600 rounded inline-block text-transparent bg-clip-text">

@@ -34,10 +34,7 @@ export default function ListingSettings({
 
   return (
     <article className="w-full flex flex-col p-3 md:p-5 rounded-xl xs:flex-row bg-zinc-950 mt-2 gap-5">
-      <button
-        onClick={() => router.push(`/listing/${listing_id}`)}
-        disabled={router.asPath === "/user/ended-listings"}
-      >
+      <button onClick={() => router.push(`/listing/${listing_id}`)}>
         <img
           style={{ maxHeight: 200 }}
           src={images ? `${API}/listings/images/${images.filename}` : nt}
@@ -62,7 +59,7 @@ export default function ListingSettings({
             </span>
           </p>
         </div>
-        <div className="flex flex-row w-full justify-between h-10">
+        <div className="flex flex-row w-full justify-between items-center mt-2 h-10">
           {remove && (
             <button
               onClick={() => onRemove(listing_id)}
@@ -81,7 +78,7 @@ export default function ListingSettings({
           )}
           <button
             onClick={() => onOpenModal(listing_id)}
-            className="p-2 rounded-full bg-zinc-900 m-2 w-10 h-10 flex justify-center items-center"
+            className="p-2 rounded-full bg-zinc-900 w-10 h-10 flex justify-center items-center"
           >
             <MdEdit color="white" />
           </button>

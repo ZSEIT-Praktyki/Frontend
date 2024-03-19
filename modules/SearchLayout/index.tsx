@@ -14,7 +14,7 @@ import Skeleton from "@components/Skeleton";
 
 const LAYOUT = {
   block:
-    "w-full grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:grid-cols-2 lg:grid-cols-3 grid-rows-auto lg:gap-4 xl:grid-cols-4 ",
+    "w-full grid grid-cols-1 gap-2 sm:grid-cols-2 sm:gap-3 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 grid-rows-auto lg:gap-4 xl:grid-cols-3 2xl:grid-cols-4 ",
   horizontal: "flex flex-col w-full",
 };
 
@@ -43,7 +43,7 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
   }
 
   return (
-    <main className="flex w-10/12 gap-5">
+    <main className="flex w-full md:w-10/12 gap-5">
       <aside
         className="hidden md:flex flex-col w-80 p-4 bg-zinc-900 rounded-lg"
         style={{ maxHeight: "110vh" }}
