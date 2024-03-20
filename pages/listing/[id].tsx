@@ -1,6 +1,6 @@
 import { Button } from "@components/index";
 import Slider from "@modules/Slider";
-import { API } from "@utils/assets/constants/routes";
+import { API, API_SERVER } from "@utils/assets/constants/routes";
 import { axiosbase } from "@utils/helpers/axiosbase";
 import {
   useAddWatchlistMutation,
@@ -125,7 +125,7 @@ function Listing({ data }: { data: ListingProps }) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`${API}/listings/ids`);
+  const res = await fetch(`${API_SERVER}/listings/ids`);
   const data = await res.json();
 
   // const { data } = await axiosbase.get(`${API}/listings/ids`);
@@ -144,7 +144,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   try {
-    const res = await fetch(`${API}/listings/${params.id.toString()}`);
+    const res = await fetch(`${API_SERVER}/listings/${params.id.toString()}`);
     const data = await res.json();
 
     // const { data } = await axiosbase.get(
