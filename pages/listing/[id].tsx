@@ -125,10 +125,10 @@ function Listing({ data }: { data: ListingProps }) {
 }
 
 export async function getStaticPaths() {
-  // const res = await fetch(`${API}/listings/ids`);
-  // const data = await res.json();
+  const res = await fetch(`${API}/listings/ids`);
+  const data = await res.json();
 
-  const { data } = await axiosbase.get(`${API}/listings/ids`);
+  // const { data } = await axiosbase.get(`${API}/listings/ids`);
 
   const paths = data.map((listing: any) => ({
     params: {
@@ -144,12 +144,12 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }: any) {
   try {
-    // const res = await fetch(`${API}/listings/${params.id.toString()}`);
-    // const data = await res.json();
+    const res = await fetch(`${API}/listings/${params.id.toString()}`);
+    const data = await res.json();
 
-    const { data } = await axiosbase.get(
-      `${API}/listings/${params.id.toString()}`
-    );
+    // const { data } = await axiosbase.get(
+    //   `${API}/listings/${params.id.toString()}`
+    // );
 
     if (data.statusCode === 404) throw new Error("Not found");
 
