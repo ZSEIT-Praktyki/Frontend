@@ -39,85 +39,70 @@ function Listing({ data }: { data: ListingProps }) {
           />
           <meta name="description" content={data.description} />
         </Head>
-        <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5">
+        <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5 bg-zinc-900 rounded-md mt-5 p-5">
           <Slider images={data.images} />
-          <article className="p-10 flex flex-col md:flex-row w-full justify-between items-center bg-zinc-900 rounded-lg mt-5">
-            <section className="mr-5">
-              {/* Auction title */}
-              <h1 className="text-3xl sm:text-4xl text-white font-bold">
-                {data.title}
-              </h1>
+          <article className="mt-5">
+            <h1 className="text-3xl sm:text-5xl text-white font-bold mb-10">
+              {data.title}
+            </h1>
 
-              {/* Tags */}
-              <div className="mt-2 w-full flex flex-col  md:flex-row flex-wrap overflow-hidden text-gray-300 border-gray-300">
-                {/* Tag */}
-                <span className="p-2 rounded border mr-2 mt-2">
-                  Category:{" "}
-                  <span className="font-bold">
-                    {data.subcategory_id.category_id.category_name}
-                    {"  "} &gt; {data.subcategory_id.name}
-                  </span>
+            <div className="w-full flex flex-col md:flex-row  flex-wrap justify-between overflow-hidden border-gray-300">
+              <div className="flex flex-col md:flex-row gap-2 text-white justify-center items-center">
+                <span className="px-4 py-2 bg-purple-800 rounded-full text-center">
+                  {data.subcategory_id.category_id.category_name}{" "}
+                  {data.subcategory_id.name}
                 </span>
-                <span className="p-2 rounded border mr-2 mt-2">
-                  Condition: <span className="font-bold">{data.condition}</span>
+
+                <span className="px-4 py-2 bg-purple-800 rounded-full text-center">
+                  Condition {data.condition}
                 </span>
-                <span className="p-2 rounded border mr-2 mt-2">
-                  Quantity: <span className="font-bold">{data.quantity}</span>
+
+                <span className="px-4 py-2 bg-purple-800 rounded-full text-center">
+                  Quantity {data.quantity}
                 </span>
               </div>
-            </section>
 
-            {/* Price and buttons */}
-            <section className="flex items-center flex-col md:flex-row gap-5">
-              <h2 className="text-white mr-5 md:m-0 mt-2 text-2xl sm:text-4xl font-bold">
-                &euro;
-                {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
-              </h2>
+              <div className="flex flex-col md:flex-row flex-1 justify-end gap-3">
+                <h2 className="text-white mr-5 md:m-0 mt-2 text-2xl sm:text-4xl font-bold">
+                  &euro;
+                  {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
+                </h2>
 
-              {isLoggedIn && data.isActive && (
-                <section className="flex flex-col">
-                  <Button
-                    classes="m-0 mt-4"
-                    onClick={() =>
-                      router.push(`/checkout?id=${data.listing_id}`)
-                    }
-                  >
-                    <AiOutlineShoppingCart className="text-xl mr-1" />
-                    <span>Purchase now</span>
-                  </Button>
+                {isLoggedIn && data.isActive && (
+                  <>
+                    <Button
+                      classes="m-0 !rounded-full !px-4"
+                      onClick={() =>
+                        router.push(`/checkout?id=${data.listing_id}`)
+                      }
+                    >
+                      <AiOutlineShoppingCart className="text-xl mr-1" />
+                      <span>Purchase now</span>
+                    </Button>
 
-                  <Button
-                    classes="m-0 mt-2"
-                    variants="outlinedPrimary"
-                    onClick={() =>
-                      status?.isIn
-                        ? Remove(data.listing_id)
-                        : Append(data.listing_id)
-                    }
-                  >
-                    {!status?.isIn ? (
-                      <>
-                        <AiOutlineHeart className="text-xl mr-1" />
-                        <span>Add to watchlist</span>
-                      </>
-                    ) : (
-                      <>
-                        {/* <AiFillHeart className="text-xl mr-1" /> */}
-                        <span>Remove from watchlist</span>
-                      </>
-                    )}
-                  </Button>
-                </section>
-              )}
-            </section>
+                    <Button
+                      classes="m-0 !rounded-full !px-4"
+                      variants="fire"
+                      onClick={() =>
+                        status?.isIn
+                          ? Remove(data.listing_id)
+                          : Append(data.listing_id)
+                      }
+                    >
+                      {!status?.isIn
+                        ? "Add to watchlist"
+                        : "Remove from watchlist"}
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
           </article>
 
-          <article className="bg-zinc-900 p-10 mt-4 rounded-lg">
-            <header className="text-xl sm:text-3xl text-white font-bold">
-              Description
-            </header>
-            <p className="mt-4 text-white">{data.description}</p>
-          </article>
+          <h3 className="text-xl sm:text-3xl text-white font-bold mt-5">
+            Description
+          </h3>
+          <p className="mt-4 text-white">{data.description}</p>
         </section>
       </main>
     </>

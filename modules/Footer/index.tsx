@@ -4,14 +4,20 @@ export default function Footer() {
     <footer className="flex flex-col w-full  bg-zinc-900  sm:px-40 py-6 mt-2">
       <section className=" flex flex-col md:flex-row justify-center text-gray-500  pt-4 pb-12">
         <section className=" flex-1 pr-4 pl-4 pb-6 flex flex-col items-center md:justify-start md:items-start">
-          <p className="text-purple-50 font-bold pb-4 text-lg">Adress</p>
-          <p>elektronowa 18,</p>
-          <p>21-370, </p>
-          <p>Piotrków Trybunalskich</p>
+          <p className="text-purple-50 font-bold pb-4 text-lg">
+            Headquater address
+          </p>
+
+          <p>Unknow Location 23/41a</p>
+          <p>Olsztyn - Poland</p>
+          <p>10-000</p>
         </section>
         <section className=" flex-1 pr-4 pl-4 pb-6 flex flex-col items-center md:justify-start md:items-start">
           <p className="text-purple-50 font-bold pb-4 text-lg">About us</p>
-          <p>Helloooo</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos
+            provident minima nostrum recusandae, porro vel,
+          </p>
         </section>
         <section className=" flex-1 pr-4 pl-4 pb-6 flex flex-col items-center md:justify-start md:items-start">
           <p className="text-purple-50 font-bold pb-4 text-lg">

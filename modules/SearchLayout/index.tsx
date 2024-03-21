@@ -46,7 +46,7 @@ function SearchLayout({ data, loading }: SearchLayoutProps) {
     <main className="flex w-full md:w-10/12 gap-5">
       <aside
         className="hidden md:flex flex-col w-80 p-4 bg-zinc-900 rounded-lg"
-        style={{ maxHeight: "110vh" }}
+        style={{ maxHeight: "120vh" }}
       >
         <div className="flex-1">
           <Categories />

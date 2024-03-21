@@ -5,7 +5,7 @@ interface StatesProps {
   state: string;
 }
 
-interface AddressProps {
+export interface AddressProps {
   name: string;
   surname: string;
   street: string;

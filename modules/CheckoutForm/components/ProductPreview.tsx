@@ -1,4 +1,4 @@
-import { H2, H4, Paragraph } from "@components/UI/Text";
+import { H2, H3, H4, Paragraph } from "@components/UI/Text";
 import { useGetListingPreviewQuery } from "@utils/services/accountService";
 import { useRouter } from "next/router";
 import { API } from "@utils/assets/constants/routes";
@@ -10,9 +10,9 @@ export default function ProductPreview() {
 
   return (
     <section className="mb-2">
-      <H2>Product preview</H2>
+      <H3>Product</H3>
 
-      <article className="bg-zinc-950 w-full p-2 mt-1 rounded-md flex">
+      <article className="bg-zinc-950 w-full p-2 mt-2 rounded-md flex">
         <img
           className="w-32 h-24 rounded mr-2 object-cover"
           src={

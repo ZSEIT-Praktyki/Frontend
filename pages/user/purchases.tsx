@@ -28,7 +28,7 @@ export default function Purchases() {
           {data.map((listing: any, index: number) => (
             <motion.article
               key={listing.order_id}
-              className="w-full bg-zinc-950 rounded-xl p-2"
+              className="w-full bg-zinc-950 rounded-xl p-4 flex flex-col"
             >
               <Link href={"/listing/" + listing.listing.listing_id}>
                 <img
@@ -42,7 +42,7 @@ export default function Purchases() {
                   tabIndex={2}
                 />
               </Link>
-              <section className=" text-white  flex flex-col justify-between">
+              <section className=" text-white flex-1 flex flex-col justify-between">
                 <h4 className="text-white font-bold text-sm mt-1">
                   Purchased at:{" "}
                   {new Date(listing.purchased_at).toLocaleDateString()}
@@ -59,16 +59,16 @@ export default function Purchases() {
                   </span>{" "}
                   x 1
                 </p>
-                <Button
-                  variants="fire"
-                  classes="w-full !m-0 !mt-3 py-3"
-                  onClick={() =>
-                    router.push("/checkout?id=" + listing.listing.listing_id)
-                  }
-                >
-                  Buy again
-                </Button>
               </section>
+              <Button
+                variants="fire"
+                classes="w-full !m-0 !mt-3 py-3"
+                onClick={() =>
+                  router.push("/checkout?id=" + listing.listing.listing_id)
+                }
+              >
+                Buy again
+              </Button>
             </motion.article>
           ))}
         </section>

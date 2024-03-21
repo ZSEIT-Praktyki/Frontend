@@ -4,11 +4,17 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function useCheckCookie() {
-  const [cookie, setCookie] = useState<"OK" | "EXPIRED" | "">("");
+  const [cookie, setCookie] = useState<"OK" | "EXPIRED" | "">("OK");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (user) {
+      dispatch(userActions.setLoggedIn());
+    }
+
     (async () => {
       try {
         await axiosbase.post("/user/cookie");

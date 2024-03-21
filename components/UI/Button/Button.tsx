@@ -38,7 +38,7 @@ export default function Button({
       className={`border-2 py-2 px-4 text-white rounded-md transition flex items-center justify-center ${
         classes ?? ""
       } ${buttonVariants[variants]} ${
-        disabled ? "opacity-25 disabled:bg-gray-500" : ""
+        disabled ? "!opacity-25 disabled:bg-gray-500" : ""
       }
      
       `}

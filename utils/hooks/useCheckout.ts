@@ -10,6 +10,8 @@ export default function useCheckout(address_id: number) {
   const elements = useElements();
   const { email, user_id, details } = useSelector((state) => state.user);
   const [secret, setSecret] = useState("");
+  const [orderId, setOrderId] = useState(0);
+
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -22,7 +24,8 @@ export default function useCheckout(address_id: number) {
             address_id,
           });
 
-          setSecret(data.paymentIntent.client_secret);
+          setOrderId(data.orderId);
+          setSecret(data.paymentIntent);
         } catch (error) {
           alert("We encountered an error, please try again later.");
           router.back();
@@ -48,16 +51,14 @@ export default function useCheckout(address_id: number) {
           p24: p24Bank,
 
           metadata: {
-            user_id: user_id,
-            description: "Purchased product: " + router.query.id,
-            listing_id: router.query.id as string,
+            orderId,
           },
           billing_details: {
             address: {
               city: "",
             },
             phone: details.phone,
-            email: email,
+            email: "email@gmail.com",
           },
         },
         payment_method_options: {
@@ -65,7 +66,9 @@ export default function useCheckout(address_id: number) {
             tos_shown_and_accepted: true,
           },
         },
-        return_url: window.location.origin + "/checkout/success",
+
+        return_url:
+          window.location.origin + "/checkout/success" + "?orderId=" + orderId,
       });
       if (error) {
         console.error(error);
