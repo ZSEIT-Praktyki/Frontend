@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Login() {
   const { onLogin, state } = useAuthenticate("login");
   return (
-    <main className="w-full h-screen flex justify-center items-center">
+    <main className="w-full min-h-[calc(100vh-100px)] flex justify-center items-center">
       <Head>
         <title>Log in</title>
       </Head>
@@ -37,50 +37,33 @@ export default function Login() {
           touched,
         }) => {
           return (
-            <div className="w-full flex flex-col h-full md:w-3/4 justify-center max-w-sm p-4 sm:h-3/4 md:h-3/5 bg-zinc-900 ">
-              <h1 className="text-5xl  text-center mt-5 mb-10 font-bold p-2 text-purple-800">
-                Log in
-              </h1>
+            <div className="w-full flex flex-col md:w-3/4 justify-center max-w-sm p-4 bg-zinc-900 rounded-lg">
+              <h1 className="text-3xl font-bold p-2 text-white mb-5">Log in</h1>
 
-              <label
-                htmlFor="name"
-                className={`ml-2 font-medium text-gray-300 ${
-                  !!errors.email && touched.email && "!text-rose-600"
-                }`}
-              >
-                {!!errors.email && touched.email ? errors.email : "Email"}
-              </label>
               <Input
+                label={!!errors.email && touched.email ? errors.email : "Email"}
                 value={values.email}
                 name="email"
                 placeholder="Email"
                 onChange={handleChange("email")}
                 onBlur={handleBlur("email")}
-                classes={`mt-0 mb-0 bg-zinc-950 text-white`}
+                classes={`mt-0 mb-0 bg-zinc-950 text-white mb-5`}
                 error={!!errors.email && touched.email}
               />
-              <p className="ml-2 text-xs text-gray-300">
-                Must be a valid email
-              </p>
-              <label
-                htmlFor="name"
-                className={`ml-2 font-medium mt-4 text-gray-300 ${
-                  !!errors.password && touched.password && "!text-rose-600"
-                }`}
-              >
-                {!!errors.password && touched.password
-                  ? errors.password
-                  : "Password"}
-              </label>
 
               <Input
+                label={
+                  !!errors.password && touched.password
+                    ? errors.password
+                    : "Password"
+                }
                 value={values.password}
                 name="password"
                 placeholder="Password"
                 onChange={handleChange("password")}
                 onBlur={handleBlur("password")}
                 type="password"
-                classes={`mt-0 mb-0 bg-zinc-950 text-white`}
+                classes={`mt-5 mb-0 bg-zinc-950 text-white`}
                 error={!!errors.password && touched.password}
               />
 
@@ -93,18 +76,20 @@ export default function Login() {
                   {state.error?.message}
                 </div>
               )}
-              <Button
-                variants="fire"
-                disabled={!(isValid && dirty)}
-                onClick={() => handleSubmit()}
-                type="submit"
-                classes="!border-0 !py-3 !mt-4"
-              >
-                LOGIN
-              </Button>
+              <div className="p-2 w-full">
+                <Button
+                  variants="fire"
+                  disabled={!(isValid && dirty)}
+                  onClick={() => handleSubmit()}
+                  type="submit"
+                  classes="!border-0 !py-3 !mt-4 w-full"
+                >
+                  LOGIN
+                </Button>
+              </div>
 
-              <div className="text-center text-purple-800 font-medium mt-2">
-                <Link href="/auth/register">Sign up</Link>
+              <div className="text-center text-zinc-400 underline font-medium mt-2">
+                <Link href="/auth/register">Or create account</Link>
               </div>
             </div>
           );

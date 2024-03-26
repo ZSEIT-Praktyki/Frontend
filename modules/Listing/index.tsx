@@ -116,13 +116,21 @@ export default function Listing({
       <section className="flex-[3] p-2 flex flex-col">
         <H2>{title}</H2>
 
-        <p className="text-zinc-400">
-          Olsztyn at: {new Date(added_date).toLocaleDateString()}
+        <p className="mt-2 text-zinc-500 flex-1">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum velit,
+          sint ipsa maiores nisi ipsum dicta autem reprehenderit, totam aliquam
+          accusantium consequatur voluptate excepturi? Quasi molestias assumenda
+          molestiae esse nobis?
         </p>
 
-        <H4>&euro;{Number.parseFloat(`${price / 100}`).toFixed(2)}</H4>
+        <div className="w-full flex flex-row justify-between">
+          <div>
+            <H4>&euro;{Number.parseFloat(`${price / 100}`).toFixed(2)}</H4>
+            <p className="text-zinc-400">
+              Olsztyn at: {new Date(added_date).toLocaleDateString()}
+            </p>
+          </div>
 
-        <div className="w-full flex justify-end flex-1 items-end p-2">
           <Button
             variants={status.isSuccess ? "ok" : "fire"}
             classes="w-full w-24 m-0 text-center max-w-[12rem] p-4"
