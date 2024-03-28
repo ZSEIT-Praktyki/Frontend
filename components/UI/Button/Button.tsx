@@ -10,9 +10,9 @@ const buttonVariants = {
     "border-purple-600 text-purple-400 font-medium hover:bg-purple-500 hover:text-white",
   warning: "bg-amber-700 hover:bg-amber-600 active:bg-amber-500",
   error: "bg-red-700 hover:bg-red-800",
-  ok: "bg-green-600 hover:bg-green-700 border-green-600",
+  ok: "bg-green-600 hover:bg-green-700 !border-0",
   text: "text-gray-900 hover:bg-gray-200",
-  fire: "p-3 px-4 transition text-white bg-gradient-to-r from-pink-600 to-red-600 rounded !border-0",
+  fire: " transition text-white bg-gradient-to-r from-pink-600 to-red-600 rounded !border-0",
 };
 
 interface ButtonProps

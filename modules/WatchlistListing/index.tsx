@@ -25,39 +25,41 @@ export default function WatchlistListing({
   const [Remove] = useRemoveWatchlistMutation();
   const router = useRouter();
   return (
-    <article className="w-full flex-col p-3 md:p-5  flex sm:flex-row bg-zinc-950 mb-2 rounded-xl">
+    <article className="w-full flex-col p-3 md:p-5 flex sm:flex-row bg-zinc-950 mb-2 rounded-xl">
       <img
         src={images ? `${API}/listings/images/${images.filename}` : nt}
         alt="Thumbnail"
         style={{ maxHeight: 200 }}
-        className="h-full rounded-md sm:w-64 object-cover"
+        className="h-full rounded-md sm:w-64 sm:h-56 object-cover"
       />
       <section className="pl-2 flex flex-col justify-between">
-        <h2 className="text-white font-medium text-2xl mt-2 sm:mt-0">
-          {title}
-        </h2>
+        <div>
+          <h2 className="text-white font-medium text-2xl mt-2 sm:mt-0">
+            {title}
+          </h2>
 
-        <p className="text-gray-300">
-          Olsztyn at {new Date(added_date).toLocaleDateString()} <br />
-          <strong className="font-medium text-xl"> &euro;{price / 100}</strong>
-        </p>
+          <p className="text-gray-300">
+            Olsztyn at {new Date(added_date).toLocaleDateString()} <br />
+            <strong className="font-medium text-xl">&euro;{price / 100}</strong>
+          </p>
+        </div>
 
-        <section className="flex">
+        <section className="flex mt-2">
           <Button
             variants="error"
-            classes="m-0 !border-0 mr-2"
+            classes="m-0 !border-0 mr-2 w-full"
             onClick={() => Remove(listing_id)}
           >
             <FiTrash2 color="white" />
-            <span className="hidden ml-2 sm:block">Remove</span>
+            <span className="ml-2">Remove</span>
           </Button>
           <Button
             variants="fire"
-            classes="m-0"
+            classes="m-0 w-full"
             onClick={() => router.push("/checkout?id=" + listing_id)}
           >
             <BsCashCoin color="white" />
-            <span className="hidden ml-2 sm:block">Purchase</span>
+            <span className="ml-2">Purchase</span>
           </Button>
         </section>
       </section>

@@ -75,7 +75,7 @@ export default function Search() {
     >
       <main className="p-2 flex flex-col items-center">
         <Head>
-          <title>Search {router.query.q ?? ""}</title>
+          <title>Searching &apos;{router.query.q ?? ""}&apos;</title>
           <meta
             name="description"
             content="Page containing listings based on params"

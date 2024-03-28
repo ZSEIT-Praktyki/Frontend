@@ -20,14 +20,14 @@ export default function HomeButtons() {
     <>
       <Button
         variants="fire"
-        classes="w-1/2 w-full mr-2 !py-5 font-medium mb-5 xs:mb-0"
+        classes="w-1/2 w-full mr-2 !py-3 font-medium mb-5 xs:mb-0"
         onClick={() => router.push("/auth/login")}
       >
         LOGIN
       </Button>
       <Button
         variants="fire"
-        classes="w-1/2 w-full !py-5 font-medium"
+        classes="w-1/2 w-full !py-3 font-medium"
         onClick={() => router.push("/auth/register")}
       >
         REGISTER

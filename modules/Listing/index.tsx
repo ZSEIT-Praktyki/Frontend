@@ -63,9 +63,10 @@ export default function Listing({
             Quisquam veritatis ad
           </p>
           <div className="flex flex-row mt-2 text-white items-center justify-between text-base">
-            <p>
-              {city} at {new Date(added_date).toLocaleDateString()}
-            </p>
+            <span className=" bg-zinc-900 rounded-full px-3 py-1 text-sm">
+              {city}
+            </span>
+
             <p className="text-xl">
               &euro;{Number.parseFloat(`${price / 100}`).toFixed(2)}
             </p>
@@ -123,17 +124,18 @@ export default function Listing({
           molestiae esse nobis?
         </p>
 
-        <div className="w-full flex flex-row justify-between">
+        <div className="w-full flex flex-row justify-between items-end">
           <div>
             <H4>&euro;{Number.parseFloat(`${price / 100}`).toFixed(2)}</H4>
-            <p className="text-zinc-400">
-              Olsztyn at: {new Date(added_date).toLocaleDateString()}
+            <p className="text-zinc-400 mt-2">
+              <span className="bg-zinc-900 rounded-full px-3 py-1">{city}</span>{" "}
+              {new Date(added_date).toLocaleDateString()}
             </p>
           </div>
 
           <Button
             variants={status.isSuccess ? "ok" : "fire"}
-            classes="w-full w-24 m-0 text-center max-w-[12rem] p-4"
+            classes="w-full w-24 m-0 text-center max-w-[12rem]"
             disabled={status.isSuccess || status.isError}
             onClick={() => Append(listing_id)}
           >

@@ -33,7 +33,7 @@ export default function ListingSettings({
   const router = useRouter();
 
   return (
-    <article className="w-full flex flex-col p-3 md:p-5 rounded-xl xs:flex-row bg-zinc-950 mt-2 gap-5">
+    <article className="w-full flex flex-col p-3 md:p-5 rounded-2xl xs:flex-row bg-zinc-950 mt-2 gap-5">
       <button onClick={() => router.push(`/listing/${listing_id}`)}>
         <img
           style={{ maxHeight: 200 }}

@@ -4,7 +4,6 @@ import { useSelector } from "@utils/store/store";
 import NotAuthenticated from "@modules/NotAuthenticated";
 import clsx from "clsx";
 import { useRouter } from "next/router";
-import path from "path";
 
 interface UserLayoutProps {
   children: ReactNode;
@@ -23,7 +22,7 @@ export default function UserLayout({ children }: UserLayoutProps) {
   return (
     <main className="w-full min-h-screen flex justify-center">
       <section className="flex flex-col w-full  md:flex-row">
-        <aside className="flex flex-1 flex-col m-3 bg-zinc-900 rounded md:sticky top-28">
+        <aside className="flex flex-1 flex-col m-3 bg-zinc-900 rounded md:sticky top-28 max-h-screen">
           <nav className="w-full p-2">
             <ul>
               <h2 className="text-white font-bold mb-2 p-2 text-2xl rounded-md">

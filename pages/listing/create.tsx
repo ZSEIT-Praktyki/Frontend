@@ -10,12 +10,12 @@ export default function AddListing() {
 
   if (!isLoggedIn)
     return (
-      <>
+      <main className="w-full sm:w-10/12 mx-auto min-h-[calc(100vh-100px)] flex justify-center p-5">
         <Head>
           <title>Please log in to see this page</title>
         </Head>
         <NotAuthenticated />
-      </>
+      </main>
     );
 
   return (

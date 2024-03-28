@@ -3,12 +3,9 @@ import { AddressProps } from "@utils/services/addressService";
 import clsx from "clsx";
 import { NextPageContext } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 
 export async function getServerSideProps(ctx: NextPageContext) {
-  console.log(ctx.query);
-
   return {
     props: {
       status: ctx.query.redirect_status,
@@ -32,11 +29,11 @@ export default function Success({ status, orderId }: any) {
   const { data } = useFetch<OrderProps>("/orders/order/" + orderId);
 
   return (
-    <main className="w-full h-screen p-3 relative flex justify-center items-center">
+    <main className="w-full h-[calc(100vh-100px)] p-3 relative flex justify-center items-center">
       <Head>
-        <title>Payment {status === "success" ? "succeeded" : "failed"}</title>
+        <title>Payment {status === "succeeded" ? "succeeded" : "failed"}</title>
       </Head>
-      <article className="bg-zinc-900 text-white p-5 rounded-md w-3/5">
+      <article className="bg-zinc-900 text-white p-5 rounded-md w-full md:w-3/5">
         <h1 className="text-4xl font-bold">Order details</h1>
 
         {data !== undefined && (
@@ -92,7 +89,7 @@ export default function Success({ status, orderId }: any) {
             <section className=" text-zinc-200 justify-between mt-5 cursor-pointer">
               <h2 className="text-xl font-semibold">Address</h2>
               <Link href={"/user/account"}>
-                <div className="flex flex-row gap-5 text-zinc-300 bg-zinc-950 px-3 py-2 rounded-md mt-2">
+                <div className="flex flex-row flex-wrap gap-5 text-zinc-300 bg-zinc-950 px-3 py-2 rounded-md mt-2">
                   <p className="text-lg font-semibold">
                     {data.address_id.name} {data.address_id.surname}
                   </p>

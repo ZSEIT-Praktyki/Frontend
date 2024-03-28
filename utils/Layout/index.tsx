@@ -25,11 +25,11 @@ export default function Layout({ children }: LayoutProps) {
 
   return (
     <main className="w-full h-full bg-zinc-950 min-h-screen">
-      <Header></Header>
+      <Header />
       <section>{children}</section>
 
-      <BottomTab></BottomTab>
-      <Footer></Footer>
+      <BottomTab />
+      <Footer />
     </main>
   );
 }
