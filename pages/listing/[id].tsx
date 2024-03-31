@@ -39,9 +39,9 @@ function Listing({ data }: { data: ListingProps }) {
           />
           <meta name="description" content={data.description} />
         </Head>
-        <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5 bg-zinc-900 rounded-md mt-5 p-5">
+        <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5 bg-zinc-900 rounded-md mt-5 mb-10">
           <Slider images={data.images} />
-          <article className="mt-5">
+          <article className="mt-5 p-5">
             <h1 className="text-3xl sm:text-5xl text-white font-bold mb-10">
               {data.title}
             </h1>
@@ -97,12 +97,11 @@ function Listing({ data }: { data: ListingProps }) {
                 )}
               </div>
             </div>
+            <h3 className="text-xl sm:text-3xl text-white font-bold mt-5">
+              Description
+            </h3>
+            <p className="mt-4 text-white">{data.description}</p>
           </article>
-
-          <h3 className="text-xl sm:text-3xl text-white font-bold mt-5">
-            Description
-          </h3>
-          <p className="mt-4 text-white">{data.description}</p>
         </section>
       </main>
     </>

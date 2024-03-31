@@ -1,11 +1,6 @@
 import { API } from "@utils/assets/constants/routes";
 import { useState } from "react";
 
-import {
-  BsFillArrowLeftCircleFill,
-  BsFillArrowRightCircleFill,
-} from "react-icons/bs";
-
 interface SliderProps {
   images: ListingImagesProps[];
 }
@@ -19,18 +14,10 @@ export default function Slider({ images }: SliderProps) {
     index: 0,
   });
 
-  function onPrev() {
-    setThumbnail((p) => ({ ...p, index: p.index + 1 }));
-  }
-
-  function onNext() {
-    setThumbnail((p) => ({ ...p, index: p.index - 1 }));
-  }
-
   return (
-    <article className="mt-5">
+    <article className="mt-5 w-full">
       <img
-        className="w-full rounded-lg  object-contain pointer-events-none" // disable image dragging and zooming
+        className="w-full object-contain pointer-events-none" // disable image dragging and zooming
         style={{ maxHeight: "50rem" }}
         src={
           images[0]?.filename
@@ -40,16 +27,13 @@ export default function Slider({ images }: SliderProps) {
         alt="preview"
       />
       {images.length > 0 && (
-        <div className="flex w-full overflow-hidden sm:overflow-hidden gap-5 mt-5 mx-5">
+        <div className="flex w-fulloverflow-auto gap-5 mt-5 mx-5">
           {images.map(({ filename, photo_id }) => (
             <button
               onClick={() => setThumbnail((p) => ({ ...p, filename }))}
               key={photo_id}
             >
               <img
-                style={{
-                  transform: `translateX(${(256 + 8) * thumbnail.index}px)`,
-                }}
                 alt="preview variant photos"
                 className="mr-2 rounded last:mr-0 max-h-36 w-64 pointer-events-none object-cover transition border-2 border-zinc-600 hover:border-purple-600"
                 src={`${API}/listings/images/${filename}`}

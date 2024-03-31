@@ -91,6 +91,19 @@ export default function Login() {
               <div className="text-center text-zinc-400 underline font-medium mt-2">
                 <Link href="/auth/register">Or create account</Link>
               </div>
+
+              <div className="text-center text-zinc-400 underline font-medium mt-2">
+                <button
+                  onClick={() => {
+                    onLogin({
+                      email: "test@account.com",
+                      password: "qwerty123",
+                    });
+                  }}
+                >
+                  Use test account
+                </button>
+              </div>
             </div>
           );
         }}
@@ -98,3 +111,6 @@ export default function Login() {
     </main>
   );
 }
+
+// test@account.com
+// qwerty123
