@@ -54,7 +54,7 @@ jobs:
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
         run: |
           ssh -i private_key $SERVER_USER@$SERVER_HOST << 'EOF'
-          cd /var/www/myapp
+          cd /root/praktyki/Frontend
           pm2 delete "praktyki-frontend"
           pm2 start npm --name "praktyki-frontend" -- start
           pm2 save
