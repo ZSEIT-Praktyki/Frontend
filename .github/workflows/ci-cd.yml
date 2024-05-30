@@ -55,6 +55,9 @@ jobs:
           NEXT_PUBLIC_BACKEND_URL: ${{ secrets.BACKEND_URL }}
         run: npm run build
 
+      - name: Create SSH Private Key
+        run: echo "$SSH_PRIVATE_KEY" > private_key && chmod 600 private_key
+
       - name: Deploy to server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
