@@ -1,4 +1,5 @@
 import { API } from "@utils/assets/constants/routes";
+import clsx from "clsx";
 import { useState } from "react";
 
 interface SliderProps {
@@ -15,27 +16,33 @@ export default function Slider({ images }: SliderProps) {
   });
 
   return (
-    <article className="mt-5 w-full">
+    <article className="w-full flex flex-col md:flex-row p-5 gap-5">
       <img
-        className="w-full object-contain pointer-events-none" // disable image dragging and zooming
-        style={{ maxHeight: "50rem" }}
+        className="w-full object-cover pointer-events-none rounded-md" // disable image dragging and zooming
+        style={{ maxHeight: "75vh" }}
         src={
           images[0]?.filename
             ? `${API}/listings/images/${thumbnail.filename}`
             : notFound
         }
-        alt="preview"
+        alt="Main listing photo"
       />
       {images.length > 0 && (
-        <div className="flex w-fulloverflow-auto gap-5 mt-5 mx-5">
+        <div className="flex flex-row md:flex-col ">
           {images.map(({ filename, photo_id }) => (
             <button
               onClick={() => setThumbnail((p) => ({ ...p, filename }))}
               key={photo_id}
+              className="mb-5"
             >
               <img
                 alt="preview variant photos"
-                className="mr-2 rounded last:mr-0 max-h-36 w-64 pointer-events-none object-cover transition border-2 border-zinc-600 hover:border-purple-600"
+                className={clsx(
+                  "mr-2 rounded last:mr-0 max-h-24 w-32 pointer-events-none object-cover transition border-2 border-transparent",
+                  {
+                    "border-purple-800": thumbnail.filename === filename,
+                  }
+                )}
                 src={`${API}/listings/images/${filename}`}
               />
             </button>

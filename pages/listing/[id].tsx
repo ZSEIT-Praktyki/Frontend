@@ -41,61 +41,65 @@ function Listing({ data }: { data: ListingProps }) {
         </Head>
         <section className="flex flex-col w-full xl:w-3/4 md:w-3/4 sm:w-4/5 bg-zinc-900 rounded-md mt-5 mb-10">
           <Slider images={data.images} />
-          <article className="mt-5 p-5">
-            <h1 className="text-3xl sm:text-5xl text-white font-bold mb-10">
+          <article className="px-5 pb-5">
+            <h1 className="text-3xl sm:text-5xl text-white font-bold">
               {data.title}
             </h1>
 
-            <div className="w-full flex flex-col md:flex-row  flex-wrap justify-between overflow-hidden border-gray-300">
-              <div className="flex flex-col md:flex-row gap-2 text-white justify-center items-center">
-                <span className="px-4 py-2 bg-purple-800 rounded-full text-center">
-                  {data.subcategory_id.category_id.category_name}{" "}
-                  {data.subcategory_id.name}
-                </span>
+            <div className="w-full flex-col md:flex-row flex gap-1 md:gap-10 mt-3">
+              <p className="text-zinc-400 pt-2">
+                Category (
+                {`${data.subcategory_id.name} / ${data.subcategory_id.category_id.category_name}`}
+                )
+              </p>
 
-                <span className="px-4 py-2 bg-purple-800 rounded-full text-center">
-                  Condition {data.condition}
-                </span>
+              <p className="text-zinc-400 pt-2">Available ({data.quantity})</p>
 
-                <span className="px-4 py-2 bg-purple-800 rounded-full text-center">
-                  Quantity {data.quantity}
-                </span>
-              </div>
+              <p className="text-zinc-400 pt-2">
+                Product's condition ({data.condition})
+              </p>
 
-              <div className="flex flex-col md:flex-row flex-1 justify-end gap-3">
-                <h2 className="text-white mr-5 md:m-0 mt-2 text-2xl sm:text-4xl font-bold">
-                  &euro;
-                  {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
-                </h2>
+              <p className="text-zinc-400 pt-2">
+                Contant to the seller: ({data.seller_id.owners_name}{" "}
+                {data.seller_id.owners_surname} {data.seller_id.owners_phone})
+              </p>
+            </div>
 
-                {isLoggedIn && data.isActive && (
-                  <>
-                    <Button
-                      classes="m-0 !rounded-full !px-4"
-                      onClick={() =>
-                        router.push(`/checkout?id=${data.listing_id}`)
-                      }
-                    >
-                      <AiOutlineShoppingCart className="text-xl mr-1" />
-                      <span>Purchase now</span>
-                    </Button>
+            <div className="w-full flex flex-col md:flex-row justify-between my-10">
+              <h2 className="text-white mr-5 md:m-0 mt-2 text-2xl sm:text-4xl font-bold">
+                &euro;
+                {Number.parseFloat(`${data.price / 100}`).toFixed(2)}
+              </h2>
 
-                    <Button
-                      classes="m-0 !rounded-full !px-4"
-                      variants="fire"
-                      onClick={() =>
-                        status?.isIn
-                          ? Remove(data.listing_id)
-                          : Append(data.listing_id)
-                      }
-                    >
-                      {!status?.isIn
-                        ? "Add to watchlist"
-                        : "Remove from watchlist"}
-                    </Button>
-                  </>
-                )}
-              </div>
+              {isLoggedIn && data.isActive && (
+                <section className="flex flex-col md:flex-row gap-2 mt-5 md:mt-0 md:gap-5">
+                  <Button
+                    variants="ok"
+                    classes="m-0 !px-4"
+                    onClick={() =>
+                      router.push(`/checkout?id=${data.listing_id}`)
+                    }
+                  >
+                    <AiOutlineShoppingCart className="text-xl mr-1" />
+                    <span>Purchase now for &euro;{data.price} </span>
+                  </Button>
+
+                  <Button
+                    classes="m-0 !px-4 gap-2 border-none"
+                    variants={status?.isIn ? "error" : "primary"}
+                    onClick={() =>
+                      status?.isIn
+                        ? Remove(data.listing_id)
+                        : Append(data.listing_id)
+                    }
+                  >
+                    {status?.isIn ? <AiFillHeart /> : <AiOutlineHeart />}
+                    {!status?.isIn
+                      ? "Follow this listing"
+                      : "Remove from watchlist"}
+                  </Button>
+                </section>
+              )}
             </div>
             <h3 className="text-xl sm:text-3xl text-white font-bold mt-5">
               Description
